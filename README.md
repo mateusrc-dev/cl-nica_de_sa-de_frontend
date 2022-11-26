@@ -1,0 +1,1 @@
+Parte front-end da aplicação clínica_de_saúde em construção... Faz parte de uma atividade do curso Explorer da Rocketseat (um projeto pessoal)
