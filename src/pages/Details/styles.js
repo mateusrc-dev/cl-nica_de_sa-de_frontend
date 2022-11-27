@@ -1,9 +1,8 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Container = styled.div`
   max-width: 100%;
   height: 100vh;
-  background: red;
   padding: 20px;
   span {
     text-decoration: underline;
