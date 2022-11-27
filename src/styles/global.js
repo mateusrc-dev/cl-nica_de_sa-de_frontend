@@ -8,8 +8,16 @@ export default createGlobalStyle`
   }
 
   body {
-    background-color: ${({theme}) => theme.COLORS.BACKGROUND_900};
-    color: ${({theme}) => theme.COLORS.WHITE};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body, input, button, textarea {
+    font-family: 'Karla', sans-serif;
+    //font-family: 'Rubik Marker Hatch', cursive;
+    font-size: 16px;
+    outline: none;
   }
 
   a {

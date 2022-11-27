@@ -1,5 +1,7 @@
 //nessa página vai ficar os detalhes do profissional (horários livres, detalhes sobre ele, depoimentos sobre ele, etc.)
 import { Container } from "./styles";
+import { Button } from "../../components/button";
+import { AiFillSchedule } from "react-icons/ai";
 
 export function Details() {
   return (
@@ -10,8 +12,11 @@ export function Details() {
         você vai se sentir no céu ao sair de uma consulta comigo, como se nenhum
         problema existisse.
       </span>
-      <br/>
-      <button>Agende uma consulta</button>
+      <br />
+      <Button>
+        <AiFillSchedule />
+        Agende sua consulta!
+      </Button>
     </Container>
   );
 }
