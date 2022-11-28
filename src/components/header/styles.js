@@ -100,7 +100,7 @@ export const Container = styled.header`
     background: ${({ theme }) => theme.COLORS.WHITE};
     border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
     border-radius: 10px;
-    box-shadow: inset 2px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
     button {
       width: 10%;
       height: 100%;

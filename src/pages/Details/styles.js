@@ -21,16 +21,6 @@ export const Main = styled.div`
   grid-template-areas: "columnOne columnTwo";
   .columnOne {
     grid-area: columnOne;
-  }
-  .row {
-    border-top: 3px solid ${({ theme }) => theme.COLORS.BLUE_100};
-    border-left: none;
-    border-right: none;
-    border-bottom: 3px solid ${({ theme }) => theme.COLORS.BLUE_100};
-    border-radius: 50px;
-    background: ${({ theme }) => theme.COLORS.BLUE_100};
-  }
-  .row:first-child {
     margin-top: 40px;
   }
   h2 {
@@ -106,17 +96,6 @@ export const Main = styled.div`
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-    }
-    .tag {
-      background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
-      color: ${({ theme }) => theme.COLORS.WHITE};
-      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-      border-radius: 10px;
-      width: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 20px;
     }
   }
   .container {
@@ -232,7 +211,6 @@ export const Main = styled.div`
         border-radius: 0 0 10px 10px;
       }
       .testimony {
-        position: relative;
         background: ${({ theme }) => theme.COLORS.WHITE};
         border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
         box-shadow: inset 2px 2px 10px 5px rgba(0, 0, 0, 0.5);
@@ -261,9 +239,7 @@ export const Main = styled.div`
           text-align: justify;
         }
         .edit {
-          position: absolute;
-          right: 15px;
-          bottom: 5px;
+          margin-left: 90%;
           font-size: 25px;
         }
       }

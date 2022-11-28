@@ -12,6 +12,8 @@ import { CgArrowUpO } from "react-icons/cg";
 import { CgArrowDownO } from "react-icons/cg";
 import { BsStarFill } from "react-icons/bs";
 import { BiEditAlt } from "react-icons/bi";
+import { Section } from "../../components/section";
+import { Tag } from "../../components/tag";
 
 export function Details() {
   const carousel = useRef(null);
@@ -44,58 +46,39 @@ export function Details() {
       <Header />
       <Main>
         <div className="columnOne">
-          <div className="row"></div>
-          <div className="main">
-            <img src="https://github.com/mateusrc-dev.png" alt="" />
-            <div className="Description">
-              <div className="description">
-                <h1>
-                  Dr. Mateus Carvalho
-                  <a className="favorite">
-                    <MdFavorite />
-                  </a>
-                </h1>
-                <p>
-                  Meu nome é Mateus, eu sou um psicólogo incrível, trato você
-                  super bem, você vai se sentir no céu ao sair de uma consulta
-                  comigo, como se nenhum problema existisse.
-                </p>
-                <div className="tags">
-                  <div className="tag">
-                    <p>depressão</p>
-                  </div>
-                  <div className="tag">
-                    <p>ansiedade</p>
-                  </div>
-                  <div className="tag">
-                    <p>tristeza</p>
-                  </div>
-                  <div className="tag">
-                    <p>angústia</p>
-                  </div>
-                  <div className="tag">
-                    <p>vazio</p>
-                  </div>
-                  <div className="tag">
-                    <p>solidão</p>
-                  </div>
-                  <div className="tag">
-                    <p>crise</p>
-                  </div>
-                  <div className="tag">
-                    <p>desesperança</p>
-                  </div>
-                  <div className="tag">
-                    <p>suicídio</p>
-                  </div>
-                  <div className="tag">
-                    <p>desistir</p>
+          <Section>
+            <div className="main">
+              <img src="https://github.com/mateusrc-dev.png" alt="" />
+              <div className="Description">
+                <div className="description">
+                  <h1>
+                    Dr. Mateus Carvalho
+                    <a className="favorite">
+                      <MdFavorite />
+                    </a>
+                  </h1>
+                  <p>
+                    Meu nome é Mateus, eu sou um psicólogo incrível, trato você
+                    super bem, você vai se sentir no céu ao sair de uma consulta
+                    comigo, como se nenhum problema existisse.
+                  </p>
+                  <div className="tags">
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
+                    <Tag title="ansiedade" />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="row"></div>
+          </Section>
           <h2>
             Horários disponíveis
             <span>
