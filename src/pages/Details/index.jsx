@@ -11,19 +11,32 @@ import { CgArrowRightO } from "react-icons/cg";
 import { CgArrowUpO } from "react-icons/cg";
 import { CgArrowDownO } from "react-icons/cg";
 import { BsStarFill } from "react-icons/bs";
+import { BiEditAlt } from "react-icons/bi";
 
 export function Details() {
   const carousel = useRef(null);
+  const carouselTwo = useRef(null);
 
   const handleLeftClick = (e) => {
     e.preventDefault();
-    console.log(carousel.current);
+    console.log(carousel);
     carousel.current.scrollLeft -= carousel.current.offsetWidth;
   };
 
   const handleRightClick = (e) => {
     e.preventDefault();
     carousel.current.scrollLeft += carousel.current.offsetWidth;
+  };
+
+  const handleUpClick = (e) => {
+    e.preventDefault();
+    console.log(carouselTwo);
+    carouselTwo.current.scrollTop -= carouselTwo.current.offsetHeight;
+  };
+
+  const handleDownClick = (e) => {
+    e.preventDefault();
+    carouselTwo.current.scrollTop += carouselTwo.current.offsetHeight;
   };
 
   return (
@@ -254,25 +267,101 @@ export function Details() {
                 <h2>Depoimentos dos pacientes</h2>
                 <div className="buttons">
                   <button>
-                    <CgArrowUpO />
+                    <CgArrowUpO onClick={handleUpClick} />
                   </button>
                   <button>
-                    <CgArrowDownO />
+                    <CgArrowDownO onClick={handleDownClick} />
                   </button>
                 </div>
               </div>
-              <div className="Depositions">
-                <div className="testimony">
-                  <img src="https://github.com/mateusrc-dev.png" alt="" />
-                  <div>
-                    <span><BsStarFill />5.0</span>
-                    <span>Paciente Fernando</span>
-                    <p>
-                      Mateus é o melhor psicólogo, não tem pra ninguém, ele cura
-                      todas as doenças da alma, deixa a pessoa em um estado
-                      perfeito de saúde mental, recomendado, ele literalmente
-                      resolve sua vida!
-                    </p>
+              <div className="Container">
+                <div className="top"></div>
+                <div className="bottom"></div>
+                <div ref={carouselTwo} className="Depositions">
+                  <div className="Deposition">
+                    <div className="testimony">
+                      <img src="https://github.com/mateusrc-dev.png" alt="" />
+                      <div>
+                        <span>
+                          <BsStarFill />
+                          5.0
+                        </span>
+                        <span>Seu depoimento</span>
+                        <p>
+                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
+                          cura todas as doenças da alma, deixa a pessoa em um
+                          estado perfeito de saúde mental, recomendado, ele
+                          literalmente resolve sua vida!
+                        </p>
+                        <a className="edit" title="Editar">
+                          <BiEditAlt />
+                        </a>
+                      </div>
+                    </div>
+                    <div className="testimony">
+                      <img src="https://github.com/mateusrc-dev.png" alt="" />
+                      <div>
+                        <span>
+                          <BsStarFill />
+                          5.0
+                        </span>
+                        <span>Paciente Fernando</span>
+                        <p>
+                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
+                          cura todas as doenças da alma, deixa a pessoa em um
+                          estado perfeito de saúde mental, recomendado, ele
+                          literalmente resolve sua vida!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="testimony">
+                      <img src="https://github.com/mateusrc-dev.png" alt="" />
+                      <div>
+                        <span>
+                          <BsStarFill />
+                          5.0
+                        </span>
+                        <span>Paciente Fernando</span>
+                        <p>
+                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
+                          cura todas as doenças da alma, deixa a pessoa em um
+                          estado perfeito de saúde mental, recomendado, ele
+                          literalmente resolve sua vida!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="testimony">
+                      <img src="https://github.com/mateusrc-dev.png" alt="" />
+                      <div>
+                        <span>
+                          <BsStarFill />
+                          5.0
+                        </span>
+                        <span>Paciente Fernando</span>
+                        <p>
+                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
+                          cura todas as doenças da alma, deixa a pessoa em um
+                          estado perfeito de saúde mental, recomendado, ele
+                          literalmente resolve sua vida!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="testimony">
+                      <img src="https://github.com/mateusrc-dev.png" alt="" />
+                      <div>
+                        <span>
+                          <BsStarFill />
+                          5.0
+                        </span>
+                        <span>Paciente Fernando</span>
+                        <p>
+                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
+                          cura todas as doenças da alma, deixa a pessoa em um
+                          estado perfeito de saúde mental, recomendado, ele
+                          literalmente resolve sua vida!
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

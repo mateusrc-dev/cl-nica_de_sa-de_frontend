@@ -183,7 +183,6 @@ export const Main = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
       h2 {
         color: ${({ theme }) => theme.COLORS.WHITE};
       }
@@ -197,15 +196,50 @@ export const Main = styled.div`
       box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.5);
       background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
       height: 100%;
+      padding: 10px;
+      .Depositions {
+        height: 453px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        width: 100%;
+        border-radius: 10px;
+      }
+      .Deposition {
+        display: flex;
+        flex-direction: column;
+      }
+      .Container {
+        position: relative;
+        width: 100%;
+      }
+      .top {
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        top: 0;
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_1000};
+        border-radius: 10px 10px 0 0;
+      }
+      .bottom {
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        bottom: 0;
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+        border-radius: 0 0 10px 10px;
+      }
       .testimony {
-        background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
-        box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.5);
-        margin: 0 20px;
+        position: relative;
+        background: ${({ theme }) => theme.COLORS.WHITE};
+        border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+        box-shadow: inset 2px 2px 10px 5px rgba(0, 0, 0, 0.5);
         border-radius: 10px;
         display: flex;
         align-items: center;
-        gap: 20px;
-        padding: 30px;
+        padding: 20px;
+        margin-bottom: 10px;
         img {
           width: 100px;
           height: 100px;
@@ -223,6 +257,12 @@ export const Main = styled.div`
         }
         p {
           text-align: justify;
+        }
+        .edit {
+          position: absolute;
+          right: 15px;
+          bottom: 5px;
+          font-size: 25px;
         }
       }
     }

@@ -8,7 +8,7 @@ export function Header() {
 
   function handleHours() {
     let Hours;
-    if (hours.getHours() > 0 && hours.getHours() <= 12) {
+    if (hours.getHours() >= 0 && hours.getHours() <= 12) {
       Hours = "Bom dia";
     } else if (hours.getHours() > 12 && hours.getHours() <= 18) {
       Hours = "Boa tarde";
