@@ -237,6 +237,7 @@ export const Main = styled.div`
         box-shadow: inset 2px 2px 10px 5px rgba(0, 0, 0, 0.5);
         border-radius: 10px;
         display: flex;
+        gap: 20px;
         align-items: center;
         padding: 20px;
         margin-bottom: 10px;
