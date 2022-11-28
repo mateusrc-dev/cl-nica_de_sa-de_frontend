@@ -179,6 +179,7 @@ export const Main = styled.div`
       flex-direction: column;
     }
     .depositions {
+      margin-top: -20px;
       display: flex;
       flex-direction: column;
       align-items: center;
