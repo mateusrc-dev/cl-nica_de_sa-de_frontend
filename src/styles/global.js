@@ -9,7 +9,7 @@ export default createGlobalStyle`
 
   body {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    color: ${({ theme }) => theme.COLORS.BLUE_100};
     -webkit-font-smoothing: antialiased;
   }
 

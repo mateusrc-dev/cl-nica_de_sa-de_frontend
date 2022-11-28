@@ -48,10 +48,10 @@ export function Header() {
         </div>
       </div>
       <div className="input">
+        <input type="text" placeholder="Pesquise por um profissional!" />
         <button>
           <BsSearch />
         </button>
-        <input type="text" placeholder="Pesquise por um profissional!" />
       </div>
       <div className="avatar">
         <div className="inner">

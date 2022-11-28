@@ -13,6 +13,7 @@ export const Container = styled.button`
   font-weight: 600;
   font-size: 16px;
   width: 100%;
+  white-space: nowrap;
   svg {
     width: 20px;
     height: 20px;

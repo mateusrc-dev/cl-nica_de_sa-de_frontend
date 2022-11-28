@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
+  position: absolute;
+  z-index: 1;
   grid-area: header;
   width: 100%;
   height: 100px;
@@ -36,6 +38,8 @@ export const Container = styled.header`
     display: flex;
     align-items: center;
     gap: 5px;
+    font-style: italic;
+    color: ${({ theme }) => theme.COLORS.BLUE_100};
   }
   .welcome {
     text-align: end;
@@ -43,19 +47,19 @@ export const Container = styled.header`
       font-size: 16px;
       font-weight: bold;
       font-style: italic;
-      color: ${({ theme }) => theme.COLORS.WHITE};
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
     }
     h2 {
       font-weight: normal;
       font-style: italic;
       font-size: 12px;
-      color: ${({ theme }) => theme.COLORS.WHITE};
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
     }
     span {
       text-decoration: none;
       font-size: 12px;
       font-weight: bold;
-      color: ${({ theme }) => theme.COLORS.WHITE};
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
     }
   }
   .logo {
@@ -99,8 +103,9 @@ export const Container = styled.header`
     button {
       width: 10%;
       height: 100%;
-      background: none;
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
       border: none;
+      border-radius: 0 10px 10px 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -113,9 +118,11 @@ export const Container = styled.header`
       background: none;
       border: none;
       color: ${({ theme }) => theme.COLORS.WHITE_100};
+      padding: 10px;
     }
     input::placeholder {
       color: ${({ theme }) => theme.COLORS.WHITE};
+      font-style: italic;
     }
   }
 `;

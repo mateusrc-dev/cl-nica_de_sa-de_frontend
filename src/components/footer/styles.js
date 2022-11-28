@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.footer`
   grid-area: footer;
+  position: absolute;
+  z-index: 1;
   width: 100%;
   height: 70px;
   background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
