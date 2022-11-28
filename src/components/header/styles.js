@@ -97,9 +97,10 @@ export const Container = styled.header`
     height: 40px;
     display: flex;
     align-items: center;
-    background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+    background: ${({ theme }) => theme.COLORS.WHITE};
     border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
     border-radius: 10px;
+    box-shadow: inset 2px 0px 10px 0px rgba(0, 0, 0, 0.5);
     button {
       width: 10%;
       height: 100%;
@@ -117,12 +118,13 @@ export const Container = styled.header`
       width: 100%;
       background: none;
       border: none;
-      color: ${({ theme }) => theme.COLORS.WHITE_100};
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
       padding: 10px;
     }
     input::placeholder {
-      color: ${({ theme }) => theme.COLORS.WHITE};
+      color: ${({ theme }) => theme.COLORS.BLUE_200};
       font-style: italic;
+      font-weight: bold;
     }
   }
 `;
