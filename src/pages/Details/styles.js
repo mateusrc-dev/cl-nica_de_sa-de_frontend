@@ -21,7 +21,7 @@ export const Main = styled.div`
   grid-template-areas: "columnOne columnTwo";
   .columnOne {
     grid-area: columnOne;
-    margin-top: 40px;
+    margin-top: 25px;
   }
   h2 {
     display: flex;
@@ -239,8 +239,15 @@ export const Main = styled.div`
           text-align: justify;
         }
         .edit {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin-left: 90%;
           font-size: 25px;
+        }
+        .edit:hover {
+          border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+          border-radius: 5px;
         }
       }
     }

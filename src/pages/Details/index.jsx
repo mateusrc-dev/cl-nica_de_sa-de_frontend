@@ -14,6 +14,8 @@ import { BsStarFill } from "react-icons/bs";
 import { BiEditAlt } from "react-icons/bi";
 import { Section } from "../../components/section";
 import { Tag } from "../../components/tag";
+import { ButtonText } from "../../components/buttonText";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 export function Details() {
   const carousel = useRef(null);
@@ -46,6 +48,10 @@ export function Details() {
       <Header />
       <Main>
         <div className="columnOne">
+          <ButtonText>
+            <MdOutlineKeyboardArrowLeft />
+            voltar
+          </ButtonText>
           <Section>
             <div className="main">
               <img src="https://github.com/mateusrc-dev.png" alt="" />
