@@ -54,7 +54,7 @@ export function Details() {
           </ButtonText>
           <Section>
             <div className="main">
-              <img src="https://github.com/mateusrc-dev.png" alt="" />
+              <img src="https://github.com/mateusrc-dev.png" alt="foto do profissional" />
               <div className="Description">
                 <div className="description">
                   <h1>
@@ -269,7 +269,7 @@ export function Details() {
                 <div ref={carouselTwo} className="Depositions">
                   <div className="Deposition">
                     <div className="testimony">
-                      <img src="https://github.com/mateusrc-dev.png" alt="" />
+                      <img src="https://github.com/mateusrc-dev.png" alt="foto do paciente" />
                       <div>
                         <span>
                           <BsStarFill />

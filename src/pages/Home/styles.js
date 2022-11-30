@@ -70,9 +70,10 @@ export const Main = styled.main`
   }
   .section {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 50% 50%;
     grid-template-areas: "text images";
     gap: 20px;
+    align-items: center;
   }
   .text {
     grid-area: text;
@@ -82,22 +83,26 @@ export const Main = styled.main`
       margin-bottom: 20px;
     }
     p {
-      font-size: 25px;
+      font-size: 20px;
       text-align: justify;
     }
   }
-  .grid {
+  .Grid {
+    width: 550px;
+    margin: auto;
     grid-area: images;
+  }
+  .grid {
     display: grid;
     align-items: flex-start;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    gap: 10px;
     grid-template-areas:
-      "A B"
-      "A D"
-      "C D";
+      "A B D"
+      "A C D";
     img {
-      width: 220px;
+      max-width: 170px;
       height: auto;
       border-radius: 10px;
       object-fit: cover;
@@ -119,6 +124,7 @@ export const Main = styled.main`
     }
     .imgThree {
       position: relative;
+      margin-top: 7px;
       grid-area: C;
     }
     .imgFour {
@@ -134,8 +140,84 @@ export const Main = styled.main`
       box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
       padding: 5px 10px;
       border-radius: 50px;
-      right: 40px;
+      right: 10%;
       top: 10px;
     }
+  }
+  .sectionTwo {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "slider textTwo";
+    gap: 20px;
+    align-items: center;
+  }
+  .textTwo {
+    grid-area: textTwo;
+    h2 {
+      font-style: italic;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 20px;
+      text-align: justify;
+    }
+  }
+  .slider {
+    grid-area: slider;
+    margin: auto;
+  }
+  .image {
+    position: relative;
+  }
+  .img {
+    width: 300px;
+    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
+  }
+  .image span {
+    position: absolute;
+    font-weight: bold;
+    background: ${({ theme }) => theme.COLORS.WHITE};
+    color: ${({ theme }) => theme.COLORS.BLUE_100};
+    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 50px;
+    right: 10px;
+    top: 10px;
+  }
+  .swiper {
+    width: 475px;
+  }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
+  .swiper-pagination-bullet-active {
+    background: ${({ theme }) => theme.COLORS.WHITE};
+    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 50%;
+  }
+  .swiper-button-prev {
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+    background: ${({ theme }) => theme.COLORS.WHITE};
+    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 60px;
+    border-radius: 10px;
+  }
+  .swiper-button-next {
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+    background: ${({ theme }) => theme.COLORS.WHITE};
+    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 60px;
+    border-radius: 10px;
   }
 `;
