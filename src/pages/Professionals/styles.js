@@ -94,7 +94,7 @@ export const Main = styled.main`
   .tags ul {
     position: absolute;
     margin-top: 160px;
-    margin-left: 75px;
+    margin-left: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -150,14 +150,14 @@ export const Main = styled.main`
     gap: 10px;
     border-radius: 5px 5px 20% 5px;
     h3 {
+      font-size: 16px;
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 5px;
     }
     span:last-child {
       display: flex;
       align-items: center;
-      gap: 5px;
       font-weight: normal;
       font-style: italic;
     }

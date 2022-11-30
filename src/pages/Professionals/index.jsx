@@ -26,6 +26,7 @@ export function Professionals() {
         </header>
         <div className="professions">
           <ul>
+            <li>Todos</li>
             <li>Psicólogos</li>
             <li>Psiquiatras</li>
             <li>Nutricionistas</li>
@@ -36,7 +37,7 @@ export function Professionals() {
         <div className="tags">
           <h2>Tags</h2>
           <ul>
-            <li>ansiedade</li>
+            <li>todos</li>
             <li>depressão</li>
             <li>compulsão alimentar</li>
             <li>dieta</li>
@@ -69,7 +70,7 @@ export function Professionals() {
               alt="imagem do profissional"
             />
             <h3>
-              <span>Dr. Mateus Carvalho </span>
+              <span>Dr. Mateus Carvalho | Psiquiatra </span>
               <span>
                 <BsStarFill /> 5.5
               </span>
@@ -93,7 +94,7 @@ export function Professionals() {
               alt="imagem do profissional"
             />
             <h3>
-              <span>Dr. Mateus Carvalho </span>
+              <span>Dr. Mateus Carvalho | Psicólogo </span>
               <span>
                 <BsStarFill /> 5.5
               </span>
@@ -117,7 +118,7 @@ export function Professionals() {
               alt="imagem do profissional"
             />
             <h3>
-              <span>Dr. Mateus Carvalho </span>
+              <span>Dr. Mateus Carvalho | Nutricionista </span>
               <span>
                 <BsStarFill /> 5.5
               </span>
@@ -141,7 +142,7 @@ export function Professionals() {
               alt="imagem do profissional"
             />
             <h3>
-              <span>Dr. Mateus Carvalho </span>
+              <span>Dr. Mateus Carvalho | Dentista </span>
               <span>
                 <BsStarFill /> 5.5
               </span>
@@ -165,31 +166,7 @@ export function Professionals() {
               alt="imagem do profissional"
             />
             <h3>
-              <span>Dr. Mateus Carvalho </span>
-              <span>
-                <BsStarFill /> 5.5
-              </span>
-            </h3>
-            <p>
-              Meu nome é Mateus, eu sou um psicólogo incrível, trato você super
-              bem, você vai se sentir no céu ao sair de uma consulta comigo,
-              como se nenhum problema existisse.
-            </p>
-            <Button>
-              <GrSchedules />
-              Agende um horário!
-            </Button>
-          </div>
-          <div className="professional">
-            <button className="favorite">
-              <MdFavorite />
-            </button>
-            <img
-              src="https://github.com/mateusrc-dev.png"
-              alt="imagem do profissional"
-            />
-            <h3>
-              <span>Dr. Mateus Carvalho </span>
+              <span>Dr. Mateus Carvalho | Fisioterapeuta </span>
               <span>
                 <BsStarFill /> 5.5
               </span>
