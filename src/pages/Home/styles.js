@@ -37,7 +37,7 @@ export const Main = styled.main`
     align-items: center;
     height: 50px;
     justify-content: space-between;
-    border-radius: 100%;
+    border-radius: 0 0 100% 100%;
   }
   h1 {
     padding-left: 120px;
