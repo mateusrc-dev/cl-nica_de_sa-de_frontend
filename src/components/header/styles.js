@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   grid-area: header;
   width: 100%;
   height: 100px;

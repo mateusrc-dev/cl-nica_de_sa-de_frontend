@@ -16,6 +16,7 @@ export const Main = styled.main`
   overflow-y: auto;
   header {
     position: absolute;
+    z-index: 2;
     width: 100%;
     display: flex;
     background: ${({ theme }) => theme.COLORS.WHITE_100};
@@ -24,7 +25,8 @@ export const Main = styled.main`
     align-items: center;
     height: 50px;
     justify-content: space-between;
-    border-radius: 100%;
+    border-radius: 0 0 100% 100%;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
   }
   h1 {
     padding-left: 120px;
@@ -53,13 +55,16 @@ export const Main = styled.main`
     font-style: italic;
   }
   .professions {
+    position: absolute;
+    z-index: 1;
     display: flex;
+    width: 100%;
     align-items: center;
     padding: 0 120px;
     background: ${({ theme }) => theme.COLORS.WHITE_100};
     border-bottom: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
     height: 100px;
-    border-radius: 30%;
+    border-radius: 0 0 50% 0%;
   }
   .professions ul {
     margin-top: 50px;
@@ -73,5 +78,109 @@ export const Main = styled.main`
     text-decoration: underline;
     cursor: pointer;
     font-style: italic;
+  }
+  .tags {
+    background: ${({ theme }) => theme.COLORS.WHITE_100};
+    border-right: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+    height: 100%;
+    width: 300px;
+    border-radius: 0 0 40% 0;
+  }
+  .tags h2 {
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 125px;
+  }
+  .tags ul {
+    position: absolute;
+    margin-top: 160px;
+    margin-left: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow-y: auto;
+    height: 300px;
+  }
+  .tags ul::-webkit-scrollbar {
+    width: 18px;
+  }
+  .tags ul::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.COLORS.BLUE_200};
+    border-radius: 20px;
+    width: 1px;
+    background-clip: padding-box;
+    border: 5px solid rgba(0, 0, 0, 0);
+  }
+  .tags ul::-webkit-scrollbar-thumb:hover {
+    background-color: ${({ theme }) => theme.COLORS.BLUE_100};
+    border-radius: 20px;
+    width: 1px;
+    background-clip: padding-box;
+    border: 5px solid rgba(0, 0, 0, 0);
+  }
+  .tags ul li {
+    color: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+    list-style-type: none;
+  }
+  .tags ul li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    font-style: italic;
+  }
+  .professionals {
+    position: absolute;
+    top: 120px;
+    left: 320px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .professional {
+    background: ${({ theme }) => theme.COLORS.WHITE_100};
+    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    position: relative;
+    padding: 20px;
+    width: 300px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px 5px 20% 5px;
+    h3 {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    span:last-child {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: normal;
+      font-style: italic;
+    }
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+    p {
+      display: -webkit-box;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .favorite {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      font-size: 30px;
+    }
   }
 `;
