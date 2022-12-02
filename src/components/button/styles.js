@@ -14,6 +14,7 @@ export const Container = styled.button`
   font-size: 16px;
   width: 100%;
   white-space: nowrap;
+  height: 40px;
   svg {
     width: 20px;
     height: 20px;

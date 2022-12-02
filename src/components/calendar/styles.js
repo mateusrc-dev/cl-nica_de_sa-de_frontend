@@ -1,38 +1,56 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  padding: 0 50px;
-  gap: 10px;
-  .columnOne {
-    width: 350px;
-    border-right: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-    border-bottom: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-    border-left: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-    height: 400px;
-    padding: 10px;
-    background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
-    border-radius: 0px 0px 200px 10px;
-    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.5);
-    h1 {
+  .modal {
+    width: 100%;
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: rgba(212, 221, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .modalContent {
+      width: 100%;
+      margin: 50px;
+      background: ${({ theme }) => theme.COLORS.WHITE};
+      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+      border-radius: 10px;
+    }
+    .modalContent p {
+      width: 100%;
+      height: 100%;
+      padding: 100px 200px;
+      font-size: 24px;
       display: flex;
+      flex-direction: row;
       align-items: center;
-      gap: 10px;
-      font-style: italic;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 20px;
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-    ul {
-      list-style: none;
+      gap: 20px;
       text-align: justify;
     }
+    .modalContent p svg {
+      position: static;
+      font-size: 90px;
+    }
+    .modalContent .close {
+      position: absolute;
+      top: 235px;
+      right: 60px;
+      background: none;
+      border: none;
+    }
+    .modalContent .close svg {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      font-size: 35px;
+    }
+    .modalContent button svg {
+      position: static;
+    }
+  }
+  .none {
+    display: none;
   }
   .buttons {
     display: flex;
