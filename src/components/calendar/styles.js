@@ -1,6 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  .buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    button {
+      font-size: 30px;
+      background: none;
+      border: none;
+    }
+    svg {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+    }
+  }
   .list {
     display: flex;
     list-style: none;
@@ -26,9 +40,13 @@ export const Container = styled.div`
   }
   .subtitle {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .list_item {
+    button {
+      background: none;
+      border: none;
+    }
   }
   .list_item_active {
     background: ${({ theme }) => theme.COLORS.WHITE};

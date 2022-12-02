@@ -1,4 +1,7 @@
 import { Container } from "./styles";
+import { useState, useEffect } from "react";
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import { BsFillArrowRightSquareFill } from "react-icons/bs";
 
 const monthNames = [
   "Janeiro",
@@ -26,19 +29,34 @@ const weekNames = [
 ];
 
 export function Calendar() {
-  var date = new Date();
-  var newDate = new Date();
+  
+  const date = new Date();
+  var newDate = new Date;
+  const [Number, setNumber] = useState(0);
 
-  newDate.setDate(date.getDate());
+  function handleDaysAdd() {
+    setNumber((prevState) => prevState + 7);
+  }
 
-  const dayWeek = newDate.getDay();
-  const day = newDate.getDate();
-  const year = newDate.getFullYear();
-  const month = newDate.getMonth();
-  const nameMonth = monthNames[month];
-  const week = weekNames[dayWeek];
-  const first = newDate.getDate() - newDate.getDay();
-  const dateString = `${day}/${month}/${year}`;
+  function handleDaysSubtract() {
+    setNumber((prevState) => prevState - 7);
+  }
+
+  newDate.setDate(date.getDate() + Number);
+
+  const today = new Date();
+  const Day = today.getDate();
+  const Year = newDate.getFullYear();
+  const Month = newDate.getMonth();
+  const dateString = `${Day}/${Month}/${Year}`;
+
+  var dayWeek = newDate.getDay();
+  var day = newDate.getDate();
+  var year = newDate.getFullYear();
+  var month = newDate.getMonth();
+  var nameMonth = monthNames[month];
+  var week = weekNames[dayWeek];
+  var first = newDate.getDate() - newDate.getDay();
 
   function getWeeks() {
     const arrayWeeks = [];
@@ -77,6 +95,14 @@ export function Calendar() {
     <Container>
       <h1 className="title">{nameMonth}</h1>
       <h2 className="subtitle">{year}</h2>
+      <div className="buttons">
+        <button onClick={() => handleDaysSubtract()}>
+          <BsFillArrowLeftSquareFill />
+        </button>
+        <button onClick={() => handleDaysAdd()}>
+          <BsFillArrowRightSquareFill />
+        </button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -97,7 +123,7 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <span>{number.padStart(10, "0")}</span>
+                <span>{number}</span>
               </td>
             ))}
           </tr>
