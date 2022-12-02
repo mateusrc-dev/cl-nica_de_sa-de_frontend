@@ -44,10 +44,10 @@ export function Calendar() {
   newDate.setDate(date.getDate() + Number);
 
   const today = new Date();
-  const Day = today.getDate();
+  const Day = String(today.getDate()).padStart(2, "0");
   const Year = today.getFullYear();
-  const Month = today.getMonth();
-  const dateString = `${Day}/${Month + 1}/${Year}`;
+  const Month = String(today.getMonth() + 1).padStart(2, "0");
+  const dateString = `${Day}/${Month}/${Year}`;
 
   var year = newDate.getFullYear();
   var month = newDate.getMonth();
@@ -71,10 +71,10 @@ export function Calendar() {
     for (let i = 0; i < 7; i++) {
       let next = new Date(newDate.getTime());
       next.setDate(first + i);
-      const day = next.getDate();
-      const month = next.getMonth();
+      const day = String(next.getDate()).padStart(2, "0");
+      const month = String(next.getMonth() + 1).padStart(2, "0");
       const year = next.getFullYear();
-      const numberWeek = `${day}/${month + 1}/${year}`;
+      const numberWeek = `${day}/${month}/${year}`;
       numbersWeek.push(numberWeek);
     }
     return numbersWeek;
