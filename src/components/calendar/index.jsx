@@ -1,5 +1,5 @@
 import { Container } from "./styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 
@@ -29,9 +29,8 @@ const weekNames = [
 ];
 
 export function Calendar() {
-  
   const date = new Date();
-  var newDate = new Date;
+  var newDate = new Date();
   const [Number, setNumber] = useState(0);
 
   function handleDaysAdd() {
@@ -46,16 +45,13 @@ export function Calendar() {
 
   const today = new Date();
   const Day = today.getDate();
-  const Year = newDate.getFullYear();
-  const Month = newDate.getMonth();
-  const dateString = `${Day}/${Month}/${Year}`;
+  const Year = today.getFullYear();
+  const Month = today.getMonth();
+  const dateString = `${Day}/${Month + 1}/${Year}`;
 
-  var dayWeek = newDate.getDay();
-  var day = newDate.getDate();
   var year = newDate.getFullYear();
   var month = newDate.getMonth();
   var nameMonth = monthNames[month];
-  var week = weekNames[dayWeek];
   var first = newDate.getDate() - newDate.getDay();
 
   function getWeeks() {
@@ -78,7 +74,7 @@ export function Calendar() {
       const day = next.getDate();
       const month = next.getMonth();
       const year = next.getFullYear();
-      const numberWeek = `${day}/${month}/${year}`;
+      const numberWeek = `${day}/${month + 1}/${year}`;
       numbersWeek.push(numberWeek);
     }
     return numbersWeek;
