@@ -13,6 +13,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     .modalContent {
+      position: relative;
       width: 100%;
       margin: 50px;
       background: ${({ theme }) => theme.COLORS.WHITE};
@@ -36,8 +37,8 @@ export const Container = styled.div`
     }
     .modalContent .close {
       position: absolute;
-      top: 235px;
-      right: 60px;
+      top: 10px;
+      right: 10px;
       background: none;
       border: none;
     }
