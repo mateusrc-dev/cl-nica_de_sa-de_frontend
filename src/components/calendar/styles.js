@@ -121,8 +121,13 @@ export const Container = styled.div`
   }
   .table tbody td {
     padding: 5px;
-    border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
     font-weight: bold;
+  }
+  .table tbody tr:nth-child(even) {
+    background: ${({ theme }) => theme.COLORS.BLUE_200};
+  }
+  .table tbody tr:nth-child(odd) {
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
   }
   .list {
     display: flex;
@@ -185,7 +190,6 @@ export const Container = styled.div`
       font-style: italic;
     }
     background: ${({ theme }) => theme.COLORS.WHITE};
-    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
     box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
     button {
       margin: 5px 10px;

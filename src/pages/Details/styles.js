@@ -18,6 +18,83 @@ export const Main = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-areas: "columnOne columnTwo";
+  .modal {
+    width: 100%;
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: rgba(212, 221, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .modalContent {
+      position: relative;
+      width: 100%;
+      margin: 50px;
+      background: ${({ theme }) => theme.COLORS.WHITE};
+      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+      border-radius: 10px;
+    }
+    .modalContent div {
+      width: 100%;
+      height: 100%;
+      padding: 100px 200px;
+      font-size: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: justify;
+    }
+    .modalContent div textarea {
+      resize: none;
+      padding: 20px;
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      &::placeholder{
+        color: ${({ theme }) => theme.COLORS.BLUE_200};
+      }
+    }
+    .modalContent div svg {
+      position: static;
+      font-size: 90px;
+    }
+    .modalContent .stars {
+      display: flex;
+      gap: 10px;
+      button {
+        background: none;
+        border: none;
+        transition: all 0.3s;
+      }
+      button:hover {
+        transform: scale(1.3);
+      }
+    }
+    .modalContent .stars svg {
+      position: static;
+      font-size: 30px;
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+    }
+    .modalContent .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+    }
+    .modalContent .close svg {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      font-size: 35px;
+    }
+    .modalContent button svg {
+      position: static;
+    }
+  }
+  .none {
+    display: none;
+  }
   .columnOne {
     grid-area: columnOne;
     margin-top: 25px;
@@ -247,6 +324,26 @@ export const Main = styled.div`
         .edit:hover {
           border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
           border-radius: 5px;
+        }
+      }
+      .createTestimony {
+        background: ${({ theme }) => theme.COLORS.WHITE};
+        border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+        box-shadow: inset 2px 2px 10px 5px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 10px;
+        font-style: italic;
+        text-align: justify;
+        button {
+          background: ${({ theme }) => theme.COLORS.BLUE_100};
+          font-size: 16px;
+        }
+        svg {
+          font-size: 100px;
         }
       }
     }
