@@ -6,6 +6,8 @@ import { Button } from "../../components/button";
 import { CgClose } from "react-icons/cg";
 import { GiConfirmed } from "react-icons/gi";
 import { FaRegHandPointRight } from "react-icons/fa";
+import { IoMdArrowDropleft } from "react-icons/io";
+import { IoMdArrowDropright } from "react-icons/io";
 
 const monthNames = [
   "Janeiro",
@@ -36,10 +38,32 @@ export function Calendar() {
   const [click, setClick] = useState(false);
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
+  const [time, setTime] = useState();
+  const [displayTime, setDisplayTime] = useState("01:00");
 
   const date = new Date();
   var newDate = new Date();
   const [Number, setNumber] = useState(0);
+
+  function handleDisplayTimeLeft() {
+    if (displayTime === "01:00") {
+      setDisplayTime("00:30");
+    } else if (displayTime === "01:30") {
+      setDisplayTime("01:00");
+    } else if (displayTime === "00:30") {
+      return;
+    }
+  }
+
+  function handleDisplayTimeRight() {
+    if (displayTime === "01:00") {
+      setDisplayTime("01:30");
+    } else if (displayTime === "00:30") {
+      setDisplayTime("01:00");
+    } else if (displayTime === "01:30") {
+      return;
+    }
+  }
 
   function handleDaysAdd() {
     setNumber((prevState) => prevState + 7);
@@ -128,10 +152,22 @@ export function Calendar() {
           </p>
         </div>
       </div>
-      <h1 className="title">
-        {nameMonth} | <span>{year}</span>
-      </h1>
-      <table>
+      <div className="timeAndTitle">
+        <div className="time">
+          <h3>Modificar tempo da consulta</h3>
+          <button onClick={handleDisplayTimeLeft}>
+            <IoMdArrowDropleft />
+          </button>
+          <span>{displayTime}</span>
+          <button onClick={handleDisplayTimeRight}>
+            <IoMdArrowDropright />
+          </button>
+        </div>
+        <h1 className="title">
+          {nameMonth} | <span>{year}</span>
+        </h1>
+      </div>
+      <table className={displayTime === "01:00" ? "table" : "none"}>
         <thead>
           <tr>
             <tr></tr>
@@ -289,6 +325,420 @@ export function Calendar() {
                 }
               >
                 <button onClick={() => handleClick(number, "20:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+      <table className={displayTime === "01:30" ? "table" : "none"}>
+        <thead>
+          <tr>
+            <tr></tr>
+            {weekDays.map((key) => (
+              <th className="list_item">
+                <span>{key}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div className="buttons">
+                <button onClick={() => handleDaysSubtract()}>
+                  <TbArrowBigLeftLines />
+                </button>
+                <button onClick={() => handleDaysAdd()}>
+                  <TbArrowBigRightLines />
+                </button>
+              </div>
+            </td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                {dateString === number ? (
+                  <span>{number} (HOJE)</span>
+                ) : (
+                  <span>{number}</span>
+                )}
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>12:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "12:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>13:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "13:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>15:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "15:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>16:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "16:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>18:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "18:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>19:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "19:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+      <table className={displayTime === "00:30" ? "table" : "none"}>
+        <thead>
+          <tr>
+            <tr></tr>
+            {weekDays.map((key) => (
+              <th className="list_item">
+                <span>{key}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div className="buttons">
+                <button onClick={() => handleDaysSubtract()}>
+                  <TbArrowBigLeftLines />
+                </button>
+                <button onClick={() => handleDaysAdd()}>
+                  <TbArrowBigRightLines />
+                </button>
+              </div>
+            </td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                {dateString === number ? (
+                  <span>{number} (HOJE)</span>
+                ) : (
+                  <span>{number}</span>
+                )}
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>12:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "12:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>12:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "12:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>13:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "13:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>13:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "13:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>14:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "14:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>14:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "14:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>15:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "15:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>15:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "15:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>16:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "16:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>16:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "16:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>17:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "17:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>17:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "17:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>18:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "18:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>18:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "18:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>19:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "19:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>19:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "19:30")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>20:00</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "20:00")}>
+                  Clique para criar um horário
+                </button>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td>20:30</td>
+            {numberDays.map((number) => (
+              <td
+                className={
+                  dateString === number ? "list_item_active" : "list_item"
+                }
+              >
+                <button onClick={() => handleClick(number, "20:30")}>
                   Clique para criar um horário
                 </button>
               </td>

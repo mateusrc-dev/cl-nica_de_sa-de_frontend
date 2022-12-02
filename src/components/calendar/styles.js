@@ -1,6 +1,54 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  .timeAndTitle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .time {
+    height: 30px;
+    left: 500px;
+    top: 115px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h3 {
+      font-size: 14px;
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+      color: ${({ theme }) => theme.COLORS.WHITE};
+      padding: 0 5px;
+      border-radius: 5px 0 0 5px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    button {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+      height: 100%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    button:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+    button svg {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+    }
+    span {
+      background: ${({ theme }) => theme.COLORS.WHITE};
+      border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+      box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+    }
+  }
   .modal {
     width: 100%;
     position: absolute;
@@ -65,13 +113,13 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.COLORS.BLUE_100};
     }
   }
-  table {
+  .table {
     margin: auto;
     border-collapse: collapse;
     width: 100%;
     max-width: 850px;
   }
-  table tbody td {
+  .table tbody td {
     padding: 5px;
     border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
     font-weight: bold;
