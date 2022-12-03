@@ -28,16 +28,17 @@ export const Container = styled.header`
       display: flex;
       align-items: center;
       flex-direction: column;
-      top: 80px;
+      top: 70px;
       margin-left: 100%;
-      left: -420px;
+      left: -445px;
       width: 300px;
       height: 400px;
-      background: ${({ theme }) => theme.COLORS.WHITE};
-      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-      border-radius: 0px 0px 5px 5px;
+      background: ${({ theme }) => theme.COLORS.WHITE_100};
+      //border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+      clip-path: polygon(0% 8%, 80% 8%, 90% 0%, 100% 8%, 100% 100%, 0 100%, 0 20%);
       padding: 40px 10px;
-      box-shadow: -3px 3px 2px 1px rgba(0, 0, 0, 0.5);
+      //box-shadow: -3px 3px 2px 1px rgba(0, 0, 0, 0.5);
+      border-radius: 0 0 10px 10px;
     }
     .modalContent a {
       color: ${({ theme }) => theme.COLORS.BLUE_100};
@@ -55,7 +56,7 @@ export const Container = styled.header`
     .modalContent .close {
       position: absolute;
       top: 10px;
-      right: 10px;
+      right: 17.5px;
       background: none;
       border: none;
     }
