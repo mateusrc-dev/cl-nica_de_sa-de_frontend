@@ -24,6 +24,7 @@ export function Professionals() {
             </ul>
           </nav>
         </header>
+
         <div className="professions">
           <ul>
             <li>Todos</li>

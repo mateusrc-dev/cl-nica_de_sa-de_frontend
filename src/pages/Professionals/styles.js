@@ -25,7 +25,8 @@ export const Main = styled.main`
     align-items: center;
     height: 50px;
     justify-content: space-between;
-    border-radius: 0 0 100% 100%;
+    border-radius: 10% 10% 10% 10% / 0% 0% 100% 100%;
+    //clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 95% 100%, 5% 100%, 0% 0%);
     box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
   }
   h1 {
@@ -62,9 +63,10 @@ export const Main = styled.main`
     align-items: center;
     padding: 0 120px;
     background: ${({ theme }) => theme.COLORS.WHITE_100};
-    border-bottom: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+    border: 0px solid ${({ theme }) => theme.COLORS.BLUE_100};
     height: 100px;
-    border-radius: 0 0 50% 0%;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 90% 100%, 0% 100%, 0% 0%);
+    //border-radius: 0 0 50% 0%;
   }
   .professions ul {
     margin-top: 50px;
@@ -82,25 +84,27 @@ export const Main = styled.main`
   .tags {
     background: ${({ theme }) => theme.COLORS.WHITE_100};
     border-right: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-    height: 100%;
+    border-top: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+    margin-top: 100px;
+    height: 350px;
     width: 300px;
     border-radius: 0 0 40% 0;
   }
   .tags h2 {
     position: absolute;
-    margin-top: 120px;
+    margin-top: 20px;
     margin-left: 125px;
   }
   .tags ul {
     position: absolute;
-    margin-top: 160px;
+    margin-top: 60px;
     margin-left: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     overflow-y: auto;
-    height: 300px;
+    height: 250px;
   }
   .tags ul::-webkit-scrollbar {
     width: 18px;

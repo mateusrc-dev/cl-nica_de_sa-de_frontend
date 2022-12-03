@@ -14,6 +14,10 @@ export const Main = styled.main`
   justify-content: space-around;
   padding: 0 50px;
   gap: 10px;
+  width: 100%;
+  height: 100%;
+  grid-area: content;
+  overflow-y: auto;
   .columnOne {
     width: 350px;
     border-right: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
@@ -42,8 +46,4 @@ export const Main = styled.main`
       text-align: justify;
     }
   }
-  width: 100%;
-  height: 100%;
-  grid-area: content;
-  overflow-y: auto;
 `;
