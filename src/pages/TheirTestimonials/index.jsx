@@ -4,7 +4,7 @@ import { Footer } from "../../components/footer";
 import { Button } from "../../components/button";
 import { TiCancel } from "react-icons/ti";
 
-export function YourSchedules() {
+export function TheirTestimonials() {
   return (
     <Container>
       <Header />
