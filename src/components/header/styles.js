@@ -28,16 +28,15 @@ export const Container = styled.header`
       display: flex;
       align-items: center;
       flex-direction: column;
+      gap: 10px;
       top: 2px;
       margin-left: 100%;
       left: -301px;
       width: 300px;
       height: 400px;
       background: ${({ theme }) => theme.COLORS.WHITE_100};
-      //border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
       clip-path: polygon(0% 8%, 80% 8%, 90% 0%, 100% 8%, 100% 100%, 0 100%, 0 20%);
       padding: 40px 10px;
-      //box-shadow: -3px 3px 2px 1px rgba(0, 0, 0, 0.5);
       border-radius: 0 0 10px 10px;
     }
     .borderModal {
@@ -53,6 +52,8 @@ export const Container = styled.header`
     }
     .modalContent a {
       color: ${({ theme }) => theme.COLORS.BLUE_100};
+      clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 80% 100%, 0% 100%, 0% 0%);
+      border-radius: 5px 0 0 5px;
       font-weight: bold;
       font-style: italic;
       padding: 5px;

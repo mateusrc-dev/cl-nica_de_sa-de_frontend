@@ -71,6 +71,7 @@ export function Header() {
             </button>
             <a>Seu Perfil</a>
             <a>Seus agendamentos</a>
+            <a>Seus depoimentos</a>
             <a>Seus profissionais favoritos</a>
             <a>Sair da sua conta</a>
           </div>
