@@ -2,9 +2,14 @@ import { Container } from "./styles";
 import { GiHealthNormal } from "react-icons/gi";
 import { FiLogIn } from "react-icons/fi";
 import { BsSearch } from "react-icons/bs";
+import { useState } from "react";
+import { CgClose } from "react-icons/cg";
+import { TiArrowSortedDown } from "react-icons/ti";
 
 export function Header() {
   const hours = new Date();
+  const [user, setUser] = useState(false);
+  const [click, setClick] = useState(false);
 
   function handleHours() {
     let Hours;
@@ -38,8 +43,37 @@ export function Header() {
     return day;
   }
 
+  function handleClick() {
+    if (click === false) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }
+
+  const handleOutsideClick = (e) => {
+    if (e.target.id === "modal") {
+      handleClick();
+    }
+  };
+
   return (
     <Container>
+      <div
+        id="modal"
+        className={click ? "modal" : "none"}
+        onClick={handleOutsideClick}
+      >
+        <div className="modalContent">
+          <button className="close" onClick={() => handleClick()}>
+            <CgClose />
+          </button>
+          <a>Seu Perfil</a>
+          <a>Seus agendamentos</a>
+          <a>Seus profissionais favoritos</a>
+          <a>Sair da sua conta</a>
+        </div>
+      </div>
       <div className="logo">
         <GiHealthNormal />
         <div className="logoText">
@@ -57,16 +91,30 @@ export function Header() {
         <div className="inner">
           <div className="welcome">
             <h1>
-              <strong>{`${handleHours()},`} </strong>
+              {user ? (
+                <strong>{`${handleHours()},`} </strong>
+              ) : (
+                <strong>{`${handleHours()},`} Mateus, </strong>
+              )}
             </h1>
             <h2>seja bem vindo(a)!</h2>
             <span>{`${handleDay()}.`}</span>
           </div>
           <div className="user">
-            <a className="login">
-              <FiLogIn />
-              Fazer login
-            </a>
+            {user ? (
+              <a className="login">
+                <FiLogIn />
+                Fazer login
+              </a>
+            ) : (
+              <a className="Avatar" onClick={() => handleClick()}>
+                <img
+                  src="https://github.com/mateusrc-dev.png"
+                  alt="imagem do profissional"
+                />
+                <TiArrowSortedDown/>
+              </a>
+            )}
           </div>
         </div>
       </div>

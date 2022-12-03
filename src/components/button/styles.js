@@ -12,7 +12,6 @@ export const Container = styled.button`
   color: ${({ theme }) => theme.COLORS.WHITE};
   font-weight: 600;
   font-size: 16px;
-  width: 100%;
   white-space: nowrap;
   height: 40px;
   svg {

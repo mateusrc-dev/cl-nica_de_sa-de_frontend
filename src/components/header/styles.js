@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   position: absolute;
-  z-index: 3;
+  z-index: 4;
   grid-area: header;
   width: 100%;
   height: 100px;
@@ -15,6 +15,58 @@ export const Container = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.WHITE};
   box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.5);
   padding: 0 120px;
+  .modal {
+    width: 100%;
+    position: absolute;
+    z-index: 4;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    background: rgba(212, 221, 255, 0);
+    .modalContent {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      top: 80px;
+      margin-left: 100%;
+      left: -420px;
+      width: 300px;
+      height: 400px;
+      background: ${({ theme }) => theme.COLORS.WHITE};
+      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+      border-radius: 0px 0px 5px 5px;
+      padding: 40px 10px;
+      box-shadow: -3px 3px 2px 1px rgba(0, 0, 0, 0.5);
+    }
+    .modalContent a {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      font-weight: bold;
+      font-style: italic;
+      padding: 5px;
+      width: 100%;
+    }
+    .modalContent a:nth-child(odd) {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
+    }
+    .modalContent a:nth-child(even) {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
+    }
+    .modalContent .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+    }
+    .modalContent .close svg {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      font-size: 25px;
+    }
+  }
+  .none {
+    display: none;
+  }
   .avatar {
     white-space: nowrap;
     position: relative;
@@ -34,12 +86,26 @@ export const Container = styled.header`
     padding: 10px;
     border-radius: 10px;
   }
-  .login {
+  .user .login {
     display: flex;
     align-items: center;
     gap: 5px;
     font-style: italic;
     color: ${({ theme }) => theme.COLORS.BLUE_100};
+  }
+  .user .Avatar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    img {
+      width: 50px;
+      height: 50px;
+      border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+      border-radius: 50%;
+    }
+    svg {
+      font-size: 20px;
+    }
   }
   .welcome {
     text-align: end;

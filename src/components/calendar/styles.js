@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
   .timeAndTitle {
     display: flex;
     align-items: center;
@@ -8,8 +13,6 @@ export const Container = styled.div`
   }
   .time {
     height: 30px;
-    left: 500px;
-    top: 115px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,7 +49,6 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 50px;
     }
   }
   .modal {
@@ -129,17 +131,7 @@ export const Container = styled.div`
   .table tbody tr:nth-child(odd) {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
   }
-  .list {
-    display: flex;
-    list-style: none;
-    width: 100%;
-    max-width: 400px;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px auto;
-    padding: 0;
-    gap: 15px;
-  }
+  
   .list_date {
     margin: auto;
     display: flex;
@@ -150,12 +142,6 @@ export const Container = styled.div`
   }
   .title {
     font-style: italic;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
     span {
       font-size: 25px;
       font-weight: normal;

@@ -228,7 +228,7 @@ export function Details() {
                 rows="10"
               ></textarea>
               <Button>
-                Criar depoimento!
+                Finalizar!
                 <GiConfirmed />
               </Button>
             </div>
