@@ -18,12 +18,15 @@ export const Main = styled.main`
   .main {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin-bottom: 20px;
   }
   h1 {
     font-style: italic;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   p {
     margin-bottom: 20px;
@@ -31,13 +34,13 @@ export const Main = styled.main`
   .svg {
     position: absolute;
     display: flex;
-    filter:drop-shadow(2px 2px 5px black);
+    filter: drop-shadow(2px 2px 2px black);
+    fill: ${({ theme }) => theme.COLORS.WHITE};
   }
   .scheduling {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 20px;
     width: 500px;
     height: 250px;
@@ -46,15 +49,41 @@ export const Main = styled.main`
       width: 200px;
       height: 200px;
       border-radius: 50%;
-      border: 1px solid ${({theme}) => theme.COLORS.BLUE_100}
+      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
     }
   }
   .details {
     display: flex;
     flex-direction: column;
-    .last {
+    .testimonial {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       margin-bottom: 10px;
+      textarea {
+        resize: none;
+        padding: 10px;
+        color: ${({ theme }) => theme.COLORS.BLUE_100};
+        &::placeholder {
+          color: ${({ theme }) => theme.COLORS.BLUE_200};
+        }
+      }
+    }
+    span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .stars button {
+      background: none;
+      border: none;
+    }
+    .stars button svg {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      transition: all 0.3s;
+    }
+    .stars button svg:hover {
+      transform: scale(1.2);
     }
   }
-  
 `;

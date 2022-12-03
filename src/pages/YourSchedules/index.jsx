@@ -3,13 +3,17 @@ import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Button } from "../../components/button";
 import { TiCancel } from "react-icons/ti";
+import { AiFillSchedule } from "react-icons/ai";
 
 export function YourSchedules() {
   return (
     <Container>
       <Header />
       <Main>
-        <h1>Seus agendamentos</h1>
+        <h1>
+          Seus agendamentos
+          <AiFillSchedule />
+        </h1>
         <p>
           Abaixo estão todos os seus agendamentos, você pode <strong>desmarcá-los</strong> se desejar!
         </p>
@@ -19,7 +23,7 @@ export function YourSchedules() {
               <polygon
                 points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
                 stroke="blue"
-                stroke-width="0.5"
+                stroke-width="1"
                 fill="white"
               />
             </svg>

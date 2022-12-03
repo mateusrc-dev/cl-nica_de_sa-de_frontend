@@ -24,6 +24,9 @@ export const Main = styled.main`
   h1 {
     font-style: italic;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   p {
     margin-bottom: 20px;
@@ -31,7 +34,7 @@ export const Main = styled.main`
   .svg {
     position: absolute;
     display: flex;
-    filter:drop-shadow(2px 2px 5px black);
+    filter:drop-shadow(2px 2px 2px black);
   }
   .scheduling {
     position: relative;
