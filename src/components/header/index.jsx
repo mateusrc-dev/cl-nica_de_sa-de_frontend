@@ -64,14 +64,16 @@ export function Header() {
         className={click ? "modal" : "none"}
         onClick={handleOutsideClick}
       >
-        <div className="modalContent">
-          <button className="close" onClick={() => handleClick()}>
-            <CgClose />
-          </button>
-          <a>Seu Perfil</a>
-          <a>Seus agendamentos</a>
-          <a>Seus profissionais favoritos</a>
-          <a>Sair da sua conta</a>
+        <div className="borderModal">
+          <div className="modalContent">
+            <button className="close" onClick={() => handleClick()}>
+              <CgClose />
+            </button>
+            <a>Seu Perfil</a>
+            <a>Seus agendamentos</a>
+            <a>Seus profissionais favoritos</a>
+            <a>Sair da sua conta</a>
+          </div>
         </div>
       </div>
       <div className="logo">
@@ -112,7 +114,7 @@ export function Header() {
                   src="https://github.com/mateusrc-dev.png"
                   alt="imagem do profissional"
                 />
-                <TiArrowSortedDown/>
+                <TiArrowSortedDown />
               </a>
             )}
           </div>

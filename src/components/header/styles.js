@@ -28,9 +28,9 @@ export const Container = styled.header`
       display: flex;
       align-items: center;
       flex-direction: column;
-      top: 70px;
+      top: 2px;
       margin-left: 100%;
-      left: -445px;
+      left: -301px;
       width: 300px;
       height: 400px;
       background: ${({ theme }) => theme.COLORS.WHITE_100};
@@ -38,6 +38,17 @@ export const Container = styled.header`
       clip-path: polygon(0% 8%, 80% 8%, 90% 0%, 100% 8%, 100% 100%, 0 100%, 0 20%);
       padding: 40px 10px;
       //box-shadow: -3px 3px 2px 1px rgba(0, 0, 0, 0.5);
+      border-radius: 0 0 10px 10px;
+    }
+    .borderModal {
+      background: ${({ theme }) => theme.COLORS.BLUE_100};
+      clip-path: polygon(0% 8%, 80% 8%, 90% 0%, 100% 8%, 100% 100%, 0 100%, 0 20%);
+      width: 302px;
+      height: 403px;
+      position: relative;
+      top: 70px;
+      margin-left: 100%;
+      left: -445px;
       border-radius: 0 0 10px 10px;
     }
     .modalContent a {
