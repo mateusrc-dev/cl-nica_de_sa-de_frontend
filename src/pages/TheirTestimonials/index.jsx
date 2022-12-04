@@ -151,7 +151,7 @@ export function TheirTestimonials() {
                   <strong>Seu depoimento:</strong>
                   <textarea
                     placeholder="O Mateus é o melhor profissional do mundo, muito atencioso, carinhoso, lindo, ele sabe te acolher, sabe te aconselhar, não tem melhor... Super indico!"
-                    cols="85"
+                    cols="96"
                     rows="3"
                   ></textarea>
                 </span>
@@ -290,7 +290,7 @@ export function TheirTestimonials() {
                   <strong>Seu depoimento:</strong>
                   <textarea
                     placeholder="O Mateus é o melhor profissional do mundo, muito atencioso, carinhoso, lindo, ele sabe te acolher, sabe te aconselhar, não tem melhor... Super indico!"
-                    cols="85"
+                    cols="96"
                     rows="3"
                   ></textarea>
                 </span>
@@ -429,7 +429,7 @@ export function TheirTestimonials() {
                   <strong>Seu depoimento:</strong>
                   <textarea
                     placeholder="O Mateus é o melhor profissional do mundo, muito atencioso, carinhoso, lindo, ele sabe te acolher, sabe te aconselhar, não tem melhor... Super indico!"
-                    cols="85"
+                    cols="96"
                     rows="3"
                   ></textarea>
                 </span>
@@ -568,7 +568,7 @@ export function TheirTestimonials() {
                   <strong>Seu depoimento:</strong>
                   <textarea
                     placeholder="O Mateus é o melhor profissional do mundo, muito atencioso, carinhoso, lindo, ele sabe te acolher, sabe te aconselhar, não tem melhor... Super indico!"
-                    cols="85"
+                    cols="96"
                     rows="3"
                   ></textarea>
                 </span>
@@ -582,8 +582,7 @@ export function TheirTestimonials() {
                 </span>
               </div>
             </div>
-          </div>
-                  
+          </div> 
         </div>
       </Main>
       <Footer />
