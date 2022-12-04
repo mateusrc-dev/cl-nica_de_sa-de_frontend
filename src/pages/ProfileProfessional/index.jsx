@@ -6,6 +6,8 @@ import { Input } from "../../components/input";
 import { MdInsertPhoto } from "react-icons/md";
 import { TfiSave } from "react-icons/tfi";
 import { Button } from "../../components/button";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { HiOutlineMail } from "react-icons/hi";
 
 export function ProfileProfessional() {
   return (
@@ -24,25 +26,36 @@ export function ProfileProfessional() {
         </div>
         <div className="main">
           <label htmlFor="email">
-            <strong>Seu email</strong>
+            <strong>Seu email:</strong>
             <Input
               id={"email"}
               placeholder={"mateus_raimundo95@outlook.com"}
-            ></Input>
+            ><HiOutlineMail/></Input>
           </label>
           <label htmlFor="old_password">
             <strong>Senha antiga:</strong>
-            <Input id={"old_password"}></Input>
+            <Input id={"old_password"}>
+              <RiLockPasswordFill />
+            </Input>
           </label>
           <label htmlFor="password">
             <strong>Nova senha:</strong>
-            <Input id={"password"}></Input>
+            <Input id={"password"}>
+              <RiLockPasswordFill />
+            </Input>
           </label>
           <label htmlFor="description" className="textarea">
             <strong>Sua descrição:</strong>
-            <textarea placeholder="Meu nome é Mateus, sou o melhor psicólogo de todos, cure todos os seus traumas, marque uma consulta comigo e resolva todos os seus problemas!" id="description" cols="86" rows="5"></textarea>
+            <textarea
+              placeholder="Meu nome é Mateus, sou o melhor psicólogo de todos, cure todos os seus traumas, marque uma consulta comigo e resolva todos os seus problemas!"
+              id="description"
+              cols="86"
+              rows="5"
+            ></textarea>
           </label>
-          <p><strong>Criar o adicionador de tags aqui...</strong></p>
+          <p>
+            <strong>Criar o adicionador de tags aqui...</strong>
+          </p>
           <span>
             <Button>
               Salvar alterações <TfiSave />

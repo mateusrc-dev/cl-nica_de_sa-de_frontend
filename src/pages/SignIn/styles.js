@@ -1,0 +1,134 @@
+import styled from "styled-components";
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 50px auto 50px;
+  grid-template-areas: "header" "content" "footer";
+`;
+
+export const Main = styled.main`
+  .main {
+    grid-area: content;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    white-space: nowrap;
+    .logoText {
+      display: flex;
+      flex-direction: column;
+      text-align: end;
+    }
+    svg {
+      width: 100px;
+      height: 100px;
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+    }
+    h1 {
+      font-size: 50px;
+      font-family: "Rubik Marker Hatch", cursive;
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      font-weight: normal;
+      font-style: italic;
+    }
+    p {
+      font-size: 20px;
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      margin-top: -5px;
+      font-weight: bold;
+      font-style: italic;
+    }
+  }
+  .clientOrProfessional {
+    .header {
+      display: flex;
+      .client {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 100%;
+        border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+        border-right: none;
+        color: ${({ theme }) => theme.COLORS.BLUE_100};
+      }
+      .professional {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 100%;
+        border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+        color: ${({ theme }) => theme.COLORS.BLUE_100};
+      }
+      .select {
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_1000};
+        font-style: italic;
+        text-decoration: underline;
+      }
+    }
+  }
+  .content {
+    width: 500px;
+    height: 400px;
+    padding: 50px;
+    border: 1px solid blue;
+    border-top: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .choice {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      h2 {
+        font-size: 20px;
+        font-style: italic;
+      }
+      svg {
+        font-size: 200px;
+      }
+    }
+    .loginClient {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      h1 {
+        font-size: 20px;
+      }
+    }
+    .none {
+      display: none;
+    }
+  }
+`;
+
+export const Header = styled.header`
+  grid-area: header;
+  width: 100%;
+  height: 50px;
+  background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+`;
+
+export const Footer = styled.header`
+  grid-area: footer;
+  width: 100%;
+  height: 50px;
+  background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+`;
