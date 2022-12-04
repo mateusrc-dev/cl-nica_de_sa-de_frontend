@@ -13,6 +13,10 @@ export const Main = styled.main`
   height: 100%;
   grid-area: content;
   overflow-y: auto;
+  .active {
+    font-style: italic;
+    text-decoration: underline;
+  }
   .row {
     border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
     border-left: none;

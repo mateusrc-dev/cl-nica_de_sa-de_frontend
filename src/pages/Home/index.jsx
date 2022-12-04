@@ -20,7 +20,7 @@ export function Home() {
           </h1>
           <nav>
             <ul>
-              <li>Sobre o nosso espaço</li>
+              <li className="active">Sobre o nosso espaço</li>
               <div className="row"></div>
               <li>Agendamentos com nossos profissionais</li>
             </ul>

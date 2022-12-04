@@ -1,13 +1,25 @@
 import { Container, Main } from "./styles";
+import { useState } from "react";
 import { GiHealthNormal } from "react-icons/gi";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { BsStarFill } from "react-icons/bs";
 import { MdFavorite } from "react-icons/md";
+import { MdFavoriteBorder } from "react-icons/md";
 import { Button } from "../../components/button";
-import { GrSchedules } from "react-icons/gr";
+import { AiFillSchedule } from "react-icons/ai";
 
 export function Professionals() {
+  const [heart, setHeart] = useState(false);
+  
+  function handleFavorite() {
+    if (heart === false) {
+      setHeart(true);
+    } else if (heart === true) {
+      setHeart(false);
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -20,14 +32,14 @@ export function Professionals() {
             <ul>
               <li>Sobre o nosso espaço</li>
               <div className="row"></div>
-              <li>Agendamentos com nossos profissionais</li>
+              <li className="active">Agendamentos com nossos profissionais</li>
             </ul>
           </nav>
         </header>
 
         <div className="professions">
           <ul>
-            <li>Todos</li>
+            <li className="active">Todos</li>
             <li>Psicólogos</li>
             <li>Psiquiatras</li>
             <li>Nutricionistas</li>
@@ -38,7 +50,7 @@ export function Professionals() {
         <div className="tags">
           <h2>Tags</h2>
           <ul>
-            <li>todos</li>
+            <li className="active">todos</li>
             <li>depressão</li>
             <li>compulsão alimentar</li>
             <li>dieta</li>
@@ -63,8 +75,8 @@ export function Professionals() {
         </div>
         <div className="professionals">
           <div className="professional">
-            <button className="favorite">
-              <MdFavorite />
+            <button className="favorite" onClick={() => handleFavorite()}>
+            {heart ? <MdFavorite /> : <MdFavoriteBorder/>}
             </button>
             <img
               src="https://github.com/mateusrc-dev.png"
@@ -82,13 +94,13 @@ export function Professionals() {
               como se nenhum problema existisse.
             </p>
             <Button>
-              <GrSchedules />
+              <AiFillSchedule />
               Agende um horário!
             </Button>
           </div>
           <div className="professional">
-            <button className="favorite">
-              <MdFavorite />
+            <button className="favorite" onClick={() => handleFavorite()}>
+              {heart ? <MdFavorite /> : <MdFavoriteBorder/>}
             </button>
             <img
               src="https://github.com/mateusrc-dev.png"
@@ -106,7 +118,7 @@ export function Professionals() {
               como se nenhum problema existisse.
             </p>
             <Button>
-              <GrSchedules />
+              <AiFillSchedule />
               Agende um horário!
             </Button>
           </div>
@@ -130,7 +142,7 @@ export function Professionals() {
               como se nenhum problema existisse.
             </p>
             <Button>
-              <GrSchedules />
+              <AiFillSchedule />
               Agende um horário!
             </Button>
           </div>
@@ -154,7 +166,7 @@ export function Professionals() {
               como se nenhum problema existisse.
             </p>
             <Button>
-              <GrSchedules />
+              <AiFillSchedule />
               Agende um horário!
             </Button>
           </div>
@@ -178,7 +190,7 @@ export function Professionals() {
               como se nenhum problema existisse.
             </p>
             <Button>
-              <GrSchedules />
+              <AiFillSchedule />
               Agende um horário!
             </Button>
           </div>

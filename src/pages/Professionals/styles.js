@@ -14,6 +14,10 @@ export const Main = styled.main`
   height: 100%;
   grid-area: content;
   overflow-y: auto;
+  .active {
+    font-style: italic;
+    text-decoration: underline;
+  }
   header {
     position: absolute;
     z-index: 2;
@@ -187,6 +191,10 @@ export const Main = styled.main`
       border: none;
       color: ${({ theme }) => theme.COLORS.BLUE_100};
       font-size: 30px;
+      transition: all 0.3s;
+    }
+    .favorite:hover {
+      transform: scale(1.3);
     }
   }
 `;

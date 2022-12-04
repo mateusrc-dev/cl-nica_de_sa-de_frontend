@@ -2,15 +2,11 @@ import { Container, Main } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Button } from "../../components/button";
-import { TiCancel } from "react-icons/ti";
-import { BiSave } from "react-icons/bi";
 import { FaWalking } from "react-icons/fa";
 import { GiBrokenHeart } from "react-icons/gi";
 import { GiNestedHearts } from "react-icons/gi";
 
 export function Favorites() {
-  
-  
   return (
     <Container>
       <Header />
@@ -155,7 +151,6 @@ export function Favorites() {
                   <strong>Especialidade:</strong> Psicólogo
                 </span>
                 <span>
-                 
                 </span>
                 <span className="description">
                   <strong>Descrição:</strong> Meu nome é Mateus, sou um profissional incrível e você não vai se arrepender de fazer uma consulta comigo, sou o melhor do fullness clinic, sem dúvida (espero que meus colegas de trabalho não leiam isso...)
