@@ -7,8 +7,6 @@ import { AiFillSchedule } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import { useState, useRef } from "react";
 import { CgClose } from "react-icons/cg";
-import { FaHandPointDown } from "react-icons/fa";
-import { GiConfirmed } from "react-icons/gi";
 import { CgArrowLeftO } from "react-icons/cg";
 import { CgArrowRightO } from "react-icons/cg";
 
@@ -230,6 +228,129 @@ export function YourSchedules() {
             Abaixo estão todos os seus agendamentos, você pode <strong>reagendar</strong> ou <strong>desmarcar</strong> consultas se desejar!
           </p>
           <div className="main">
+            <div className="Scheduling">
+              <svg class="svg" width="500px" height="250px">
+                <polygon
+                  points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
+                  stroke="blue"
+                  stroke-width="0.5"
+                  fill="white"
+                />
+              </svg>
+              <div className="scheduling">
+                <img
+                  src="https://github.com/mateusrc-dev.png"
+                  alt="imagem do profissional"
+                />
+                <div className="details">
+                  <span>
+                    <strong>Profissional:</strong> Dr. Mateus Carvalho
+                  </span>
+                  <span>
+                    <strong>Especialidade:</strong> Psicólogo
+                  </span>
+                  <span>
+                    <strong>Data da consulta:</strong> 22/22/2022
+                  </span>
+                  <span>
+                    <strong>Horário da consulta:</strong> 12:00hrs
+                  </span>
+                  <span className="last">
+                    <strong>Duração da consulta:</strong> 01:00
+                  </span>
+                  <span className="buttons">
+                    <Button onClick={() => handleClick()}>
+                      Reagendar consulta! <FiEdit2 />
+                    </Button>
+                    <Button>
+                      Cancelar consulta! <TiCancel />
+                    </Button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="Scheduling">
+              <svg class="svg" width="500px" height="250px">
+                <polygon
+                  points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
+                  stroke="blue"
+                  stroke-width="0.5"
+                  fill="white"
+                />
+              </svg>
+              <div className="scheduling">
+                <img
+                  src="https://github.com/mateusrc-dev.png"
+                  alt="imagem do profissional"
+                />
+                <div className="details">
+                  <span>
+                    <strong>Profissional:</strong> Dr. Mateus Carvalho
+                  </span>
+                  <span>
+                    <strong>Especialidade:</strong> Psicólogo
+                  </span>
+                  <span>
+                    <strong>Data da consulta:</strong> 22/22/2022
+                  </span>
+                  <span>
+                    <strong>Horário da consulta:</strong> 12:00hrs
+                  </span>
+                  <span className="last">
+                    <strong>Duração da consulta:</strong> 01:00
+                  </span>
+                  <span className="buttons">
+                    <Button onClick={() => handleClick()}>
+                      Reagendar consulta! <FiEdit2 />
+                    </Button>
+                    <Button>
+                      Cancelar consulta! <TiCancel />
+                    </Button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="Scheduling">
+              <svg class="svg" width="500px" height="250px">
+                <polygon
+                  points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
+                  stroke="blue"
+                  stroke-width="0.5"
+                  fill="white"
+                />
+              </svg>
+              <div className="scheduling">
+                <img
+                  src="https://github.com/mateusrc-dev.png"
+                  alt="imagem do profissional"
+                />
+                <div className="details">
+                  <span>
+                    <strong>Profissional:</strong> Dr. Mateus Carvalho
+                  </span>
+                  <span>
+                    <strong>Especialidade:</strong> Psicólogo
+                  </span>
+                  <span>
+                    <strong>Data da consulta:</strong> 22/22/2022
+                  </span>
+                  <span>
+                    <strong>Horário da consulta:</strong> 12:00hrs
+                  </span>
+                  <span className="last">
+                    <strong>Duração da consulta:</strong> 01:00
+                  </span>
+                  <span className="buttons">
+                    <Button onClick={() => handleClick()}>
+                      Reagendar consulta! <FiEdit2 />
+                    </Button>
+                    <Button>
+                      Cancelar consulta! <TiCancel />
+                    </Button>
+                  </span>
+                </div>
+              </div>
+            </div>
             <div className="Scheduling">
               <svg class="svg" width="500px" height="250px">
                 <polygon

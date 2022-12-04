@@ -69,9 +69,11 @@ export const Main = styled.main`
     //border-radius: 0 0 50% 0%;
   }
   .professions ul {
+    width: 1000px;
     margin-top: 50px;
     display: flex;
-    gap: 100px;
+    align-items: center;
+    justify-content: space-around;
   }
   .professions ul li {
     list-style-type: none;
