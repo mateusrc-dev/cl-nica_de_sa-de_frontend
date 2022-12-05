@@ -8,6 +8,8 @@ import { FiEdit2 } from "react-icons/fi";
 import { useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
+import { ButtonText } from "../../components/buttonText";
+import { TiArrowBack } from "react-icons/ti";
 
 export function TheirTestimonials() {
   const [stars, setStars] = useState(1);
@@ -18,6 +20,12 @@ export function TheirTestimonials() {
     <Container>
       <Header />
       <Main>
+        <div className="textButton">
+          <ButtonText>
+            <TiArrowBack />
+            retornar
+          </ButtonText>
+        </div>
         <h1>
           Seus depoimentos
           <FiEdit2 />
@@ -582,7 +590,7 @@ export function TheirTestimonials() {
                 </span>
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </Main>
       <Footer />

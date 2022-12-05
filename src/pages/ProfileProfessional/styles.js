@@ -64,7 +64,7 @@ export const Main = styled.div`
     width: 100%;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     .tags {
       display: flex;
       gap: 10px;

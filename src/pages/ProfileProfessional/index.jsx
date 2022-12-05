@@ -8,6 +8,8 @@ import { Button } from "../../components/button";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { TagItem } from "../../components/TagItem";
+import { ButtonText } from "../../components/buttonText";
+import { TiArrowBack } from "react-icons/ti";
 
 export function ProfileProfessional() {
   return (
@@ -15,6 +17,10 @@ export function ProfileProfessional() {
       <Header />
       <Main>
         <div className="avatar">
+          <ButtonText>
+            <TiArrowBack className="svg" />
+            retornar
+          </ButtonText>
           <img
             className="img"
             src="https://github.com/mateusrc-dev.png"
@@ -57,7 +63,7 @@ export function ProfileProfessional() {
             <TagItem placeholder={"depressão"} />
             <TagItem placeholder={"ansiedade"} />
             <TagItem placeholder={"crise"} />
-            <TagItem value={"pensamentos negativos"} isNew/>
+            <TagItem value={"pensamentos negativos"} isNew />
           </span>
           <span>
             <Button>

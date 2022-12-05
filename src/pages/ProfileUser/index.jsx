@@ -6,6 +6,8 @@ import { Input } from "../../components/input";
 import { MdInsertPhoto } from "react-icons/md";
 import { TfiSave } from "react-icons/tfi";
 import { Button } from "../../components/button";
+import { ButtonText } from "../../components/buttonText";
+import { TiArrowBack } from "react-icons/ti";
 
 export function ProfileUser() {
   return (
@@ -13,6 +15,10 @@ export function ProfileUser() {
       <Header />
       <Main>
         <div className="avatar">
+          <ButtonText>
+            <TiArrowBack className="svg" />
+            retornar
+          </ButtonText>
           <img
             className="img"
             src="https://github.com/mateusrc-dev.png"

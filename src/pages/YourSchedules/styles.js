@@ -111,6 +111,9 @@ export const Main = styled.main`
   section {
     position: relative;
   }
+  .textButton {
+    margin-top: 20px;
+  }
   .main {
     display: flex;
     gap: 20px;

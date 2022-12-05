@@ -15,6 +15,9 @@ export const Main = styled.main`
   grid-area: content;
   overflow-y: auto;
   padding: 0 120px;
+  .textButton {
+    margin-top: 20px;
+  }
   .main {
     display: flex;
     gap: 20px;

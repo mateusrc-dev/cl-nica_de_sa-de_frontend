@@ -9,6 +9,8 @@ import { useState, useRef } from "react";
 import { CgClose } from "react-icons/cg";
 import { CgArrowLeftO } from "react-icons/cg";
 import { CgArrowRightO } from "react-icons/cg";
+import { ButtonText } from "../../components/buttonText";
+import { TiArrowBack } from "react-icons/ti";
 
 export function YourSchedules() {
   const [click, setClick] = useState(false);
@@ -220,12 +222,19 @@ export function YourSchedules() {
           </div>
         </div>
         <section>
+          <div className="textButton">
+            <ButtonText>
+              <TiArrowBack />
+              retornar
+            </ButtonText>
+          </div>
           <h1>
             Seus agendamentos
             <AiFillSchedule />
           </h1>
           <p>
-            Abaixo estão todos os seus agendamentos, você pode <strong>reagendar</strong> ou <strong>desmarcar</strong> consultas se desejar!
+            Abaixo estão todos os seus agendamentos, você pode <strong>reagendar</strong> ou <strong>desmarcar</strong> consultas
+            se desejar!
           </p>
           <div className="main">
             <div className="Scheduling">
