@@ -43,7 +43,7 @@ export function SignIn() {
                   <BiSelectMultiple />
                   <h2>
                     Escolha acima se você vai logar como paciente ou
-                    profissional!
+                    como profissional!
                   </h2>
                 </div>
                 <div className={click === 1 ? "loginClient" : "none"}>

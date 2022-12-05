@@ -50,43 +50,11 @@ export const Main = styled.main`
       font-style: italic;
     }
   }
-  .clientOrProfessional {
-    .header {
-      display: flex;
-      .client {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 50px;
-        width: 100%;
-        border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
-        border-right: none;
-        color: ${({ theme }) => theme.COLORS.BLUE_100};
-      }
-      .professional {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 50px;
-        width: 100%;
-        border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
-        color: ${({ theme }) => theme.COLORS.BLUE_100};
-      }
-      .select {
-        background: ${({ theme }) => theme.COLORS.BACKGROUND_1000};
-        font-style: italic;
-        text-decoration: underline;
-      }
-    }
-  }
   .content {
     width: 500px;
     height: 400px;
     padding: 50px;
-    border: 1px solid ${({theme}) => theme.COLORS.BLUE_100};
-    border-top: none;
+    border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,7 +79,10 @@ export const Main = styled.main`
       flex-direction: column;
       gap: 20px;
       h1 {
+        gap: 5px;
         font-size: 20px;
+        display: flex;
+        align-items: center;
       }
       a {
         display: flex;
