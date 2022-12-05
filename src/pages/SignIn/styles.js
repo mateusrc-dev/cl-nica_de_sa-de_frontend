@@ -85,7 +85,7 @@ export const Main = styled.main`
     width: 500px;
     height: 400px;
     padding: 50px;
-    border: 1px solid ${({theme}) => theme.COLORS.BLUE_100};
+    border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
     border-top: none;
     display: flex;
     align-items: center;
@@ -131,6 +131,19 @@ export const Header = styled.header`
   width: 100%;
   height: 50px;
   background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+  display: flex;
+  align-items: center;
+  a {
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: ${({ theme }) => theme.COLORS.BLUE_100};
+  }
+  a:hover {
+    font-style: italic;
+    text-decoration: underline;
+  }
 `;
 
 export const Footer = styled.header`

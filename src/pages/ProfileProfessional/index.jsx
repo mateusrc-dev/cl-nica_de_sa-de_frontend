@@ -1,4 +1,3 @@
-//nessa página vai ficar os detalhes do profissional (horários livres, detalhes sobre ele, depoimentos sobre ele, etc.)
 import { Container, Main } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
@@ -20,11 +19,12 @@ export function ProfileProfessional() {
             src="https://github.com/mateusrc-dev.png"
             alt="foto do usuário"
           />
-          <button className="edit">
+          <label htmlFor="avatar" className="edit">
             <MdInsertPhoto />
-          </button>
+            <input type="file" id="avatar" />
+          </label>
         </div>
-        <div className="main">
+        <form className="main">
           <label htmlFor="email">
             <strong>Seu email:</strong>
             <Input
@@ -61,7 +61,7 @@ export function ProfileProfessional() {
               Salvar alterações <TfiSave />
             </Button>
           </span>
-        </div>
+        </form>
       </Main>
       <Footer />
     </Container>

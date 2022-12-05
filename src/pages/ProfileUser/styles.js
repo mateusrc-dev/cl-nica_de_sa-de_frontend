@@ -43,6 +43,15 @@ export const Main = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      transition: all 0.5s;
+    }
+    .edit:hover {
+      transform: scale(1.2);
+      filter: brightness(0.7);
+    }
+    input {
+      display: none;
     }
     svg {
       color: ${({ theme }) => theme.COLORS.WHITE};
@@ -64,6 +73,10 @@ export const Main = styled.div`
         resize: none;
         padding: 20px;
         color: ${({ theme }) => theme.COLORS.BLUE_100};
+        background: ${({ theme }) => theme.COLORS.WHITE};
+        border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+        border-radius: 10px;
+        box-shadow: inset 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
         &::placeholder {
           color: ${({ theme }) => theme.COLORS.BLUE_200};
         }

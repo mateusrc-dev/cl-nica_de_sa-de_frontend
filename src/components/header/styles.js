@@ -25,23 +25,35 @@ export const Container = styled.header`
     background: rgba(212, 221, 255, 0);
     .modalContent {
       position: relative;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      gap: 10px;
       top: 2px;
       margin-left: 100%;
       left: -301px;
       width: 300px;
       height: 400px;
       background: ${({ theme }) => theme.COLORS.WHITE_100};
-      clip-path: polygon(0% 8%, 80% 8%, 90% 0%, 100% 8%, 100% 100%, 0 100%, 0 20%);
+      clip-path: polygon(
+        0% 8%,
+        80% 8%,
+        90% 0%,
+        100% 8%,
+        100% 100%,
+        0 100%,
+        0 20%
+      );
       padding: 40px 10px;
       border-radius: 0 0 10px 10px;
     }
     .borderModal {
       background: ${({ theme }) => theme.COLORS.BLUE_100};
-      clip-path: polygon(0% 8%, 80% 8%, 90% 0%, 100% 8%, 100% 100%, 0 100%, 0 20%);
+      clip-path: polygon(
+        0% 8%,
+        80% 8%,
+        90% 0%,
+        100% 8%,
+        100% 100%,
+        0 100%,
+        0 20%
+      );
       width: 302px;
       height: 403px;
       position: relative;
@@ -49,6 +61,11 @@ export const Container = styled.header`
       margin-left: 100%;
       left: -445px;
       border-radius: 0 0 10px 10px;
+    }
+    .modalContent .links {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
     }
     .modalContent a {
       color: ${({ theme }) => theme.COLORS.BLUE_100};
@@ -64,17 +81,6 @@ export const Container = styled.header`
     }
     .modalContent a:nth-child(even) {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
-    }
-    .modalContent .close {
-      position: absolute;
-      top: 10px;
-      right: 17.5px;
-      background: none;
-      border: none;
-    }
-    .modalContent .close svg {
-      color: ${({ theme }) => theme.COLORS.BLUE_100};
-      font-size: 25px;
     }
   }
   .none {

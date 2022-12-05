@@ -8,6 +8,8 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FiLogIn } from "react-icons/fi";
 import { MdCreate } from "react-icons/md";
 import { useState } from "react";
+import { TfiBackLeft } from "react-icons/tfi";
+import { TfiHandPointUp } from "react-icons/tfi";
 
 export function SignIn() {
   const [click, setClick] = useState(0);
@@ -22,7 +24,12 @@ export function SignIn() {
 
   return (
     <Container>
-      <Header />
+      <Header>
+        <a href="#">
+          retornar
+          <TfiBackLeft />
+        </a>
+      </Header>
       <Main>
         <div className="main">
           <div className="logo">
@@ -35,15 +42,27 @@ export function SignIn() {
           <div className="clientOrProfessional">
             <div className="table">
               <div className="header">
-                <button className={click === 1 ? "client select" : "client"} onClick={() => handleClick(1)}>Paciente</button>
-                <button className={click === 2 ? "professional select" : "professional"} onClick={() => handleClick(2)}>Profissional</button>
+                <button
+                  className={click === 1 ? "client select" : "client"}
+                  onClick={() => handleClick(1)}
+                >
+                  Paciente
+                </button>
+                <button
+                  className={
+                    click === 2 ? "professional select" : "professional"
+                  }
+                  onClick={() => handleClick(2)}
+                >
+                  Profissional
+                </button>
               </div>
               <div className="content">
                 <div className={click === 0 ? "choice" : "none"}>
-                  <BiSelectMultiple />
+                  <TfiHandPointUp />
                   <h2>
-                    Escolha acima se você vai logar como paciente ou
-                    como profissional!
+                    Escolha acima se você vai logar como paciente ou como
+                    profissional!
                   </h2>
                 </div>
                 <div className={click === 1 ? "loginClient" : "none"}>
@@ -56,7 +75,11 @@ export function SignIn() {
                   </label>
                   <label htmlFor="password" className="password">
                     <strong>Senha:</strong>
-                    <Input id={"password"} type={"password"} placeholder="Digite a sua senha!">
+                    <Input
+                      id={"password"}
+                      type={"password"}
+                      placeholder="Digite a sua senha!"
+                    >
                       <RiLockPasswordFill />
                     </Input>
                   </label>
@@ -79,7 +102,11 @@ export function SignIn() {
                   </label>
                   <label htmlFor="password" className="password">
                     <strong>Senha:</strong>
-                    <Input id={"password"} type={"password"} placeholder="Digite a sua senha!">
+                    <Input
+                      id={"password"}
+                      type={"password"}
+                      placeholder="Digite a sua senha!"
+                    >
                       <RiLockPasswordFill />
                     </Input>
                   </label>

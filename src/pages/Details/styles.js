@@ -52,7 +52,11 @@ export const Main = styled.div`
       resize: none;
       padding: 20px;
       color: ${({ theme }) => theme.COLORS.BLUE_100};
-      &::placeholder{
+      background: ${({ theme }) => theme.COLORS.WHITE};
+      border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+      border-radius: 10px;
+      box-shadow: inset 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
+      &::placeholder {
         color: ${({ theme }) => theme.COLORS.BLUE_200};
       }
     }

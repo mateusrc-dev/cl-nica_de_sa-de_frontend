@@ -18,11 +18,12 @@ export function ProfileUser() {
             src="https://github.com/mateusrc-dev.png"
             alt="foto do usuário"
           />
-          <button className="edit">
+          <label htmlFor="avatar" className="edit">
             <MdInsertPhoto />
-          </button>
+            <input type="file" id="avatar" />
+          </label>
         </div>
-        <div className="main">
+        <form className="main">
           <label htmlFor="email">
             <strong>Seu email</strong>
             <Input
@@ -40,14 +41,19 @@ export function ProfileUser() {
           </label>
           <label htmlFor="description" className="textarea">
             <strong>Sua queixa:</strong>
-            <textarea placeholder="Estou sentindo muita ansiedade, tenho que passar no concurso e não aguento mais reprovar e morar na casa dos meus pais!" id="description" cols="86" rows="5"></textarea>
+            <textarea
+              placeholder="Estou sentindo muita ansiedade, tenho que passar no concurso e não aguento mais reprovar e morar na casa dos meus pais!"
+              id="description"
+              cols="86"
+              rows="5"
+            ></textarea>
           </label>
           <span>
             <Button>
               Salvar alterações <TfiSave />
             </Button>
           </span>
-        </div>
+        </form>
       </Main>
       <Footer />
     </Container>

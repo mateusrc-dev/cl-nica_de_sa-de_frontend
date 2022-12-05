@@ -3,7 +3,6 @@ import { GiHealthNormal } from "react-icons/gi";
 import { FiLogIn } from "react-icons/fi";
 import { BsSearch } from "react-icons/bs";
 import { useState } from "react";
-import { CgClose } from "react-icons/cg";
 import { TiArrowSortedDown } from "react-icons/ti";
 
 export function Header() {
@@ -66,14 +65,13 @@ export function Header() {
       >
         <div className="borderModal">
           <div className="modalContent">
-            <button className="close" onClick={() => handleClick()}>
-              <CgClose />
-            </button>
-            <a>Seu Perfil</a>
-            <a>Seus agendamentos</a>
-            <a>Seus depoimentos</a>
-            <a>Seus profissionais favoritos</a>
-            <a>Sair da sua conta</a>
+            <div className="links">
+              <a>Seu Perfil</a>
+              <a>Seus agendamentos</a>
+              <a>Seus depoimentos</a>
+              <a>Seus profissionais favoritos</a>
+              <a>Sair da sua conta</a>
+            </div>
           </div>
         </div>
       </div>
