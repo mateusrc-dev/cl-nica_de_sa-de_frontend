@@ -1,10 +1,10 @@
 import { Container } from "./styles";
 
-export function Input({ children, placeholder, id }) {
+export function Input({ children, placeholder, id, type = "text" }) {
   return (
     <Container>
       {children}
-      <input type="text" id={id} placeholder={placeholder} />
+      <input id={id} type={type} placeholder={placeholder} />
     </Container>
   );
 }

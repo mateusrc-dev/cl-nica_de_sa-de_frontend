@@ -6,8 +6,20 @@ import { Button } from "../../components/button";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { FiLogIn } from "react-icons/fi";
+import { MdCreate } from "react-icons/md";
+import { useState } from "react";
 
 export function SignIn() {
+  const [click, setClick] = useState(0);
+
+  function handleClick(number) {
+    if (number === click) {
+      setClick(0);
+    } else {
+      setClick(number);
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -23,19 +35,19 @@ export function SignIn() {
           <div className="clientOrProfessional">
             <div className="table">
               <div className="header">
-                <button className="client">Paciente</button>
-                <button className="professional">Profissional</button>
+                <button className={click === 1 ? "client select" : "client"} onClick={() => handleClick(1)}>Paciente</button>
+                <button className={click === 2 ? "professional select" : "professional"} onClick={() => handleClick(2)}>Profissional</button>
               </div>
               <div className="content">
-                <div className="choice none">
+                <div className={click === 0 ? "choice" : "none"}>
                   <BiSelectMultiple />
                   <h2>
                     Escolha acima se você vai logar como paciente ou
-                    profissional
+                    profissional!
                   </h2>
                 </div>
-                <div className="loginClient">
-                  <h1>Faça seu login</h1>
+                <div className={click === 1 ? "loginClient" : "none"}>
+                  <h1>Faça seu login (Cliente)</h1>
                   <label htmlFor="email">
                     <strong>Email:</strong>
                     <Input id={"email"} placeholder={"Digite o seu email!"}>
@@ -44,7 +56,7 @@ export function SignIn() {
                   </label>
                   <label htmlFor="password" className="password">
                     <strong>Senha:</strong>
-                    <Input id={"password"} placeholder="Digite a sua senha">
+                    <Input id={"password"} type={"password"} placeholder="Digite a sua senha!">
                       <RiLockPasswordFill />
                     </Input>
                   </label>
@@ -52,7 +64,29 @@ export function SignIn() {
                     Fazer login
                     <FiLogIn />
                   </Button>
-                  <a>Crie a sua conta</a>
+                  <a>
+                    Crie a sua conta!
+                    <MdCreate />
+                  </a>
+                </div>
+                <div className={click === 2 ? "loginClient" : "none"}>
+                  <h1>Faça seu login (Profissional)</h1>
+                  <label htmlFor="email">
+                    <strong>Email:</strong>
+                    <Input id={"email"} placeholder={"Digite o seu email!"}>
+                      <HiOutlineMail />
+                    </Input>
+                  </label>
+                  <label htmlFor="password" className="password">
+                    <strong>Senha:</strong>
+                    <Input id={"password"} type={"password"} placeholder="Digite a sua senha!">
+                      <RiLockPasswordFill />
+                    </Input>
+                  </label>
+                  <Button>
+                    Fazer login
+                    <FiLogIn />
+                  </Button>
                 </div>
               </div>
             </div>

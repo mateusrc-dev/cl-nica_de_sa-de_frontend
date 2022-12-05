@@ -99,6 +99,7 @@ export const Main = styled.main`
       h2 {
         font-size: 20px;
         font-style: italic;
+        text-align: justify;
       }
       svg {
         font-size: 200px;
@@ -111,6 +112,12 @@ export const Main = styled.main`
       gap: 20px;
       h1 {
         font-size: 20px;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
       }
     }
     .none {
