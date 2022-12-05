@@ -16,7 +16,7 @@ export const Main = styled.div`
   overflow-y: auto;
   padding: 0 120px;
   display: flex;
-  gap: 60px;
+  gap: 40px;
   align-items: flex-start;
   .avatar {
     margin-top: 50px;

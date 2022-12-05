@@ -7,6 +7,7 @@ import { TfiSave } from "react-icons/tfi";
 import { Button } from "../../components/button";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
+import { TagItem } from "../../components/TagItem";
 
 export function ProfileProfessional() {
   return (
@@ -27,10 +28,9 @@ export function ProfileProfessional() {
         <form className="main">
           <label htmlFor="email">
             <strong>Seu email:</strong>
-            <Input
-              id={"email"}
-              placeholder={"mateus_raimundo95@outlook.com"}
-            ><HiOutlineMail/></Input>
+            <Input id={"email"} placeholder={"mateus_raimundo95@outlook.com"}>
+              <HiOutlineMail />
+            </Input>
           </label>
           <label htmlFor="old_password">
             <strong>Senha antiga:</strong>
@@ -53,9 +53,13 @@ export function ProfileProfessional() {
               rows="5"
             ></textarea>
           </label>
-          <p>
-            <strong>Criar o adicionador de tags aqui...</strong>
-          </p>
+          <strong>Suas tags:</strong>
+          <span className="tags">
+            <TagItem placeholder={"depressão"} />
+            <TagItem placeholder={"ansiedade"} />
+            <TagItem placeholder={"crise"} />
+            <TagItem value={"pensamentos negativos"} isNew/>
+          </span>
           <span>
             <Button>
               Salvar alterações <TfiSave />

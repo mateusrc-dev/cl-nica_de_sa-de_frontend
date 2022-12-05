@@ -16,7 +16,7 @@ export const Main = styled.div`
   overflow-y: auto;
   padding: 0 120px;
   display: flex;
-  gap: 60px;
+  gap: 40px;
   align-items: flex-start;
   .avatar {
     margin-top: 50px;
@@ -64,11 +64,17 @@ export const Main = styled.div`
     width: 100%;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 50px;
+    .tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
     .textarea {
       display: flex;
       align-items: flex-start;
       flex-direction: column;
-      margin-bottom: 10px;
       textarea {
         resize: none;
         padding: 20px;
