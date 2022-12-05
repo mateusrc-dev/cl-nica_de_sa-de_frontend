@@ -44,7 +44,6 @@ export function ProfileUser() {
             <textarea
               placeholder="Estou sentindo muita ansiedade, tenho que passar no concurso e não aguento mais reprovar e morar na casa dos meus pais!"
               id="description"
-              cols="86"
               rows="5"
             ></textarea>
           </label>

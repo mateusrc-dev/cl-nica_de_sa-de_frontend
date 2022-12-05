@@ -49,7 +49,6 @@ export function ProfileProfessional() {
             <textarea
               placeholder="Meu nome é Mateus, sou o melhor psicólogo de todos, cure todos os seus traumas, marque uma consulta comigo e resolva todos os seus problemas!"
               id="description"
-              cols="86"
               rows="5"
             ></textarea>
           </label>

@@ -76,6 +76,7 @@ export const Main = styled.div`
       align-items: flex-start;
       flex-direction: column;
       textarea {
+        width: 100%;
         resize: none;
         padding: 20px;
         color: ${({ theme }) => theme.COLORS.BLUE_100};
