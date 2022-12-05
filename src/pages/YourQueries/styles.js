@@ -14,74 +14,6 @@ export const Main = styled.main`
   grid-area: content;
   overflow-y: auto;
   padding: 0 120px;
-  .modal {
-    width: 100%;
-    position: absolute;
-    z-index: 5;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    background: rgba(212, 221, 255, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 50px;
-    .modalContent {
-      position: relative;
-      width: 100%;
-      padding: 50px;
-      background: ${({ theme }) => theme.COLORS.WHITE};
-      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
-      border-radius: 10px;
-    }
-    .modalContent div {
-      width: 100%;
-      height: 100%;
-    }
-    .modalContent h2 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .modalContent .buttons button {
-      background: none;
-      border: none;
-    }
-    .modalContent .buttons button svg {
-      font-size: 30px;
-      color: ${({ theme }) => theme.COLORS.BLUE_100};
-    }
-    .modalContent .close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-    }
-    .modalContent .close svg {
-      color: ${({ theme }) => theme.COLORS.BLUE_100};
-      font-size: 35px;
-    }
-    .container {
-      position: relative;
-      width: 100%;
-    }
-    .left {
-      position: absolute;
-      max-width: 50px;
-      height: 100%;
-      left: 0;
-      background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
-      border-radius: 10px 0 0 10px;
-    }
-    .right {
-      position: absolute;
-      max-width: 50px;
-      height: 100%;
-      right: 0;
-      background: ${({ theme }) => theme.COLORS.BACKGROUND_100};
-      border-radius: 0px 10px 10px 0px;
-    }
     .schedules {
       display: flex;
       overflow-x: hidden;
@@ -165,5 +97,11 @@ export const Main = styled.main`
       gap: 10px;
       width: 200px;
     }
-  }
+    .complaint {
+      overflow-y: scroll;
+      height: 80px;
+      width: 250px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
 `;
