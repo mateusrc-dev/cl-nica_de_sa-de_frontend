@@ -8,6 +8,7 @@ import { TiArrowSortedDown } from "react-icons/ti";
 export function Header() {
   const hours = new Date();
   const [user, setUser] = useState(false);
+  const [professional, setProfessional] = useState(true);
   const [click, setClick] = useState(false);
 
   function handleHours() {
@@ -58,23 +59,43 @@ export function Header() {
 
   return (
     <Container>
-      <div
-        id="modal"
-        className={click ? "modal" : "none"}
-        onClick={handleOutsideClick}
-      >
-        <div className="borderModal">
-          <div className="modalContent">
-            <div className="links">
-              <a>Seu Perfil</a>
-              <a>Seus agendamentos</a>
-              <a>Seus depoimentos</a>
-              <a>Seus profissionais favoritos</a>
-              <a>Sair da sua conta</a>
+      {user ? (
+        <div
+          id="modal"
+          className={click ? "modal" : "none"}
+          onClick={handleOutsideClick}
+        >
+          <div className="borderModal">
+            <div className="modalContent">
+              <div className="links">
+                <a>Seu Perfil</a>
+                <a>Seus agendamentos</a>
+                <a>Seus depoimentos</a>
+                <a>Seus profissionais favoritos</a>
+                <a>Sair da sua conta</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : null}
+      {professional ? (
+        <div
+          id="modal"
+          className={click ? "modal" : "none"}
+          onClick={handleOutsideClick}
+        >
+          <div className="borderModal">
+            <div className="modalContent">
+              <div className="links">
+                <a>Seu Perfil</a>
+                <a>Suas consultas</a>
+                <a>Gerenciar a sua agenda</a>
+                <a>Sair da sua conta</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="logo">
         <GiHealthNormal />
         <div className="logoText">
@@ -102,12 +123,13 @@ export function Header() {
             <span>{`${handleDay()}.`}</span>
           </div>
           <div className="user">
-            {user ? (
+            {user || professional ? null : (
               <a className="login">
                 <FiLogIn />
                 Fazer login
               </a>
-            ) : (
+            )}
+            {user ? (
               <a className="Avatar" onClick={() => handleClick()}>
                 <img
                   src="https://github.com/mateusrc-dev.png"
@@ -115,7 +137,16 @@ export function Header() {
                 />
                 <TiArrowSortedDown />
               </a>
-            )}
+            ) : null}
+            {professional ? (
+              <a className="Avatar" onClick={() => handleClick()}>
+                <img
+                  src="https://github.com/mateusrc-dev.png"
+                  alt="imagem do profissional"
+                />
+                <TiArrowSortedDown />
+              </a>
+            ) : null}
           </div>
         </div>
       </div>
