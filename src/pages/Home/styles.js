@@ -180,17 +180,20 @@ export const Main = styled.main`
     border-radius: 10px;
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
   }
-  .image span {
+  .image button {
     position: absolute;
     font-weight: bold;
     background: ${({ theme }) => theme.COLORS.WHITE};
-    color: ${({ theme }) => theme.COLORS.BLUE_100};
     border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
     box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
     padding: 5px 10px;
     border-radius: 50px;
     right: 10px;
     top: 10px;
+    transition: all 0.5s;
+  }
+  .image button:hover {
+    transform: scale(1.05);
   }
   .swiper {
     width: 475px;

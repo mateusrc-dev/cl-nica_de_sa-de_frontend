@@ -98,10 +98,23 @@ export const Main = styled.main`
 `;
 
 export const Header = styled.header`
-  grid-area: header;
+   grid-area: header;
   width: 100%;
   height: 50px;
   background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+  display: flex;
+  align-items: center;
+  a {
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: ${({ theme }) => theme.COLORS.BLUE_100};
+  }
+  a:hover {
+    font-style: italic;
+    text-decoration: underline;
+  }
 `;
 
 export const Footer = styled.header`

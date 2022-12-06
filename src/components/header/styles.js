@@ -67,7 +67,7 @@ export const Container = styled.header`
       flex-direction: column;
       gap: 5px;
     }
-    .modalContent a {
+    .modalContent button {
       color: ${({ theme }) => theme.COLORS.BLUE_100};
       clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 80% 100%, 0% 100%, 0% 0%);
       border-radius: 5px 0 0 5px;
@@ -75,11 +75,20 @@ export const Container = styled.header`
       font-style: italic;
       padding: 5px;
       width: 100%;
+      background: none;
+      border: none;
+      text-align: start;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      svg {
+        font-size: 20px;
+      }
     }
-    .modalContent a:nth-child(odd) {
+    .modalContent button:nth-child(odd) {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
     }
-    .modalContent a:nth-child(even) {
+    .modalContent button:nth-child(even) {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
     }
   }

@@ -19,11 +19,12 @@ export const Main = styled.div`
   gap: 40px;
   align-items: flex-start;
   .avatar {
-    margin-top: 50px;
+    margin-top: 20px;
     position: relative;
     width: 300px;
     height: 300px;
     img {
+      margin-top: 20px;
       width: 300px;
       height: 300px;
       border-radius: 50%;
@@ -38,6 +39,7 @@ export const Main = styled.div`
       width: 100px;
       height: 100px;
       border-radius: 50%;
+      top: 250px;
       bottom: 0;
       right: 0;
       display: flex;
@@ -53,7 +55,7 @@ export const Main = styled.div`
     input {
       display: none;
     }
-    svg {
+    .svg {
       color: ${({ theme }) => theme.COLORS.WHITE};
       font-size: 50px;
     }

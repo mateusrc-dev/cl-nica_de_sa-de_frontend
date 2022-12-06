@@ -10,6 +10,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { TagItem } from "../../components/TagItem";
 import { ButtonText } from "../../components/buttonText";
 import { TiArrowBack } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 export function ProfileProfessional() {
   return (
@@ -17,17 +18,19 @@ export function ProfileProfessional() {
       <Header />
       <Main>
         <div className="avatar">
-          <ButtonText>
-            <TiArrowBack className="svg" />
-            retornar
-          </ButtonText>
+          <Link to={-1}>
+            <ButtonText>
+              <TiArrowBack />
+              retornar
+            </ButtonText>
+          </Link>
           <img
             className="img"
             src="https://github.com/mateusrc-dev.png"
             alt="foto do usuário"
           />
           <label htmlFor="avatar" className="edit">
-            <MdInsertPhoto />
+            <MdInsertPhoto className="svg" />
             <input type="file" id="avatar" />
           </label>
         </div>

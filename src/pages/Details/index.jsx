@@ -6,6 +6,7 @@ import { AiFillSchedule } from "react-icons/ai";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { MdFavorite } from "react-icons/md";
+import { MdFavoriteBorder } from "react-icons/md";
 import { useRef } from "react";
 import { CgArrowLeftO } from "react-icons/cg";
 import { CgArrowRightO } from "react-icons/cg";
@@ -22,14 +23,26 @@ import { CgClose } from "react-icons/cg";
 import { GiConfirmed } from "react-icons/gi";
 import { FaHandPointDown } from "react-icons/fa";
 import { FaRegHandPointRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export function Details() {
   const [click, setClick] = useState(false);
   const [stars, setStars] = useState(1);
   const [clickTwo, setClickTwo] = useState(false);
+  const [clickThree, setClickThree] = useState(false);
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
-  const [testimony, setTestimony] = useState(false);
+  const [testimony, setTestimony] = useState(true);
+  const [user, setUser] = useState(true);
+  const [heart, setHeart] = useState(false);
+
+  function handleFavorite() {
+    if (heart === false) {
+      setHeart(true);
+    } else if (heart === true) {
+      setHeart(false);
+    }
+  }
 
   function handleClick(dt, tm) {
     if (click === false) {
@@ -58,6 +71,20 @@ export function Details() {
   const handleOutsideClickTwo = (e) => {
     if (e.target.id === "modal") {
       handleClickTwo();
+    }
+  };
+
+  function handleClickThree() {
+    if (clickThree === false) {
+      setClickThree(true);
+    } else {
+      setClickThree(false);
+    }
+  }
+
+  const handleOutsideClickThree = (e) => {
+    if (e.target.id === "modal") {
+      handleClickThree();
     }
   };
 
@@ -234,12 +261,133 @@ export function Details() {
             </div>
           </div>
         </div>
+        <div
+          id="modal"
+          className={clickThree ? "modal" : "none"}
+          onClick={handleOutsideClickThree}
+        >
+          <div className="modalContent">
+            <button className="close" onClick={() => handleClickThree()}>
+              <CgClose />
+            </button>
+            <div>
+              <h4>Editar a nota do profissional:</h4>
+              {stars === 1 ? (
+                <span className="stars">
+                  <button onClick={() => handleStars(1)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(2)}>
+                    <BsStar />
+                  </button>
+                  <button onClick={() => handleStars(3)}>
+                    <BsStar />
+                  </button>
+                  <button onClick={() => handleStars(4)}>
+                    <BsStar />
+                  </button>
+                  <button onClick={() => handleStars(5)}>
+                    <BsStar />
+                  </button>
+                </span>
+              ) : null}
+              {stars === 2 ? (
+                <span className="stars">
+                  <button onClick={() => handleStars(1)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(2)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(3)}>
+                    <BsStar />
+                  </button>
+                  <button onClick={() => handleStars(4)}>
+                    <BsStar />
+                  </button>
+                  <button onClick={() => handleStars(5)}>
+                    <BsStar />
+                  </button>
+                </span>
+              ) : null}
+              {stars === 3 ? (
+                <span className="stars">
+                  <button onClick={() => handleStars(1)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(2)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(3)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(4)}>
+                    <BsStar />
+                  </button>
+                  <button onClick={() => handleStars(5)}>
+                    <BsStar />
+                  </button>
+                </span>
+              ) : null}
+              {stars === 4 ? (
+                <span className="stars">
+                  <button onClick={() => handleStars(1)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(2)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(3)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(4)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(5)}>
+                    <BsStar />
+                  </button>
+                </span>
+              ) : null}
+              {stars === 5 ? (
+                <span className="stars">
+                  <button onClick={() => handleStars(1)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(2)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(3)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(4)}>
+                    <BsStarFill />
+                  </button>
+                  <button onClick={() => handleStars(5)}>
+                    <BsStarFill />
+                  </button>
+                </span>
+              ) : null}
+              <h4>Editar seu depoimento sobre o profissional:</h4>
+              <textarea
+                placeholder="Mateus é o melhor psicólogo, não tem pra ninguém, ele cura todas as doenças da alma, deixa a pessoa em um estado perfeito de saúde mental, recomendado, ele literalmente resolve sua vida!"
+                cols="80"
+                rows="10"
+              ></textarea>
+              <Button>
+                Atualizar!
+                <GiConfirmed />
+              </Button>
+            </div>
+          </div>
+        </div>
 
         <div className="columnOne">
-          <ButtonText>
-            <MdOutlineKeyboardArrowLeft />
-            voltar
-          </ButtonText>
+          <Link to={-1}>
+            <ButtonText>
+              <MdOutlineKeyboardArrowLeft />
+              voltar
+            </ButtonText>
+          </Link>
           <Section>
             <div className="main">
               <img
@@ -250,9 +398,12 @@ export function Details() {
                 <div className="description">
                   <h1>
                     Dr. Mateus Carvalho
-                    <a className="favorite">
-                      <MdFavorite />
-                    </a>
+                    <button
+                      className="favorite"
+                      onClick={() => handleFavorite()}
+                    >
+                      {heart ? <MdFavorite /> : <MdFavoriteBorder />}
+                    </button>
                   </h1>
                   <p>
                     Meu nome é Mateus, eu sou um psicólogo incrível, trato você
@@ -460,7 +611,7 @@ export function Details() {
                 <div ref={carouselTwo} className="Depositions">
                   <div className="Deposition">
                     {testimony ? (
-                      <div className="testimony">
+                      <div className={user ? "testimony" : "none"}>
                         <img
                           src="https://github.com/mateusrc-dev.png"
                           alt="foto do paciente"
@@ -477,16 +628,20 @@ export function Details() {
                             um estado perfeito de saúde mental, recomendado, ele
                             literalmente resolve sua vida!
                           </p>
-                          <a className="edit" title="Editar">
+                          <a
+                            className="edit"
+                            title="Editar"
+                            onClick={() => handleClickThree()}
+                          >
                             <BiEditAlt />
                           </a>
                         </div>
                       </div>
                     ) : (
-                      <span className="createTestimony">
+                      <span className={user ? "createTestimony" : "none"}>
                         <FaRegHandPointRight />
                         Você ainda não criou seu depoimento sobre esse
-                        profissional.{" "}
+                        profissional.
                         <Button onClick={() => handleClickTwo()}>
                           Crie seu depoimento!
                         </Button>

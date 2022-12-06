@@ -6,6 +6,7 @@ import { TiCancel } from "react-icons/ti";
 import { AiFillSchedule } from "react-icons/ai";
 import { ButtonText } from "../../components/buttonText";
 import { TiArrowBack } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 export function YourQueries() {
   return (
@@ -14,10 +15,12 @@ export function YourQueries() {
       <Main>
         <section>
           <div className="textButton">
-            <ButtonText>
-              <TiArrowBack />
-              retornar
-            </ButtonText>
+            <Link to={-1}>
+              <ButtonText>
+                <TiArrowBack />
+                retornar
+              </ButtonText>
+            </Link>
           </div>
           <h1>
             Suas consultas
@@ -46,7 +49,11 @@ export function YourQueries() {
                     <strong>Paciente:</strong> Fernando
                   </span>
                   <span className="complaint">
-                    <strong>Queixa do paciente:</strong> Muita ansiedade, estou estudando para o Enem e isso está me deixando muito ansioso. Sem falar que minha namorada terminou comigo porque queria ficar um tempo livre e isso faz eu imaginar diversas coisas...
+                    <strong>Queixa do paciente:</strong> Muita ansiedade, estou
+                    estudando para o Enem e isso está me deixando muito ansioso.
+                    Sem falar que minha namorada terminou comigo porque queria
+                    ficar um tempo livre e isso faz eu imaginar diversas
+                    coisas...
                   </span>
                   <span>
                     <strong>Data da consulta:</strong> 22/22/2022

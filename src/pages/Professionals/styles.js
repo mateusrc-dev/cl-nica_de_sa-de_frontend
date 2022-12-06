@@ -18,6 +18,13 @@ export const Main = styled.main`
     font-style: italic;
     text-decoration: underline;
   }
+  .row {
+    border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    height: 30px;
+  }
   header {
     position: absolute;
     z-index: 2;
@@ -49,6 +56,7 @@ export const Main = styled.main`
   nav ul {
     display: flex;
     gap: 10px;
+    color: ${({ theme }) => theme.COLORS.BLUE_100};
   }
   nav ul li {
     list-style-type: none;

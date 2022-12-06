@@ -9,7 +9,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    .svg {
+    svg {
       font-size: 30px;
       color: ${({ theme }) => theme.COLORS.BLUE_100};
     }

@@ -1,6 +1,5 @@
 import { Container, Main, Header, Footer } from "./styles";
 import { GiHealthNormal } from "react-icons/gi";
-import { BiSelectMultiple } from "react-icons/bi";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -10,6 +9,7 @@ import { MdCreate } from "react-icons/md";
 import { useState } from "react";
 import { TfiBackLeft } from "react-icons/tfi";
 import { TfiHandPointUp } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 
 export function SignIn() {
   const [click, setClick] = useState(0);
@@ -25,10 +25,12 @@ export function SignIn() {
   return (
     <Container>
       <Header>
-        <a href="#">
-          retornar
-          <TfiBackLeft />
-        </a>
+        <Link to="/">
+          <a>
+            retornar para a Home
+            <TfiBackLeft />
+          </a>
+        </Link>
       </Header>
       <Main>
         <div className="main">
@@ -87,10 +89,12 @@ export function SignIn() {
                     Fazer login
                     <FiLogIn />
                   </Button>
-                  <a>
-                    Crie a sua conta!
-                    <MdCreate />
-                  </a>
+                  <Link to="/signUp">
+                    <a>
+                      Crie a sua conta!
+                      <MdCreate />
+                    </a>
+                  </Link>
                 </div>
                 <div className={click === 2 ? "loginClient" : "none"}>
                   <h1>Faça seu login (Profissional)</h1>

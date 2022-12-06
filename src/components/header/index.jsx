@@ -4,12 +4,17 @@ import { FiLogIn } from "react-icons/fi";
 import { BsSearch } from "react-icons/bs";
 import { useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { AiFillSchedule } from "react-icons/ai";
+import { BsDoorClosed } from "react-icons/bs";
+import { TiInputChecked } from "react-icons/ti";
 
 export function Header() {
   const hours = new Date();
   const [user, setUser] = useState(false);
-  const [professional, setProfessional] = useState(true);
-  const [click, setClick] = useState(false);
+  const [professional, setProfessional] = useState(false);
+  const [click, setClick] = useState(true);
 
   function handleHours() {
     let Hours;
@@ -68,11 +73,11 @@ export function Header() {
           <div className="borderModal">
             <div className="modalContent">
               <div className="links">
-                <a>Seu Perfil</a>
-                <a>Seus agendamentos</a>
-                <a>Seus depoimentos</a>
-                <a>Seus profissionais favoritos</a>
-                <a>Sair da sua conta</a>
+                <button><CgProfile />Seu Perfil</button>
+                <button><TiInputChecked />Seus agendamentos</button>
+                <button>Seus depoimentos</button>
+                <button>Seus profissionais favoritos</button>
+                <button><BsDoorClosed />Sair da sua conta</button>
               </div>
             </div>
           </div>
@@ -87,22 +92,42 @@ export function Header() {
           <div className="borderModal">
             <div className="modalContent">
               <div className="links">
-                <a>Seu Perfil</a>
-                <a>Suas consultas</a>
-                <a>Gerenciar a sua agenda</a>
-                <a>Sair da sua conta</a>
+                <Link to="/profileProfessional">
+                  <button>
+                    <CgProfile />
+                    Seu Perfil
+                  </button>
+                </Link>
+                <Link to="/yourQueries">
+                  <button>
+                    <TiInputChecked />
+                    Suas consultas
+                  </button>
+                </Link>
+                <Link to="/schedules">
+                  <button>
+                    <AiFillSchedule />
+                    Gerenciar a sua agenda
+                  </button>
+                </Link>
+                <button>
+                  <BsDoorClosed />
+                  Sair da sua conta
+                </button>
               </div>
             </div>
           </div>
         </div>
       ) : null}
-      <div className="logo">
-        <GiHealthNormal />
-        <div className="logoText">
-          <h1>fullness clinic</h1>
-          <p>Sempre pensando na sua saúde!</p>
+      <Link to="/" title="Ir para a página inicial">
+        <div className="logo">
+          <GiHealthNormal />
+          <div className="logoText">
+            <h1>fullness clinic</h1>
+            <p>Sempre pensando na sua saúde!</p>
+          </div>
         </div>
-      </div>
+      </Link>
       <div className="input">
         <input type="text" placeholder="Pesquise por um profissional!" />
         <button>
@@ -124,10 +149,12 @@ export function Header() {
           </div>
           <div className="user">
             {user || professional ? null : (
-              <a className="login">
-                <FiLogIn />
-                Fazer login
-              </a>
+              <Link to="/signIn">
+                <a className="login">
+                  <FiLogIn />
+                  Fazer login
+                </a>
+              </Link>
             )}
             {user ? (
               <a className="Avatar" onClick={() => handleClick()}>

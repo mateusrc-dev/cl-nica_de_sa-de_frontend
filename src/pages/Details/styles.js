@@ -143,6 +143,17 @@ export const Main = styled.div`
       overflow-y: auto;
       flex-direction: column;
       gap: 20px;
+      .favorite {
+        background: none;
+        border: none;
+        font-size: 25px;
+        margin-right: 10px;
+        color: ${({ theme }) => theme.COLORS.BLUE_100};
+        transition: all 0.5s;
+      }
+      .favorite:hover {
+        transform: scale(1.2);
+      }
     }
     .description::-webkit-scrollbar {
       width: 18px;
@@ -269,7 +280,11 @@ export const Main = styled.div`
       .Deposition {
         display: flex;
         flex-direction: column;
+        .none {
+          display: none;
+        }
       }
+
       .Container {
         position: relative;
         width: 100%;

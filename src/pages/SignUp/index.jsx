@@ -8,11 +8,20 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { MdOutlineCreate } from "react-icons/md";
 import { HiUser } from "react-icons/hi";
 import { BsArrowReturnLeft } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { TfiBackLeft } from "react-icons/tfi";
 
 export function SignUp() {
   return (
     <Container>
-      <Header />
+      <Header>
+        <Link to="/">
+          <a>
+            retornar para a Home
+            <TfiBackLeft />
+          </a>
+        </Link>
+      </Header>
       <Main>
         <div className="main">
           <div className="logo">
@@ -53,10 +62,12 @@ export function SignUp() {
                 Criar conta!
                 <AiOutlineUserAdd />
               </Button>
-              <a>
-                <BsArrowReturnLeft />
-                Voltar para o login
-              </a>
+              <Link to="/signIn">
+                <a>
+                  <BsArrowReturnLeft />
+                  Voltar para o login
+                </a>
+              </Link>
             </div>
           </div>
         </div>

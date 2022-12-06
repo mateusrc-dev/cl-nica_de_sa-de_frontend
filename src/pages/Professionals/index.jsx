@@ -8,10 +8,11 @@ import { MdFavorite } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Button } from "../../components/button";
 import { AiFillSchedule } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export function Professionals() {
   const [heart, setHeart] = useState(false);
-  
+
   function handleFavorite() {
     if (heart === false) {
       setHeart(true);
@@ -30,7 +31,9 @@ export function Professionals() {
           </h1>
           <nav>
             <ul>
-              <li>Sobre o nosso espaço</li>
+              <li>
+                <Link to="/">Sobre o nosso espaço</Link>
+              </li>
               <div className="row"></div>
               <li className="active">Agendamentos com nossos profissionais</li>
             </ul>
@@ -76,7 +79,7 @@ export function Professionals() {
         <div className="professionals">
           <div className="professional">
             <button className="favorite" onClick={() => handleFavorite()}>
-            {heart ? <MdFavorite /> : <MdFavoriteBorder/>}
+              {heart ? <MdFavorite /> : <MdFavoriteBorder />}
             </button>
             <img
               src="https://github.com/mateusrc-dev.png"
@@ -93,14 +96,16 @@ export function Professionals() {
               bem, você vai se sentir no céu ao sair de uma consulta comigo,
               como se nenhum problema existisse.
             </p>
-            <Button>
-              <AiFillSchedule />
-              Agende um horário!
-            </Button>
+            <Link to="/details/1">
+              <Button>
+                <AiFillSchedule />
+                Agende um horário!
+              </Button>
+            </Link>
           </div>
           <div className="professional">
             <button className="favorite" onClick={() => handleFavorite()}>
-              {heart ? <MdFavorite /> : <MdFavoriteBorder/>}
+              {heart ? <MdFavorite /> : <MdFavoriteBorder />}
             </button>
             <img
               src="https://github.com/mateusrc-dev.png"
