@@ -9,12 +9,14 @@ import { CgProfile } from "react-icons/cg";
 import { AiFillSchedule } from "react-icons/ai";
 import { BsDoorClosed } from "react-icons/bs";
 import { TiInputChecked } from "react-icons/ti";
+import { RiHeartsFill } from "react-icons/ri";
+import { TiPen } from "react-icons/ti";
 
 export function Header() {
   const hours = new Date();
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
   const [professional, setProfessional] = useState(false);
-  const [click, setClick] = useState(true);
+  const [click, setClick] = useState(false);
 
   function handleHours() {
     let Hours;
@@ -73,11 +75,34 @@ export function Header() {
           <div className="borderModal">
             <div className="modalContent">
               <div className="links">
-                <button><CgProfile />Seu Perfil</button>
-                <button><TiInputChecked />Seus agendamentos</button>
-                <button>Seus depoimentos</button>
-                <button>Seus profissionais favoritos</button>
-                <button><BsDoorClosed />Sair da sua conta</button>
+                <Link to="/profileUser">
+                  <button>
+                    <CgProfile />
+                    Seu Perfil
+                  </button>
+                </Link>
+                <Link to="/yourSchedules">
+                  <button>
+                    <TiInputChecked />
+                    Seus agendamentos
+                  </button>
+                </Link>
+                <Link to="/theirTestimonials">
+                  <button>
+                    <TiPen />
+                    Seus depoimentos
+                  </button>
+                </Link>
+                <Link to="/favorites">
+                  <button>
+                    <RiHeartsFill />
+                    Profissionais favoritos
+                  </button>
+                </Link>
+                <button>
+                  <BsDoorClosed />
+                  Sair da sua conta
+                </button>
               </div>
             </div>
           </div>

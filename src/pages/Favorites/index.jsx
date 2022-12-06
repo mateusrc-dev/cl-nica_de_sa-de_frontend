@@ -7,6 +7,7 @@ import { GiBrokenHeart } from "react-icons/gi";
 import { GiNestedHearts } from "react-icons/gi";
 import { ButtonText } from "../../components/buttonText";
 import { TiArrowBack } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 export function Favorites() {
   return (
@@ -14,10 +15,12 @@ export function Favorites() {
       <Header />
       <Main>
         <div className="textButton">
-          <ButtonText>
-            <TiArrowBack />
-            retornar
-          </ButtonText>
+          <Link to={-1}>
+            <ButtonText>
+              <TiArrowBack />
+              retornar
+            </ButtonText>
+          </Link>
         </div>
         <h1>
           Seus profissionais favoritos

@@ -81,15 +81,10 @@ export const Container = styled.header`
       display: flex;
       align-items: center;
       gap: 5px;
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
       svg {
         font-size: 20px;
       }
-    }
-    .modalContent button:nth-child(odd) {
-      background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
-    }
-    .modalContent button:nth-child(even) {
-      background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
     }
   }
   .none {

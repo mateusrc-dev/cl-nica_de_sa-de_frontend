@@ -10,6 +10,7 @@ import { BsStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { ButtonText } from "../../components/buttonText";
 import { TiArrowBack } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 export function TheirTestimonials() {
   const [stars, setStars] = useState(1);
@@ -21,10 +22,12 @@ export function TheirTestimonials() {
       <Header />
       <Main>
         <div className="textButton">
-          <ButtonText>
-            <TiArrowBack />
-            retornar
-          </ButtonText>
+          <Link to={-1}>
+            <ButtonText>
+              <TiArrowBack />
+              retornar
+            </ButtonText>
+          </Link>
         </div>
         <h1>
           Seus depoimentos
