@@ -24,6 +24,9 @@ import { GiConfirmed } from "react-icons/gi";
 import { FaHandPointDown } from "react-icons/fa";
 import { FaRegHandPointRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuthUser } from "../../hooks/authUser";
+import { GoAlert } from "react-icons/go";
+import { MdLogin } from "react-icons/md";
 
 export function Details() {
   const [click, setClick] = useState(false);
@@ -33,8 +36,8 @@ export function Details() {
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
   const [testimony, setTestimony] = useState(true);
-  const [user, setUser] = useState(true);
   const [heart, setHeart] = useState(false);
+  const { user } = useAuthUser();
 
   function handleFavorite() {
     if (heart === false) {
@@ -130,16 +133,29 @@ export function Details() {
             <button className="close" onClick={() => handleClick()}>
               <CgClose />
             </button>
-            <div>
-              <FaHandPointDown />
-              Tem certeza que deseja agendar a consulta na data {
-                modalDate
-              } às {modalTime} hrs?
-              <Button>
-                Confirmar!
-                <GiConfirmed />
-              </Button>
-            </div>
+            {user ? (
+              <div>
+                <FaHandPointDown className="svg" />
+                Tem certeza que deseja agendar a consulta na data {
+                  modalDate
+                } às {modalTime} hrs?
+                <Button>
+                  Confirmar!
+                  <GiConfirmed />
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <GoAlert className="svg" />
+                Para agendar uma consulta você precisa estar logado!!
+                <ButtonText>
+                  <Link to="/signIn">
+                    Fazer o login!
+                    <MdLogin />
+                  </Link>
+                </ButtonText>
+              </div>
+            )}
           </div>
         </div>
         <div

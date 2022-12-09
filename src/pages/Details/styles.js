@@ -60,7 +60,7 @@ export const Main = styled.div`
         color: ${({ theme }) => theme.COLORS.BLUE_200};
       }
     }
-    .modalContent div svg {
+    .modalContent div .svg {
       position: static;
       font-size: 90px;
     }

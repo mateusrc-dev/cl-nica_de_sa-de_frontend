@@ -165,9 +165,9 @@ export function Header() {
           <div className="welcome">
             <h1>
               {user ? (
-                <strong>{`${handleHours()},`} </strong>
+                <strong>{`${handleHours()},`} {user ? user.name + "," : null} </strong>
               ) : (
-                <strong>{`${handleHours()},`} Mateus, </strong>
+                <strong>{`${handleHours()},`}  </strong>
               )}
             </h1>
             <h2>seja bem vindo(a)!</h2>

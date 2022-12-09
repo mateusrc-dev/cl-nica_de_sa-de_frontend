@@ -22,6 +22,9 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
     color: ${({ theme }) => theme.COLORS.BLUE_100};
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 
   button, a {
