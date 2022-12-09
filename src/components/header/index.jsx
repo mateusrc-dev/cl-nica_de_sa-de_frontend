@@ -21,8 +21,21 @@ export function Header() {
   const [click, setClick] = useState(false);
   const { user, signOut } = useAuthUser();
   const { professional, signOutProfessional } = useAuthProfessional();
-  const navigate = useNavigate()
-  const avatarUrlUser = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+  const navigate = useNavigate();
+  let avatarUrlUser;
+  let avatarUrlProfessional;
+
+  if (user) {
+    avatarUrlUser = user.avatar
+      ? `${api.defaults.baseURL}/files/${user.avatar}`
+      : avatarPlaceholder;
+  }
+
+  if (professional) {
+    avatarUrlProfessional = professional.avatar
+      ? `${api.defaults.baseURL}/files/${professional.avatar}`
+      : avatarPlaceholder;
+  }
 
   function handleHours() {
     let Hours;
@@ -170,9 +183,12 @@ export function Header() {
           <div className="welcome">
             <h1>
               {user || professional ? (
-                <strong>{`${handleHours()},`} {user ? user.name + "," : professional.name + ","} </strong>
+                <strong>
+                  {`${handleHours()},`}{" "}
+                  {user ? user.name + "," : professional.name + ","}{" "}
+                </strong>
               ) : (
-                <strong>{`${handleHours()},`}  </strong>
+                <strong>{`${handleHours()},`} </strong>
               )}
             </h1>
             <h2>seja bem vindo(a)!</h2>
@@ -189,19 +205,13 @@ export function Header() {
             )}
             {user ? (
               <a className="Avatar" onClick={() => handleClick()}>
-                <img
-                  src={avatarUrlUser}
-                  alt="imagem do profissional"
-                />
+                <img src={avatarUrlUser} alt="imagem do profissional" />
                 <TiArrowSortedDown />
               </a>
             ) : null}
             {professional ? (
               <a className="Avatar" onClick={() => handleClick()}>
-                <img
-                  src="https://github.com/mateusrc-dev.png"
-                  alt="imagem do profissional"
-                />
+                <img src={avatarUrlProfessional} alt="imagem do profissional" />
                 <TiArrowSortedDown />
               </a>
             ) : null}

@@ -67,6 +67,19 @@ export const Main = styled.div`
     flex-direction: column;
     gap: 10px;
     margin-bottom: 40px;
+    select {
+      background-color: transparent;
+      padding: 10px;
+      border-radius: 5px;
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      border: none;
+      text-align: left;
+      font-weight: 400;
+      font-size: 16px;
+    }
+    option {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};   
+    }
     .tags {
       display: flex;
       gap: 10px;

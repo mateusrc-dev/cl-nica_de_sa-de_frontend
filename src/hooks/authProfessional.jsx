@@ -30,6 +30,28 @@ function AuthProfessionalProvider({ children }) {
     {navigate}
   }
 
+  async function updateProfileProfessional({ professional, avatarFile }) {
+    try {
+      if (avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+        const response = await api.patch("/professionals/avatar", fileUploadForm)
+        professional.avatar = response.data.avatar
+      }
+      await api.put("/professionals", professional);
+      localStorage.setItem("@fullnessclinic:professional", JSON.stringify(professional));
+      setData({ professional, token: data.token });
+      alert("Perfil atualizado");
+      window.location.reload();
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível atualizar o perfil");
+      }
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@fullnessclinic:token");
     const professional = localStorage.getItem("@fullnessclinic:professional");
@@ -43,7 +65,7 @@ function AuthProfessionalProvider({ children }) {
   }, []);
 
   return (
-    <AuthProfessionalContext.Provider value={{ signInProfessional, professional: data.professional, signOutProfessional }}>
+    <AuthProfessionalContext.Provider value={{ signInProfessional, professional: data.professional, signOutProfessional, updateProfileProfessional }}>
       {children}
     </AuthProfessionalContext.Provider>
   );
