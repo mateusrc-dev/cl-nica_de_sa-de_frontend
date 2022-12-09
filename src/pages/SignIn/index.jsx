@@ -10,16 +10,18 @@ import { MdCreate } from "react-icons/md";
 import { useState } from "react";
 import { TfiBackLeft } from "react-icons/tfi";
 import { TfiHandPointUp } from "react-icons/tfi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signIn } = useAuthUser();
   const [click, setClick] = useState(0);
+  const navigate = useNavigate()
 
   function handleSignIn() {
     signIn({ email, password });
+    navigate("/")
   }
 
   function handleClick(number) {

@@ -11,12 +11,13 @@ import { BsDoorClosed } from "react-icons/bs";
 import { TiInputChecked } from "react-icons/ti";
 import { RiHeartsFill } from "react-icons/ri";
 import { TiPen } from "react-icons/ti";
+import { useAuthUser } from "../../hooks/authUser";
 
 export function Header() {
   const hours = new Date();
-  const [user, setUser] = useState(false);
   const [professional, setProfessional] = useState(false);
   const [click, setClick] = useState(false);
+  const { user } = useAuthUser();
 
   function handleHours() {
     let Hours;

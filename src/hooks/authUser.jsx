@@ -4,6 +4,8 @@ import { api } from "../services/api";
 
 function AuthUserProvider({ children }) {
   const [data, setData] = useState({});
+  
+
   async function signIn({ email, password }) {
     try {
       const response = await api.post("/sessions", { email, password });
