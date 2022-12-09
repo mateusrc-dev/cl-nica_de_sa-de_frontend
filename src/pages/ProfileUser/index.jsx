@@ -11,6 +11,8 @@ import { TiArrowBack } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { useAuthUser } from "../../hooks/authUser";
 import { useState } from "react";
+import { api } from "../../services/api";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
 export function ProfileUser() {
   const { user, updateProfileUser } = useAuthUser();
@@ -19,7 +21,9 @@ export function ProfileUser() {
   const [queixa, setQueixa] = useState(user.queixas);
   const [passwordOld, setPasswordOld] = useState("");
   const [passwordNew, setPasswordNew] = useState("");
-
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+  const [avatar, setAvatar] = useState(avatarUrl)
+  const [avatarFile, setAvatarFile] = useState(null)
 
   async function handleUpdateUser() {
     const user = {
@@ -29,7 +33,14 @@ export function ProfileUser() {
       password: passwordNew,
       old_password: passwordOld,
     };
-    await updateProfileUser({ user });
+    await updateProfileUser({ user, avatarFile });
+  }
+
+  function handleChangeAvatar(event) {
+    const file = event.target.files[0];
+    setAvatarFile(file);
+    const imagePreview = URL.createObjectURL(file);
+    setAvatar(imagePreview)
   }
 
   return (
@@ -45,12 +56,12 @@ export function ProfileUser() {
           </Link>
           <img
             className="img"
-            src="https://github.com/mateusrc-dev.png"
+            src={avatar}
             alt="foto do usuário"
           />
           <label htmlFor="avatar" className="edit">
             <MdInsertPhoto className="svg" />
-            <input type="file" id="avatar" />
+            <input type="file" id="avatar" onChange={handleChangeAvatar}/>
           </label>
         </div>
         <form className="main">

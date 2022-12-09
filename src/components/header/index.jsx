@@ -13,6 +13,8 @@ import { RiHeartsFill } from "react-icons/ri";
 import { TiPen } from "react-icons/ti";
 import { useAuthUser } from "../../hooks/authUser";
 import { useAuthProfessional } from "../../hooks/authProfessional";
+import { api } from "../../services/api";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
 export function Header() {
   const hours = new Date();
@@ -20,6 +22,7 @@ export function Header() {
   const { user, signOut } = useAuthUser();
   const { professional, signOutProfessional } = useAuthProfessional();
   const navigate = useNavigate()
+  const avatarUrlUser = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
   function handleHours() {
     let Hours;
@@ -187,7 +190,7 @@ export function Header() {
             {user ? (
               <a className="Avatar" onClick={() => handleClick()}>
                 <img
-                  src="https://github.com/mateusrc-dev.png"
+                  src={avatarUrlUser}
                   alt="imagem do profissional"
                 />
                 <TiArrowSortedDown />

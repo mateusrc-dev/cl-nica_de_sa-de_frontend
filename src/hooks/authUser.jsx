@@ -32,12 +32,19 @@ function AuthUserProvider({ children }) {
     }
   }
 
-  async function updateProfileUser({ user }) {
+  async function updateProfileUser({ user, avatarFile }) {
     try {
+      if (avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+        const response = await api.patch("/users/avatar", fileUploadForm)
+        user.avatar = response.data.avatar
+      }
       await api.put("/users", user);
       localStorage.setItem("@fullnessclinic:user", JSON.stringify(user));
       setData({ user, token: data.token });
       alert("Perfil atualizado");
+      window.location.reload();
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
