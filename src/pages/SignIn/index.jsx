@@ -1,3 +1,4 @@
+import { useAuthUser } from "../../hooks/authUser";
 import { Container, Main, Header, Footer } from "./styles";
 import { GiHealthNormal } from "react-icons/gi";
 import { Input } from "../../components/input";
@@ -12,7 +13,14 @@ import { TfiHandPointUp } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 
 export function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signIn } = useAuthUser();
   const [click, setClick] = useState(0);
+
+  function handleSignIn() {
+    signIn({ email, password });
+  }
 
   function handleClick(number) {
     if (number === click) {
@@ -71,7 +79,7 @@ export function SignIn() {
                   <h1>Faça seu login (Cliente)</h1>
                   <label htmlFor="email">
                     <strong>Email:</strong>
-                    <Input id={"email"} placeholder={"Digite o seu email!"}>
+                    <Input id={"email"} placeholder={"Digite o seu email!"} onChange={e => setEmail(e.target.value)}>
                       <HiOutlineMail />
                     </Input>
                   </label>
@@ -81,11 +89,12 @@ export function SignIn() {
                       id={"password"}
                       type={"password"}
                       placeholder="Digite a sua senha!"
+                      onChange={e => setPassword(e.target.value)}
                     >
                       <RiLockPasswordFill />
                     </Input>
                   </label>
-                  <Button>
+                  <Button onClick={handleSignIn}>
                     Fazer login
                     <FiLogIn />
                   </Button>
