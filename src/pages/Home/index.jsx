@@ -9,8 +9,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
+import { useAuthProfessional } from "../../hooks/authProfessional";
 
 export function Home() {
+  const { professional } = useAuthProfessional();
   return (
     <Container>
       <Header />
@@ -23,7 +25,17 @@ export function Home() {
             <ul>
               <li className="active">Sobre o nosso espaço</li>
               <div className="row"></div>
-              <li><Link to="/professionals">Agendamentos com nossos profissionais</Link></li>
+              {!professional ? (
+                <li>
+                  <Link to="/professionals">
+                    Agendamentos com nossos profissionais
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/professionals">Ver todos os profissionais</Link>
+                </li>
+              )}
             </ul>
           </nav>
         </header>
@@ -98,7 +110,9 @@ export function Home() {
                       src="https://github.com/mateusrc-dev.png"
                       alt="foto do profissional"
                     />
-                    <button><Link to="/details/1">Mateus Carvalho | Psicólogo</Link></button>
+                    <button>
+                      <Link to="/details/1">Mateus Carvalho | Psicólogo</Link>
+                    </button>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -108,7 +122,11 @@ export function Home() {
                       src="https://github.com/mateusrc-dev.png"
                       alt="foto do profissional"
                     />
-                    <button><Link to="/details/1">Fernando Gonçalves | Nutricionista</Link></button>
+                    <button>
+                      <Link to="/details/1">
+                        Fernando Gonçalves | Nutricionista
+                      </Link>
+                    </button>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -118,7 +136,9 @@ export function Home() {
                       src="https://github.com/mateusrc-dev.png"
                       alt="foto do profissional"
                     />
-                    <button><Link to="/details/1">Ítalo Marsili | Psiquiatra</Link></button>
+                    <button>
+                      <Link to="/details/1">Ítalo Marsili | Psiquiatra</Link>
+                    </button>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -128,7 +148,9 @@ export function Home() {
                       src="https://github.com/mateusrc-dev.png"
                       alt="foto do profissional"
                     />
-                    <button><Link to="/details/1">Samia Marsili | Pediatra</Link></button>
+                    <button>
+                      <Link to="/details/1">Samia Marsili | Pediatra</Link>
+                    </button>
                   </div>
                 </SwiperSlide>
               </Swiper>

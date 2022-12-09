@@ -9,9 +9,11 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { Button } from "../../components/button";
 import { AiFillSchedule } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useAuthProfessional } from "../../hooks/authProfessional";
 
 export function Professionals() {
   const [heart, setHeart] = useState(false);
+  const { professional } = useAuthProfessional();
 
   function handleFavorite() {
     if (heart === false) {
@@ -35,7 +37,13 @@ export function Professionals() {
                 <Link to="/">Sobre o nosso espaço</Link>
               </li>
               <div className="row"></div>
-              <li className="active">Agendamentos com nossos profissionais</li>
+              {professional ? (
+                <li className="active">Ver todos os profissionais</li>
+              ) : (
+                <li className="active">
+                  Agendamentos com nossos profissionais
+                </li>
+              )}
             </ul>
           </nav>
         </header>
@@ -78,9 +86,11 @@ export function Professionals() {
         </div>
         <div className="professionals">
           <div className="professional">
-            <button className="favorite" onClick={() => handleFavorite()}>
-              {heart ? <MdFavorite /> : <MdFavoriteBorder />}
-            </button>
+            {!professional ? (
+              <button className="favorite" onClick={() => handleFavorite()}>
+                {heart ? <MdFavorite /> : <MdFavoriteBorder />}
+              </button>
+            ) : null}
             <img
               src="https://github.com/mateusrc-dev.png"
               alt="imagem do profissional"
@@ -97,10 +107,14 @@ export function Professionals() {
               como se nenhum problema existisse.
             </p>
             <Link to="/details/1">
-              <Button>
-                <AiFillSchedule />
-                Agende um horário!
-              </Button>
+              {!professional ? (
+                <Button>
+                  <AiFillSchedule />
+                  Agende um horário!
+                </Button>
+              ) : (
+                <Button>Veja os detalhes do profissional!</Button>
+              )}
             </Link>
           </div>
           <div className="professional">

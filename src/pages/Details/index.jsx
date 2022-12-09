@@ -25,6 +25,7 @@ import { FaHandPointDown } from "react-icons/fa";
 import { FaRegHandPointRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuthUser } from "../../hooks/authUser";
+import { useAuthProfessional } from "../../hooks/authProfessional";
 import { GoAlert } from "react-icons/go";
 import { MdLogin } from "react-icons/md";
 
@@ -38,6 +39,7 @@ export function Details() {
   const [testimony, setTestimony] = useState(true);
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
+  const { professional } = useAuthProfessional();
 
   function handleFavorite() {
     if (heart === false) {
@@ -414,12 +416,12 @@ export function Details() {
                 <div className="description">
                   <h1>
                     Dr. Mateus Carvalho
-                    <button
+                    {!professional ? <button
                       className="favorite"
                       onClick={() => handleFavorite()}
                     >
                       {heart ? <MdFavorite /> : <MdFavoriteBorder />}
-                    </button>
+                    </button> : null}
                   </h1>
                   <p>
                     Meu nome é Mateus, eu sou um psicólogo incrível, trato você
@@ -443,7 +445,7 @@ export function Details() {
               </div>
             </div>
           </Section>
-          <h2>
+          {!professional ? <h2>
             Horários disponíveis
             <span>
               <button onClick={handleLeftClick}>
@@ -453,12 +455,12 @@ export function Details() {
                 <CgArrowRightO />
               </button>
             </span>
-          </h2>
+          </h2> : null}
           <div className="container">
             <div className="left"></div>
             <div className="right"></div>
             <div ref={carousel} className="schedules">
-              <div className="Schedules">
+              {!professional ? <div className="Schedules">
                 <div className="query">
                   <p>
                     <strong>Data:</strong> 20/03/2050
@@ -603,7 +605,7 @@ export function Details() {
                     Agende sua consulta!
                   </Button>
                 </div>
-              </div>
+              </div> : null}
             </div>
           </div>
         </div>
