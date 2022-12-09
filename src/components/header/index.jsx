@@ -15,7 +15,7 @@ import { TiPen } from "react-icons/ti";
 export function Header() {
   const hours = new Date();
   const [user, setUser] = useState(false);
-  const [professional, setProfessional] = useState(true);
+  const [professional, setProfessional] = useState(false);
   const [click, setClick] = useState(false);
 
   function handleHours() {

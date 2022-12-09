@@ -67,6 +67,7 @@ export const Main = styled.main`
         resize: none;
         padding: 10px;
         color: ${({ theme }) => theme.COLORS.BLUE_100};
+        width: 820px;
         background: ${({ theme }) => theme.COLORS.WHITE};
         border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
         border-radius: 10px;
