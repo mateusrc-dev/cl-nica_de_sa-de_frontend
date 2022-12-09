@@ -7,7 +7,7 @@ function AuthUserProvider({ children }) {
 
   async function signIn({ email, password }) {
     try {
-      console.log(email, password)
+      console.log(email, password);
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
       localStorage.setItem("@fullnessclinic:user", JSON.stringify(user));
@@ -32,6 +32,21 @@ function AuthUserProvider({ children }) {
     }
   }
 
+  async function updateProfileUser({ user }) {
+    try {
+      await api.put("/users", user);
+      localStorage.setItem("@fullnessclinic:user", JSON.stringify(user));
+      setData({ user, token: data.token });
+      alert("Perfil atualizado");
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível atualizar o perfil");
+      }
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@fullnessclinic:token");
     const user = localStorage.getItem("@fullnessclinic:user");
@@ -45,7 +60,7 @@ function AuthUserProvider({ children }) {
   }, []);
 
   return (
-    <AuthUserContext.Provider value={{ signIn, user: data.user, signOut }}>
+    <AuthUserContext.Provider value={{ signIn, user: data.user, signOut, updateProfileUser }}>
       {children}
     </AuthUserContext.Provider>
   );

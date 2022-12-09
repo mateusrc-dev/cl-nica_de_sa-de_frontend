@@ -9,8 +9,29 @@ import { Button } from "../../components/button";
 import { ButtonText } from "../../components/buttonText";
 import { TiArrowBack } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import { useAuthUser } from "../../hooks/authUser";
+import { useState } from "react";
 
 export function ProfileUser() {
+  const { user, updateProfileUser } = useAuthUser();
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [queixa, setQueixa] = useState(user.queixas);
+  const [passwordOld, setPasswordOld] = useState("");
+  const [passwordNew, setPasswordNew] = useState("");
+
+
+  async function handleUpdateUser() {
+    const user = {
+      name,
+      email,
+      queixas: queixa,
+      password: passwordNew,
+      old_password: passwordOld,
+    };
+    await updateProfileUser({ user });
+  }
+
   return (
     <Container>
       <Header />
@@ -34,30 +55,52 @@ export function ProfileUser() {
         </div>
         <form className="main">
           <label htmlFor="email">
+            <strong>Seu nome</strong>
+            <Input
+              id={"email"}
+              placeholder={name}
+              onChange={(e) => setName(e.target.value)}
+            ></Input>
+          </label>
+          <label htmlFor="email">
             <strong>Seu email</strong>
             <Input
               id={"email"}
-              placeholder={"mateus_raimundo95@outlook.com"}
+              placeholder={email}
+              onChange={(e) => setEmail(e.target.value)}
             ></Input>
           </label>
           <label htmlFor="old_password">
             <strong>Senha antiga:</strong>
-            <Input id={"old_password"}></Input>
+            <Input
+              id={"old_password"}
+              onChange={(e) => setPasswordOld(e.target.value)}
+              type="password"
+            ></Input>
           </label>
           <label htmlFor="password">
             <strong>Nova senha:</strong>
-            <Input id={"password"}></Input>
+            <Input
+              id={"password"}
+              onChange={(e) => setPasswordNew(e.target.value)}
+              type="password"
+            ></Input>
           </label>
           <label htmlFor="description" className="textarea">
             <strong>Sua queixa:</strong>
             <textarea
-              placeholder="Estou sentindo muita ansiedade, tenho que passar no concurso e não aguento mais reprovar e morar na casa dos meus pais!"
+              placeholder={
+                queixa
+                  ? queixa
+                  : "Você ainda não inseriu sua queixa, digite aqui sua principal queixa, quanto mais detalhes, melhor! ;)"
+              }
+              onChange={(e) => setQueixa(e.target.value)}
               id="description"
               rows="5"
             ></textarea>
           </label>
           <span>
-            <Button>
+            <Button onClick={handleUpdateUser}>
               Salvar alterações <TfiSave />
             </Button>
           </span>
