@@ -3,10 +3,28 @@ import { AppRoutes } from "./app.routes";
 import { ProfessionalRoutes } from "./professional.routes";
 import { UserRoutes } from "./user.routes";
 import { useAuthUser } from "../hooks/authUser";
+import { useAuthProfessional } from "../hooks/authProfessional";
 
 export function Routes() {
   const { user } = useAuthUser();
-  console.log(user)
-  return <BrowserRouter>{user ? <UserRoutes /> : <AppRoutes />}</BrowserRouter>;
- 
+  const { professional } = useAuthProfessional();
+  if (user) {
+    return (
+      <BrowserRouter>
+        <UserRoutes />
+      </BrowserRouter>
+    );
+  } else if (professional) {
+    return (
+      <BrowserRouter>
+        <ProfessionalRoutes />
+      </BrowserRouter>
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import { useAuthUser } from "../../hooks/authUser";
+import { useAuthProfessional } from "../../hooks/authProfessional";
 import { Container, Main, Header, Footer } from "./styles";
 import { GiHealthNormal } from "react-icons/gi";
 import { Input } from "../../components/input";
@@ -7,7 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
 import { FiLogIn } from "react-icons/fi";
 import { MdCreate } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TfiBackLeft } from "react-icons/tfi";
 import { TfiHandPointUp } from "react-icons/tfi";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,13 +16,25 @@ import { Link, useNavigate } from "react-router-dom";
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useAuthUser();
+  const [emailProfessional, setEmailProfessional] = useState("");
+  const [passwordProfessional, setPasswordProfessional] = useState("");
+  const { signIn, user } = useAuthUser();
+  const { signInProfessional, professional } = useAuthProfessional();
   const [click, setClick] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user || professional) {
+      navigate("/")
+    }
+  }, [user, professional]);
 
   function handleSignIn() {
-    signIn({ email, password });
-    navigate("/")
+    signIn({ email, password } );
+  }
+
+  function handleSignInProfessional() {
+    signInProfessional({ emailProfessional, passwordProfessional });
   }
 
   function handleClick(number) {
@@ -81,7 +94,11 @@ export function SignIn() {
                   <h1>Faça seu login (Cliente)</h1>
                   <label htmlFor="email">
                     <strong>Email:</strong>
-                    <Input id={"email"} placeholder={"Digite o seu email!"} onChange={e => setEmail(e.target.value)}>
+                    <Input
+                      id={"email"}
+                      placeholder={"Digite o seu email!"}
+                      onChange={(e) => setEmail(e.target.value)}
+                    >
                       <HiOutlineMail />
                     </Input>
                   </label>
@@ -91,7 +108,7 @@ export function SignIn() {
                       id={"password"}
                       type={"password"}
                       placeholder="Digite a sua senha!"
-                      onChange={e => setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                     >
                       <RiLockPasswordFill />
                     </Input>
@@ -111,7 +128,7 @@ export function SignIn() {
                   <h1>Faça seu login (Profissional)</h1>
                   <label htmlFor="email">
                     <strong>Email:</strong>
-                    <Input id={"email"} placeholder={"Digite o seu email!"}>
+                    <Input id={"email"} placeholder={"Digite o seu email!"} onChange={(e) => setEmailProfessional(e.target.value)}>
                       <HiOutlineMail />
                     </Input>
                   </label>
@@ -121,11 +138,12 @@ export function SignIn() {
                       id={"password"}
                       type={"password"}
                       placeholder="Digite a sua senha!"
+                      onChange={(e) => setPasswordProfessional(e.target.value)}
                     >
                       <RiLockPasswordFill />
                     </Input>
                   </label>
-                  <Button>
+                  <Button onClick={handleSignInProfessional}>
                     Fazer login
                     <FiLogIn />
                   </Button>

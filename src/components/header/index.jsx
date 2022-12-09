@@ -4,7 +4,7 @@ import { FiLogIn } from "react-icons/fi";
 import { BsSearch } from "react-icons/bs";
 import { useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { AiFillSchedule } from "react-icons/ai";
 import { BsDoorClosed } from "react-icons/bs";
@@ -12,12 +12,14 @@ import { TiInputChecked } from "react-icons/ti";
 import { RiHeartsFill } from "react-icons/ri";
 import { TiPen } from "react-icons/ti";
 import { useAuthUser } from "../../hooks/authUser";
+import { useAuthProfessional } from "../../hooks/authProfessional";
 
 export function Header() {
   const hours = new Date();
-  const [professional, setProfessional] = useState(false);
   const [click, setClick] = useState(false);
-  const { user } = useAuthUser();
+  const { user, signOut } = useAuthUser();
+  const { professional, signOutProfessional } = useAuthProfessional();
+  const navigate = useNavigate()
 
   function handleHours() {
     let Hours;
@@ -100,7 +102,7 @@ export function Header() {
                     Profissionais favoritos
                   </button>
                 </Link>
-                <button>
+                <button onClick={() => signOut(navigate("/"))}>
                   <BsDoorClosed />
                   Sair da sua conta
                 </button>
@@ -136,7 +138,7 @@ export function Header() {
                     Gerenciar a sua agenda
                   </button>
                 </Link>
-                <button>
+                <button onClick={() => signOutProfessional(navigate("/"))}>
                   <BsDoorClosed />
                   Sair da sua conta
                 </button>
@@ -164,8 +166,8 @@ export function Header() {
         <div className="inner">
           <div className="welcome">
             <h1>
-              {user ? (
-                <strong>{`${handleHours()},`} {user ? user.name + "," : null} </strong>
+              {user || professional ? (
+                <strong>{`${handleHours()},`} {user ? user.name + "," : professional.name + ","} </strong>
               ) : (
                 <strong>{`${handleHours()},`}  </strong>
               )}
