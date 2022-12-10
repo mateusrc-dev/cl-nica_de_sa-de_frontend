@@ -78,7 +78,14 @@ export const Container = styled.div`
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 20px;
+      gap: 50px;
+      text-align: justify;
+    }
+    .modalContent p .allDetails{
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 100px;
       text-align: justify;
     }
     .modalContent p svg {
@@ -100,10 +107,34 @@ export const Container = styled.div`
       position: static;
     }
     .modalContent .avatar .avatarClient {
-      width: 100px;
-      height: 100px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+    }
+    .modalContent .scheduleDetails {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      white-space: nowrap;
+      h2 {
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+    }
+    .modalContent .Client h2 {
+      font-style: italic;
+    }
+    .modalContent .client {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .modalContent .detailsClient {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
   }
   .none {

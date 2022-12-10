@@ -187,6 +187,14 @@ export function Calendar() {
     handleSchedules();
   }, []);
 
+  async function handleClickTwoClose() {
+    if (clickTwo === false) {
+      setClickTwo(true);
+    } else {
+      setClickTwo(false);
+    }
+  }
+
   async function handleClickTwo(date, time) {
     if (clickTwo === false) {
       setClickTwo(true);
@@ -202,7 +210,7 @@ export function Calendar() {
 
   const handleOutsideClickTwo = (e) => {
     if (e.target.id === "modalTwo") {
-      handleClickTwo();
+      handleClickTwoClose();
     }
   };
 
@@ -233,34 +241,54 @@ export function Calendar() {
         onClick={handleOutsideClickTwo}
       >
         <div className="modalContent">
-          <button className="close" onClick={() => handleClickTwo()}>
+          <button className="close" onClick={() => handleClickTwoClose()}>
             <CgClose />
           </button>
           <p>
-            <div className="scheduleDetails">
-              <h2>Detalhes sobre a consulta</h2>
-              <span><strong>Horário:</strong> {scheduleOccupied[0]["time"]}</span>
-              <span><strong>Data:</strong> {scheduleOccupied[0]["date"]}</span>
-              <span><strong>Duração:</strong> {scheduleOccupied[0]["duration"]}</span>
-              <span>
-                <strong>Disponibilidade:</strong> {scheduleOccupied[0]["availability"]}
-              </span>
-              <span><strong>Status:</strong> {scheduleOccupied[0]["status"]}</span>
-            </div>
-            <div className="client">
-              <h2>Detalhes sobre o paciente:</h2>
-              <div className="avatar">
-                {scheduleOccupied[0]["status"] ? (
-                  <img
-                    className="avatarClient"
-                    src={`${api.defaults.baseURL}/files/${scheduleOccupied[0]["avatar"]}`}
-                    alt="imagem do paciente"
-                  />
-                ) : (
-                  <img src={avatarPlaceholder} alt="avatar do paciente" />
-                )}
+            <div className="allDetails">
+              <div className="scheduleDetails">
+                <h2>Detalhes sobre a consulta:</h2>
+                <span>
+                  <strong>Horário:</strong> {scheduleOccupied[0]["time"]}
+                </span>
+                <span>
+                  <strong>Data:</strong> {scheduleOccupied[0]["date"]}
+                </span>
+                <span>
+                  <strong>Duração:</strong> {scheduleOccupied[0]["duration"]}
+                </span>
+                <span>
+                  <strong>Disponibilidade:</strong>{" "}
+                  {scheduleOccupied[0]["availability"]}
+                </span>
+                <span>
+                  <strong>Status:</strong> {scheduleOccupied[0]["status"]}
+                </span>
               </div>
-              <div className="detailsClient"></div>
+              <div className="Client">
+                <h2>Detalhes sobre o paciente:</h2>
+                <div className="client">
+                  <div className="avatar">
+                    {scheduleOccupied[0]["status"] ? (
+                      <img
+                        className="avatarClient"
+                        src={`${api.defaults.baseURL}/files/${scheduleOccupied[0]["avatar"]}`}
+                        alt="imagem do paciente"
+                      />
+                    ) : (
+                      <img src={avatarPlaceholder} alt="avatar do paciente" />
+                    )}
+                  </div>
+                  <div className="detailsClient">
+                    <span>
+                      <strong>Nome:</strong> {scheduleOccupied[0]["name"]}
+                    </span>
+                    <span>
+                      <strong>Queixas:</strong> {scheduleOccupied[0]["queixas"]}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </p>
         </div>
