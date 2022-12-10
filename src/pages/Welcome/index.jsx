@@ -3,7 +3,7 @@ import { useAuthProfessional } from "../../hooks/authProfessional";
 import { Container, Main } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { CiCloudSun } from "react-icons/ci";
-import { BsCloudMoonFill } from "react-icons/bs";
+import { BsFillMoonStarsFill } from "react-icons/bs";
 import { GiHealthNormal } from "react-icons/gi";
 
 export function Welcome() {
@@ -29,7 +29,7 @@ export function Welcome() {
   function handleTime() {
     setTimeout(function () {
       navigate("/");
-    }, 5000);
+    }, 8000);
   }
 
   handleTime();
@@ -50,7 +50,7 @@ export function Welcome() {
           ) : null}
           {Hours === "Boa noite" ? (
             <h1>
-              {Hours} <BsCloudMoonFill />
+              {Hours} <BsFillMoonStarsFill />
             </h1>
           ) : null}
         </div>

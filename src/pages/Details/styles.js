@@ -224,6 +224,9 @@ export const Main = styled.div`
     gap: 20px;
   }
   .query {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
     width: 250px;
     padding: 10px;
     border-radius: 10px;
