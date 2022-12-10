@@ -1,5 +1,5 @@
 import { Container } from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TbArrowBigLeftLines } from "react-icons/tb";
 import { TbArrowBigRightLines } from "react-icons/tb";
 import { Button } from "../../components/button";
@@ -8,6 +8,9 @@ import { GiConfirmed } from "react-icons/gi";
 import { FaRegHandPointRight } from "react-icons/fa";
 import { IoMdArrowDropleft } from "react-icons/io";
 import { IoMdArrowDropright } from "react-icons/io";
+import { api } from "../../services/api";
+import { useAuthProfessional } from "../../hooks/authProfessional";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
 const monthNames = [
   "Janeiro",
@@ -36,10 +39,27 @@ const weekNames = [
 
 export function Calendar() {
   const [click, setClick] = useState(false);
+  const [clickTwo, setClickTwo] = useState(false);
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
-  const [time, setTime] = useState();
   const [displayTime, setDisplayTime] = useState("01:00");
+  const [schedules, setSchedules] = useState([]);
+  const [scheduleOccupied, setScheduleOccupied] = useState([
+    {
+      availability: "ocupado",
+      avatar: "c664849438f84a2b2cd9-health.png",
+      date: "10/12/2022",
+      duration: "01:00",
+      name: "Mateus Fernandes",
+      queixas: "tenho muita ansiedade, sofri muito bulliyng na vida.",
+      status: "por realizar",
+      time: "12:00",
+    },
+  ]);
+  const [schedulesTwo, setSchedulesTwo] = useState([]);
+  const { professional } = useAuthProfessional();
+
+  console.log(scheduleOccupied);
 
   const date = new Date();
   var newDate = new Date();
@@ -114,6 +134,7 @@ export function Calendar() {
 
   const weekDays = getWeeks();
   const numberDays = getNumber();
+  console.log(numberDays);
 
   function handleClick(dt, tm) {
     if (click === false) {
@@ -131,6 +152,60 @@ export function Calendar() {
     }
   };
 
+  async function handleCreateSchedule() {
+    if (modalDate < dateString) {
+      alert("Não é possível criar um horário em um dia anterior a data atual!");
+      return;
+    } else {
+      const availability = "disponível";
+      await api.post("/schedules", {
+        time: modalTime,
+        availability,
+        date: modalDate,
+        duration: displayTime,
+      });
+      alert("Novo horário criado com sucesso!");
+      window.location.reload();
+    }
+  }
+
+  useEffect(() => {
+    async function handleSchedules() {
+      const response = await api.get(
+        `/schedulesProfessionals/${professional.id}`
+      );
+      setSchedules(response.data.schedules);
+      let Schedules = [];
+      for (var i = 0; i < response.data.schedules.length; i++) {
+        let obj = response.data.schedules[i]["date"];
+        let obj2 = response.data.schedules[i]["time"];
+        let obj3 = response.data.schedules[i]["availability"];
+        Schedules.push(obj + obj2 + obj3);
+      }
+      setSchedulesTwo(Schedules);
+    }
+    handleSchedules();
+  }, []);
+
+  async function handleClickTwo(date, time) {
+    if (clickTwo === false) {
+      setClickTwo(true);
+    } else {
+      setClickTwo(false);
+    }
+
+    const response = await api.get(
+      `/schedulesProfessionals/?date=${date}&time=${time}`
+    );
+    setScheduleOccupied(response.data.schedules);
+  }
+
+  const handleOutsideClickTwo = (e) => {
+    if (e.target.id === "modalTwo") {
+      handleClickTwo();
+    }
+  };
+
   return (
     <Container>
       <div
@@ -145,10 +220,48 @@ export function Calendar() {
           <p>
             <FaRegHandPointRight /> Tem certeza que deseja criar um horário na
             data {modalDate} às {modalTime}hrs?
-            <Button>
+            <Button onClick={handleCreateSchedule}>
               Confirmar!
               <GiConfirmed />
             </Button>
+          </p>
+        </div>
+      </div>
+      <div
+        id="modalTwo"
+        className={clickTwo ? "modal" : "none"}
+        onClick={handleOutsideClickTwo}
+      >
+        <div className="modalContent">
+          <button className="close" onClick={() => handleClickTwo()}>
+            <CgClose />
+          </button>
+          <p>
+            <div className="scheduleDetails">
+              <h2>Detalhes sobre a consulta</h2>
+              <span><strong>Horário:</strong> {scheduleOccupied[0]["time"]}</span>
+              <span><strong>Data:</strong> {scheduleOccupied[0]["date"]}</span>
+              <span><strong>Duração:</strong> {scheduleOccupied[0]["duration"]}</span>
+              <span>
+                <strong>Disponibilidade:</strong> {scheduleOccupied[0]["availability"]}
+              </span>
+              <span><strong>Status:</strong> {scheduleOccupied[0]["status"]}</span>
+            </div>
+            <div className="client">
+              <h2>Detalhes sobre o paciente:</h2>
+              <div className="avatar">
+                {scheduleOccupied[0]["status"] ? (
+                  <img
+                    className="avatarClient"
+                    src={`${api.defaults.baseURL}/files/${scheduleOccupied[0]["avatar"]}`}
+                    alt="imagem do paciente"
+                  />
+                ) : (
+                  <img src={avatarPlaceholder} alt="avatar do paciente" />
+                )}
+              </div>
+              <div className="detailsClient"></div>
+            </div>
           </p>
         </div>
       </div>
@@ -206,15 +319,28 @@ export function Calendar() {
           </tr>
           <tr>
             <td>12:00</td>
+
             {numberDays.map((number) => (
               <td
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "12:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "12:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "12:00ocupado") ? (
+                  <button onClick={() => handleClickTwo(number, "12:00")}>
+                    Horário Ocupado (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "12:00disponível") &&
+                !schedulesTwo.includes(number + "12:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "12:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>

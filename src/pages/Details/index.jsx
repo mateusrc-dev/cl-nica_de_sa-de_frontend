@@ -36,7 +36,7 @@ export function Details() {
   const [clickThree, setClickThree] = useState(false);
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
-  const [testimony, setTestimony] = useState(true);
+  const [testimony, setTestimony] = useState(false);
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();

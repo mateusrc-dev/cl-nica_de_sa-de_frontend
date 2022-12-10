@@ -99,6 +99,12 @@ export const Container = styled.div`
     .modalContent button svg {
       position: static;
     }
+    .modalContent .avatar .avatarClient {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+    }
   }
   .none {
     display: none;
@@ -131,7 +137,7 @@ export const Container = styled.div`
   .table tbody tr:nth-child(odd) {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_200};
   }
-  
+
   .list_date {
     margin: auto;
     display: flex;
@@ -158,8 +164,11 @@ export const Container = styled.div`
       border: none;
       transition: all 0.5s;
       color: ${({ theme }) => theme.COLORS.WHITE_100};
-      border-radius: 5px 0px 30px 0px;
+      border-radius: 5px 0px 10px 0px;
       padding: 5px;
+      &:disabled {
+        opacity: 0.8;
+      }
     }
     button:hover {
       transform: scale(1.1);
@@ -183,9 +192,12 @@ export const Container = styled.div`
       border: none;
       transition: all 0.5s;
       color: ${({ theme }) => theme.COLORS.BLUE_100};
-      border-radius: 10px 0px 30px 0px;
+      border-radius: 10px 0px 10px 0px;
       font-weight: bold;
       padding: 5px;
+      &:disabled {
+        opacity: 0.8;
+      }
     }
     button:hover {
       transform: scale(1.1);

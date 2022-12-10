@@ -35,6 +35,10 @@ export function ProfileProfessional() {
   const [newTag, setNewTag] = useState("");
 
   function handleAddTag() {
+    if (newTag.length === 0) {
+      alert ("Digite algo para adicionar uma nova tag!")
+      return
+    }
     setTags((prevState) => [...prevState, newTag]);
     setNewTag("");
   }
