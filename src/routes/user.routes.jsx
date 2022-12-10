@@ -8,6 +8,7 @@ import { SignIn } from "../pages/SignIn";
 import { SignUp } from "../pages/SignUp";
 import { TheirTestimonials } from "../pages/TheirTestimonials";
 import { YourSchedules } from "../pages/YourSchedules";
+import { Welcome } from "../pages/Welcome";
 
 export function UserRoutes() {
   return (
@@ -21,6 +22,7 @@ export function UserRoutes() {
       <Route path="/signUp" element={<SignUp />} />;
       <Route path="/theirTestimonials" element={<TheirTestimonials />} />;
       <Route path="/yourSchedules" element={<YourSchedules />} />;
+      <Route path="/welcome" element={<Welcome />} />;
     </Routes>
   );
 }

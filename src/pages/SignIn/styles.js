@@ -19,7 +19,27 @@ export const Main = styled.main`
     align-items: center;
     gap: 100px;
     justify-content: center;
+    background:  ${({ theme }) => theme.COLORS.BACKGROUND_000};
+    background-size: 300% 300%;
+    animation: colors 15s ease infinite alternate-reverse;
   }
+  @keyframes colors {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 50% 100%;
+    }
+
+    75% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 50% 0%;
+    }
+  } 
   .logo {
     display: flex;
     align-items: center;
@@ -150,5 +170,5 @@ export const Footer = styled.header`
   grid-area: footer;
   width: 100%;
   height: 50px;
-  background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND_300};
 `;

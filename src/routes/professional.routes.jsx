@@ -7,6 +7,7 @@ import { SignIn } from "../pages/SignIn";
 import { SignUp } from "../pages/SignUp";
 import { Schedules } from "../pages/Schedules";
 import { YourQueries } from "../pages/YourQueries";
+import { Welcome } from "../pages/Welcome";
 
 export function ProfessionalRoutes() {
   return (
@@ -19,6 +20,7 @@ export function ProfessionalRoutes() {
       <Route path="/signUp" element={<SignUp />} />;
       <Route path="/schedules" element={<Schedules />} />;
       <Route path="/yourQueries" element={<YourQueries />} />;
+      <Route path="/welcome" element={<Welcome />} />;
     </Routes>
   );
 }

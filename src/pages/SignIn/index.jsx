@@ -25,7 +25,7 @@ export function SignIn() {
 
   useEffect(() => {
     if (user || professional) {
-      navigate("/")
+      navigate("/welcome")
     }
   }, [user, professional]);
 
