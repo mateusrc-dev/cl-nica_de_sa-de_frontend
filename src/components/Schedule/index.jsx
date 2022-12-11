@@ -16,7 +16,8 @@ export function Schedule({ date, time }) {
 
   return (
     <Container>
-      <span>{scheduleOccupied[0]["name"]}</span>
+      <span className="nameClient">{scheduleOccupied[0]["name"]}</span>
+      {scheduleOccupied[0]["justification"] ? <span className="cancel">Desmarcado!</span> : null}
     </Container>
   );
 }

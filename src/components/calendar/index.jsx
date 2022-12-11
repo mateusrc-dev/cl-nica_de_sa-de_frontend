@@ -218,6 +218,8 @@ export function Calendar() {
     setScheduleOccupied(response.data.schedules);
     if (clickTwo === false) {
       setClickTwo(true);
+      setModalDate(date);
+      setModalTime(time);
     } else {
       setClickTwo(false);
     }
@@ -237,6 +239,10 @@ export function Calendar() {
   }
 
   function handleClickThree() {
+    if (modalDate < dateString) {
+      alert("Não é possível desmarcar uma consulta numa data anterior a data atual!");
+      return;
+    } 
     if (clickThree === false) {
       setClickThree(true);
     } else {
@@ -423,6 +429,7 @@ export function Calendar() {
                 {" "}
                 {schedulesTwo.includes(number + "12:00disponível") ? (
                   <button
+                    className="state"
                     onClick={() => {
                       handleDeleteSchedule(number, "12:00");
                     }}
@@ -460,6 +467,7 @@ export function Calendar() {
                 {" "}
                 {schedulesTwo.includes(number + "13:00disponível") ? (
                   <button
+                    className="state"
                     onClick={() => {
                       handleDeleteSchedule(number, "13:00");
                     }}
@@ -497,6 +505,7 @@ export function Calendar() {
                 {" "}
                 {schedulesTwo.includes(number + "14:00disponível") ? (
                   <button
+                    className="state"
                     onClick={() => {
                       handleDeleteSchedule(number, "14:00");
                     }}
@@ -534,8 +543,9 @@ export function Calendar() {
                 {" "}
                 {schedulesTwo.includes(number + "15:00disponível") ? (
                   <button
+                    className="state"
                     onClick={() => {
-                      handleDeleteSchedule(number, "14:00");
+                      handleDeleteSchedule(number, "15:00");
                     }}
                   >
                     Horário Criado Disponível (Clique para excluir)
@@ -570,7 +580,11 @@ export function Calendar() {
               >
                 {" "}
                 {schedulesTwo.includes(number + "16:00disponível") ? (
-                  <button disabled={true}>Horário Criado Disponível</button>
+                  <button className="state" onClick={() => {
+                    handleDeleteSchedule(number, "16:00");
+                  }}
+                >
+                  Horário Criado Disponível (Clique para excluir)</button>
                 ) : null}
                 {schedulesTwo.includes(number + "16:00ocupado") ? (
                   <button
@@ -601,7 +615,11 @@ export function Calendar() {
               >
                 {" "}
                 {schedulesTwo.includes(number + "17:00disponível") ? (
-                  <button disabled={true}>Horário Criado Disponível</button>
+                  <button className="state" onClick={() => {
+                    handleDeleteSchedule(number, "17:00");
+                  }}
+                >
+                  Horário Criado Disponível (Clique para excluir)</button>
                 ) : null}
                 {schedulesTwo.includes(number + "17:00ocupado") ? (
                   <button
@@ -632,7 +650,11 @@ export function Calendar() {
               >
                 {" "}
                 {schedulesTwo.includes(number + "18:00disponível") ? (
-                  <button disabled={true}>Horário Criado Disponível</button>
+                  <button className="state" onClick={() => {
+                    handleDeleteSchedule(number, "18:00");
+                  }}
+                >
+                  Horário Criado Disponível (Clique para excluir)</button>
                 ) : null}
                 {schedulesTwo.includes(number + "18:00ocupado") ? (
                   <button
@@ -663,7 +685,11 @@ export function Calendar() {
               >
                 {" "}
                 {schedulesTwo.includes(number + "19:00disponível") ? (
-                  <button disabled={true}>Horário Criado Disponível</button>
+                  <button className="state" onClick={() => {
+                    handleDeleteSchedule(number, "19:00");
+                  }}
+                >
+                  Horário Criado Disponível (Clique para excluir)</button>
                 ) : null}
                 {schedulesTwo.includes(number + "19:00ocupado") ? (
                   <button
@@ -694,7 +720,11 @@ export function Calendar() {
               >
                 {" "}
                 {schedulesTwo.includes(number + "20:00disponível") ? (
-                  <button disabled={true}>Horário Criado Disponível</button>
+                  <button className="state" onClick={() => {
+                    handleDeleteSchedule(number, "20:00");
+                  }}
+                >
+                  Horário Criado Disponível (Clique para excluir)</button>
                 ) : null}
                 {schedulesTwo.includes(number + "20:00ocupado") ? (
                   <button

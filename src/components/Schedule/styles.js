@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  font-style: italic;
-  text-decoration: underline;
+  .nameClient {
+    font-style: italic;
+    text-decoration: underline;
+  }
+  .cancel {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+  }
 `;

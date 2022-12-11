@@ -216,6 +216,9 @@ export const Container = styled.div`
     .occupied {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_RED};
     }
+    .state {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+    }
     button {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
       border: none;
@@ -234,6 +237,9 @@ export const Container = styled.div`
     }
   }
   .list_item_active {
+    background: ${({ theme }) => theme.COLORS.WHITE};
+    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+
     span {
       display: flex;
       align-items: center;
@@ -242,11 +248,14 @@ export const Container = styled.div`
       font-weight: bold;
       font-style: italic;
     }
-    background: ${({ theme }) => theme.COLORS.WHITE};
-    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+
     .occupied {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_RED};
     }
+    .state {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+    }
+
     button {
       margin: 5px 10px;
       background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
@@ -256,10 +265,6 @@ export const Container = styled.div`
       border-radius: 10px 0px 10px 0px;
       font-weight: bold;
       padding: 5px;
-      &:disabled {
-        opacity: 0.8;
-        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
-      }
     }
     button:hover {
       transform: scale(1.1);
