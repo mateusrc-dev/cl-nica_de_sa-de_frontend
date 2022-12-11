@@ -112,13 +112,14 @@ export const Main = styled.main`
   .tags ul {
     position: absolute;
     margin-top: 60px;
-    margin-left: 70px;
+    margin-left: 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     overflow-y: auto;
     height: 250px;
+    width: 200px;
   }
   .tags ul::-webkit-scrollbar {
     width: 18px;

@@ -44,6 +44,10 @@ export function ProfileProfessional() {
   }
 
   async function handleUpdateProfessional() {
+    if (tags) {
+      alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio!")
+      return
+    }
     const professional = {
       name,
       email,
@@ -143,6 +147,12 @@ export function ProfileProfessional() {
                 value="nutricionista"
               >
                 Nutricionista
+              </option>
+              <option
+                selected={specialization === "fisioterapeuta"}
+                value="fisioterapeuta"
+              >
+                Fisioterapeuta
               </option>
               <option selected={specialization === "dentista"} value="dentista">
                 Dentista

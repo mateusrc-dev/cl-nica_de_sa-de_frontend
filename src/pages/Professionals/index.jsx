@@ -1,5 +1,6 @@
 import { Container, Main } from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { api } from "../../services/api"
 import { GiHealthNormal } from "react-icons/gi";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
@@ -14,6 +15,48 @@ import { useAuthProfessional } from "../../hooks/authProfessional";
 export function Professionals() {
   const [heart, setHeart] = useState(false);
   const { professional } = useAuthProfessional();
+
+  const [tags, setTags] = useState([])
+  const [tagsSelected, setTagsSelected] = useState([])
+  const [specializationSelected, setSpecializationSelected] = useState([])
+
+  function handleTagSelected(tagName) {
+    if (tagName === "all") {
+      setTagsSelected([])
+      return
+    }
+
+    const Selected = tagsSelected.includes(tagName)
+    if (Selected) {
+      const filterTags = tagsSelected.filter(tag => tag !== tagName)
+      setTagsSelected(filterTags)
+    } else {
+      setTagsSelected(prevState => [...prevState, tagName])
+    }
+  }
+
+  function handleSpecializationSelected(specializationName) {
+    if (specializationName === "all") {
+      setSpecializationSelected([])
+      return
+    }
+
+    const Selected = specializationSelected.includes(specializationName)
+    if (Selected) {
+      const filterSpecialization = specializationSelected.filter(specialization => specialization !== specializationName)
+      setSpecializationSelected(filterSpecialization)
+    } else {
+      setSpecializationSelected(prevState => [...prevState, specializationName])
+    }
+  }
+
+  useEffect(() => {
+    async function fetchTags() {
+      const response = await api.get("/tags")
+      setTags(response.data)
+    }
+    fetchTags()
+  }, [])
 
   function handleFavorite() {
     if (heart === false) {
@@ -50,38 +93,23 @@ export function Professionals() {
 
         <div className="professions">
           <ul>
-            <li className="active">Todos</li>
-            <li>Psicólogos</li>
-            <li>Psiquiatras</li>
-            <li>Nutricionistas</li>
-            <li>Fisioterapeutas</li>
-            <li>Dentistas</li>
+            <li className={specializationSelected.includes("all") || specializationSelected.length === 0 ? "active" : "null"} onClick={() => handleSpecializationSelected("all")}>todos</li>
+            <li className={specializationSelected.includes("psicólogo") ? "active" : null} onClick={() => handleSpecializationSelected("psicólogo")}>Psicólogos</li>
+            <li className={specializationSelected.includes("psiquiatra") ? "active" : null} onClick={() => handleSpecializationSelected("psiquiatra")}>Psiquiatras</li>
+            <li className={specializationSelected.includes("nutricionista") ? "active" : null} onClick={() => handleSpecializationSelected("nutricionista")}>Nutricionistas</li>
+            <li className={specializationSelected.includes("fisioterapeuta") ? "active" : null} onClick={() => handleSpecializationSelected("fisioterapeuta")}>Fisioterapeutas</li>
+            <li className={specializationSelected.includes("dentista") ? "active" : null} onClick={() => handleSpecializationSelected("dentista")}>Dentistas</li>
           </ul>
         </div>
         <div className="tags">
           <h2>Tags</h2>
           <ul>
-            <li className="active">todos</li>
-            <li>depressão</li>
-            <li>compulsão alimentar</li>
-            <li>dieta</li>
-            <li>cáries dentais</li>
-            <li>ansiedade</li>
-            <li>depressão</li>
-            <li>compulsão alimentar</li>
-            <li>dieta</li>
-            <li>cáries dentais</li>
-            <li>ansiedade</li>
-            <li>depressão</li>
-            <li>compulsão alimentar</li>
-            <li>dieta</li>
-            <li>cáries dentais</li>
-            <li>cáries dentais</li>
-            <li>ansiedade</li>
-            <li>depressão</li>
-            <li>compulsão alimentar</li>
-            <li>dieta</li>
-            <li>cáries dentais</li>
+            <li className={tagsSelected.includes("all") || tagsSelected.length === 0 ? "active" : "null"} onClick={() => handleTagSelected("all")}>todos</li>
+            {
+              tags && tags.map(tag => (
+                  <li className={tagsSelected.includes(tag.name) ? "active" : null}key={String(tag.id)} onClick={() => handleTagSelected(tag.name)}>{tag.name}</li>
+                ))
+            }
           </ul>
         </div>
         <div className="professionals">
