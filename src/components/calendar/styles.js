@@ -159,6 +159,18 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.COLORS.BLUE_200};
       }
     }
+    .modalContent .modalConfirm {
+      margin-left: 60px;
+    }
+    .modalContent .modalConfirm span {
+      font-style: italic;
+      font-weight: bold;
+    }
+    .modalContent .modalConfirm .buttonsModal {
+      display: flex;
+      margin-top: 10px;
+      gap: 20px;
+    }
   }
   .none {
     display: none;

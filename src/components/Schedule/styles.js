@@ -10,4 +10,8 @@ export const Container = styled.div`
     text-decoration: none;
     font-weight: bold;
   }
+  .confirm {
+    color: yellow;
+   font-style: italic;
+  }
 `;
