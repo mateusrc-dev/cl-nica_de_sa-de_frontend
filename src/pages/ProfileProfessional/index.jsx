@@ -175,7 +175,7 @@ export function ProfileProfessional() {
               placeholder={
                 description
                   ? description
-                  : "Você ainda não inseriu sua descrição, seja criativo, fale da sua experiência, qual seu foco, quais problemas você gosta de trabalhar, qual seu público alvo, suas especializadas, etc..."
+                  : "Você ainda não inseriu sua descrição, seja criativo, fale da sua experiência, qual seu foco, quais problemas você gosta de trabalhar, qual seu público alvo, suas especializações, etc..."
               }
               id="description"
               rows="5"

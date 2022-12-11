@@ -136,6 +136,12 @@ export const Container = styled.div`
       flex-direction: column;
       gap: 10px;
     }
+    .modalContent .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
   }
   .none {
     display: none;
