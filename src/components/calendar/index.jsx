@@ -11,6 +11,7 @@ import { IoMdArrowDropright } from "react-icons/io";
 import { api } from "../../services/api";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+import { Schedule } from "../../components/Schedule";
 
 const monthNames = [
   "Janeiro",
@@ -196,16 +197,15 @@ export function Calendar() {
   }
 
   async function handleClickTwo(date, time) {
+    const response = await api.get(
+      `/schedulesProfessionals/?date=${date}&time=${time}`
+    );
+    setScheduleOccupied(response.data.schedules);
     if (clickTwo === false) {
       setClickTwo(true);
     } else {
       setClickTwo(false);
     }
-
-    const response = await api.get(
-      `/schedulesProfessionals/?date=${date}&time=${time}`
-    );
-    setScheduleOccupied(response.data.schedules);
   }
 
   const handleOutsideClickTwo = (e) => {
@@ -247,7 +247,7 @@ export function Calendar() {
           <p>
             <div className="allDetails">
               <div className="scheduleDetails">
-                <h2>Detalhes sobre a consulta:</h2>
+                <h2>Detalhes sobre o horário:</h2>
                 <span>
                   <strong>Horário:</strong> {scheduleOccupied[0]["time"]}
                 </span>
@@ -269,7 +269,7 @@ export function Calendar() {
                 <h2>Detalhes sobre o paciente:</h2>
                 <div className="client">
                   <div className="avatar">
-                    {scheduleOccupied[0]["status"] ? (
+                    {scheduleOccupied[0]["avatar"] ? (
                       <img
                         className="avatarClient"
                         src={`${api.defaults.baseURL}/files/${scheduleOccupied[0]["avatar"]}`}
@@ -359,8 +359,13 @@ export function Calendar() {
                   <button disabled={true}>Horário Criado Disponível</button>
                 ) : null}
                 {schedulesTwo.includes(number + "12:00ocupado") ? (
-                  <button onClick={() => handleClickTwo(number, "12:00")}>
-                    Horário Ocupado (Clique para ver mais detalhes)
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "12:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"12:00"} />
+                    (Clique para ver mais detalhes)
                   </button>
                 ) : null}
                 {!schedulesTwo.includes(number + "12:00disponível") &&
@@ -380,9 +385,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "13:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "13:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "13:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "13:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"13:00"} /> (Clique para ver
+                    mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "13:00disponível") &&
+                !schedulesTwo.includes(number + "13:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "13:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>
@@ -394,9 +416,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "14:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "14:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "14:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "14:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"14:00"} />
+                    (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "14:00disponível") &&
+                !schedulesTwo.includes(number + "14:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "14:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>
@@ -408,9 +447,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "15:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "15:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "15:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "15:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"15:00"} />
+                    (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "15:00disponível") &&
+                !schedulesTwo.includes(number + "15:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "15:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>
@@ -422,9 +478,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "16:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "16:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "16:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "16:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"16:00"} />
+                    (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "16:00disponível") &&
+                !schedulesTwo.includes(number + "16:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "16:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>
@@ -436,9 +509,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "17:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "17:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "17:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "17:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"17:00"} />
+                    (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "17:00disponível") &&
+                !schedulesTwo.includes(number + "17:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "17:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>
@@ -450,9 +540,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "18:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "18:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "18:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "18:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"18:00"} />
+                    (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "18:00disponível") &&
+                !schedulesTwo.includes(number + "18:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "18:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>
@@ -464,9 +571,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "19:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "19:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "19:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "19:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"19:00"} />
+                    (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "19:00disponível") &&
+                !schedulesTwo.includes(number + "19:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "19:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>
@@ -478,9 +602,26 @@ export function Calendar() {
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
-                <button onClick={() => handleClick(number, "20:00")}>
-                  Clique para criar um horário
-                </button>
+                {" "}
+                {schedulesTwo.includes(number + "20:00disponível") ? (
+                  <button disabled={true}>Horário Criado Disponível</button>
+                ) : null}
+                {schedulesTwo.includes(number + "20:00ocupado") ? (
+                  <button
+                    className="occupied"
+                    onClick={() => handleClickTwo(number, "20:00")}
+                  >
+                    Horário Ocupado por{" "}
+                    <Schedule date={number} time={"20:00"} />
+                    (Clique para ver mais detalhes)
+                  </button>
+                ) : null}
+                {!schedulesTwo.includes(number + "20:00disponível") &&
+                !schedulesTwo.includes(number + "20:00ocupado") ? (
+                  <button onClick={() => handleClick(number, "20:00")}>
+                    Criar novo horário
+                  </button>
+                ) : null}
               </td>
             ))}
           </tr>

@@ -12,6 +12,7 @@ export default {
     BACKGROUND_200: "linear-gradient(90deg, rgba(212,221,255,1) 0%, rgba(233,238,255,0.00) 100%)",
     BACKGROUND_100: "linear-gradient(90deg, rgba(212,221,255,0) 0%, rgba(212,221,255,1) 100%)",
     BACKGROUND_000: "linear-gradient(45deg, #084177, rgba(229,235,255,1), rgba(190,204,255,1),  rgba(153,174,255,1))",
+    BACKGROUND_RED: "linear-gradient(0deg, rgba(255,229,229,1) 0%, rgba(255,190,190,1) 12%, rgba(255,153,153,1) 16%)",
 
     WHITE: "#F4EDE8",
     WHITE_100: "#FFFFFF",

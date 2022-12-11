@@ -81,7 +81,7 @@ export const Container = styled.div`
       gap: 50px;
       text-align: justify;
     }
-    .modalContent p .allDetails{
+    .modalContent p .allDetails {
       display: flex;
       flex-direction: row;
       align-items: flex-start;
@@ -190,6 +190,9 @@ export const Container = styled.div`
       align-items: center;
       justify-content: center;
     }
+    .occupied {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_RED};
+    }
     button {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
       border: none;
@@ -199,6 +202,7 @@ export const Container = styled.div`
       padding: 5px;
       &:disabled {
         opacity: 0.8;
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
       }
     }
     button:hover {
@@ -217,6 +221,9 @@ export const Container = styled.div`
     }
     background: ${({ theme }) => theme.COLORS.WHITE};
     box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+    .occupied {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_RED};
+    }
     button {
       margin: 5px 10px;
       background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
@@ -228,6 +235,7 @@ export const Container = styled.div`
       padding: 5px;
       &:disabled {
         opacity: 0.8;
+        background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
       }
     }
     button:hover {
