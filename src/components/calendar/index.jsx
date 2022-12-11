@@ -41,10 +41,12 @@ const weekNames = [
 export function Calendar() {
   const [click, setClick] = useState(false);
   const [clickTwo, setClickTwo] = useState(false);
+  const [clickThree, setClickThree] = useState(false);
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
   const [displayTime, setDisplayTime] = useState("01:00");
   const [schedules, setSchedules] = useState([]);
+  const [justification, setJustification] = useState("")
   const [scheduleOccupied, setScheduleOccupied] = useState([
     {
       availability: "ocupado",
@@ -201,6 +203,7 @@ export function Calendar() {
   }, []);
 
   async function handleClickTwoClose() {
+      setClickThree(false)
     if (clickTwo === false) {
       setClickTwo(true);
     } else {
@@ -233,6 +236,22 @@ export function Calendar() {
     }
   }
 
+  function handleClickThree() {
+    if (clickThree === false) {
+      setClickThree(true);
+    } else {
+      setClickThree(false);
+    }
+  }
+
+  async function handleConfirmCancel(id) {
+    const status = "desmarcado por professional!";
+    await api.put(`/schedules/${id}/?status=${status}&justification=${justification}`);
+    alert("Consulta desmarcada!");
+    setClickThree(false);
+    window.location.reload();
+  }
+
   return (
     <Container>
       <div
@@ -263,64 +282,80 @@ export function Calendar() {
           <button className="close" onClick={() => handleClickTwoClose()}>
             <CgClose />
           </button>
-          <p>
-            <div className="allDetails">
-              <div className="scheduleDetails">
-                <h2>Detalhes sobre o horário:</h2>
-                <span>
-                  <strong>Horário:</strong> {scheduleOccupied[0]["time"]}
-                </span>
-                <span>
-                  <strong>Data:</strong> {scheduleOccupied[0]["date"]}
-                </span>
-                <span>
-                  <strong>Duração:</strong> {scheduleOccupied[0]["duration"]}
-                </span>
-                <span>
-                  <strong>Disponibilidade:</strong>{" "}
-                  {scheduleOccupied[0]["availability"]}
-                </span>
-                <span>
-                  <strong>Status:</strong> {scheduleOccupied[0]["status"]}
-                </span>
-                {scheduleOccupied[0]["justification"] ? (
+          {!clickThree ? (
+            <p>
+              <div className="allDetails">
+                <div className="scheduleDetails">
+                  <h2>Detalhes sobre o horário:</h2>
                   <span>
-                    <strong>Justificativa:</strong>{" "}
-                    {scheduleOccupied[0]["justification"]}
+                    <strong>Horário:</strong> {scheduleOccupied[0]["time"]}
                   </span>
-                ) : null}
-              </div>
-              <div className="Client">
-                <h2>Detalhes sobre o paciente:</h2>
-                <div className="client">
-                  <div className="avatar">
-                    {scheduleOccupied[0]["avatar"] ? (
-                      <img
-                        className="avatarClient"
-                        src={`${api.defaults.baseURL}/files/${scheduleOccupied[0]["avatar"]}`}
-                        alt="imagem do paciente"
-                      />
-                    ) : (
-                      <img src={avatarPlaceholder} alt="avatar do paciente" />
-                    )}
-                  </div>
-                  <div className="detailsClient">
+                  <span>
+                    <strong>Data:</strong> {scheduleOccupied[0]["date"]}
+                  </span>
+                  <span>
+                    <strong>Duração:</strong> {scheduleOccupied[0]["duration"]}
+                  </span>
+                  <span>
+                    <strong>Disponibilidade:</strong>{" "}
+                    {scheduleOccupied[0]["availability"]}
+                  </span>
+                  <span>
+                    <strong>Status:</strong> {scheduleOccupied[0]["status"]}
+                  </span>
+                  {scheduleOccupied[0]["justification"] ? (
                     <span>
-                      <strong>Nome:</strong> {scheduleOccupied[0]["name"]}
+                      <strong>Justificativa:</strong>{" "}
+                      {scheduleOccupied[0]["justification"]}
                     </span>
-                    {scheduleOccupied[0]["queixas"] ? (
+                  ) : null}
+                </div>
+                <div className="Client">
+                  <h2>Detalhes sobre o paciente:</h2>
+                  <div className="client">
+                    <div className="avatar">
+                      {scheduleOccupied[0]["avatar"] ? (
+                        <img
+                          className="avatarClient"
+                          src={`${api.defaults.baseURL}/files/${scheduleOccupied[0]["avatar"]}`}
+                          alt="imagem do paciente"
+                        />
+                      ) : (
+                        <img src={avatarPlaceholder} alt="avatar do paciente" />
+                      )}
+                    </div>
+                    <div className="detailsClient">
                       <span>
-                        <strong>Queixas:</strong>{" "}
-                        {scheduleOccupied[0]["queixas"]}
+                        <strong>Nome:</strong> {scheduleOccupied[0]["name"]}
                       </span>
-                    ) : null}
+                      {scheduleOccupied[0]["queixas"] ? (
+                        <span>
+                          <strong>Queixas:</strong>{" "}
+                          {scheduleOccupied[0]["queixas"]}
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </p>
+            </p>
+          ) : (
+            <p>
+              <h2>Escreva uma justificativa:</h2>
+              <textarea onChange={e => setJustification(e.target.value)} cols="50" rows="10" placeholder="Explique os motivos para desmarcar a consulta!"></textarea>
+            </p>
+          )}
           <div className="button">
-            <Button>Desmarcar consulta!</Button>
+            {!clickThree ? (
+              <Button disabled={scheduleOccupied[0]["justification"]} onClick={handleClickThree}>
+                <span>Desmarcar consulta!</span>
+              </Button>
+            ) : null}
+            {clickThree ? (
+              <Button onClick={() => handleConfirmCancel(scheduleOccupied[0]["id"])}>
+                <span>Confirmar!</span>
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>
