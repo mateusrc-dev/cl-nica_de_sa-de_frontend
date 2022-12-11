@@ -1,7 +1,6 @@
 import { Container } from "./styles";
 import { GiHealthNormal } from "react-icons/gi";
 import { FiLogIn } from "react-icons/fi";
-import { BsSearch } from "react-icons/bs";
 import { useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,12 +14,15 @@ import { useAuthUser } from "../../hooks/authUser";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import { api } from "../../services/api";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+import { InputTwo } from "../inputTwo";
+import { useInput } from '../../hooks/input'
 
 export function Header() {
   const hours = new Date();
   const [click, setClick] = useState(false);
   const { user, signOut } = useAuthUser();
   const { professional, signOutProfessional } = useAuthProfessional();
+  const { search } = useInput();
   const navigate = useNavigate();
   let avatarUrlUser;
   let avatarUrlProfessional;
@@ -172,12 +174,7 @@ export function Header() {
           </div>
         </div>
       </Link>
-      <div className="input">
-        <input type="text" placeholder="Pesquise por um profissional!" />
-        <button>
-          <BsSearch />
-        </button>
-      </div>
+      <InputTwo placeholder={"Pesquisa por um profissional!"} value={search} />
       <div className="avatar">
         <div className="inner">
           <div className="welcome">
