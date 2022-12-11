@@ -549,8 +549,7 @@ export function Calendar() {
                     className="occupied"
                     onClick={() => handleClickTwo(number, "18:00")}
                   >
-                    Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:00"} />
+                    Horário Ocupado por <Schedule date={number} time={"18:00"} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -580,8 +579,7 @@ export function Calendar() {
                     className="occupied"
                     onClick={() => handleClickTwo(number, "19:00")}
                   >
-                    Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:00"} />
+                    Horário Ocupado por <Schedule date={number} time={"19:00"} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
