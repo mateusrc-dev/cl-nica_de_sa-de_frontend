@@ -1,6 +1,7 @@
 //nessa página vai ficar os detalhes do profissional (horários livres, detalhes sobre ele, depoimentos sobre ele, etc.)
 import { Container, Main } from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { api } from "../../services/api";
 import { Button } from "../../components/button";
 import { AiFillSchedule } from "react-icons/ai";
 import { Header } from "../../components/header";
@@ -23,7 +24,7 @@ import { CgClose } from "react-icons/cg";
 import { GiConfirmed } from "react-icons/gi";
 import { FaHandPointDown } from "react-icons/fa";
 import { FaRegHandPointRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuthUser } from "../../hooks/authUser";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import { GoAlert } from "react-icons/go";
@@ -40,6 +41,39 @@ export function Details() {
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
+  const params = useParams();
+  const [data, setData] = useState(null);
+  const [schedules, setSchedules] = useState([]);
+  const [idShedule, setIdSchedule] = useState(null)
+
+  useEffect(() => {
+    async function fetchProfessional() {
+      const response = await api.get(`/professionals/${params.id}`);
+      setData(response.data);
+    }
+    fetchProfessional();
+  }, []);
+
+  useEffect(() => {
+    async function fetchSchedules() {
+      const response = await api.get(
+        `schedules/${params.id}?availability=disponível`
+      );
+      setSchedules(response.data.schedules);
+    }
+    fetchSchedules();
+  }, [schedules]);
+
+  async function scheduleConfirm() {
+    const Schedule = {
+      availability: "ocupado",
+      status: "por realizar",
+      id: idShedule
+    }
+    await api.put("/schedules", Schedule);
+    alert("Consulta agendada com sucesso!")
+    setClick(false)
+  }
 
   function handleFavorite() {
     if (heart === false) {
@@ -49,11 +83,12 @@ export function Details() {
     }
   }
 
-  function handleClick(dt, tm) {
+  function handleClick(dt, tm, id) {
     if (click === false) {
       setClick(true);
       setModalDate(dt);
       setModalTime(tm);
+      setIdSchedule(id);
     } else {
       setClick(false);
     }
@@ -141,7 +176,7 @@ export function Details() {
                 Tem certeza que deseja agendar a consulta na data {
                   modalDate
                 } às {modalTime} hrs?
-                <Button>
+                <Button onClick={scheduleConfirm}>
                   Confirmar!
                   <GiConfirmed />
                 </Button>
@@ -413,199 +448,75 @@ export function Details() {
                 alt="foto do profissional"
               />
               <div className="Description">
-                <div className="description">
-                  <h1>
-                    Dr. Mateus Carvalho
-                    {!professional ? <button
-                      className="favorite"
-                      onClick={() => handleFavorite()}
-                    >
-                      {heart ? <MdFavorite /> : <MdFavoriteBorder />}
-                    </button> : null}
-                  </h1>
-                  <p>
-                    Meu nome é Mateus, eu sou um psicólogo incrível, trato você
-                    super bem, você vai se sentir no céu ao sair de uma consulta
-                    comigo, como se nenhum problema existisse.
-                  </p>
-                  <div className="tags">
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
-                    <Tag title="ansiedade" />
+                {data && (
+                  <div className="description">
+                    <h1>
+                      Dr. {data.name}
+                      {!professional ? (
+                        <button
+                          className="favorite"
+                          onClick={() => handleFavorite()}
+                        >
+                          {heart ? <MdFavorite /> : <MdFavoriteBorder />}
+                        </button>
+                      ) : null}
+                    </h1>
+                    <p>{data.description}</p>
+                    <div className="tags">
+                      {data.tags.map((tag) => (
+                        <Tag key={String(tag.id)} title={tag.name} />
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </Section>
-          {!professional ? <h2>
-            Horários disponíveis
-            <span>
-              <button onClick={handleLeftClick}>
-                <CgArrowLeftO />
-              </button>
-              <button onClick={handleRightClick}>
-                <CgArrowRightO />
-              </button>
-            </span>
-          </h2> : null}
+          {!professional ? (
+            <h2>
+              Horários disponíveis
+              <span>
+                <button onClick={handleLeftClick}>
+                  <CgArrowLeftO />
+                </button>
+                <button onClick={handleRightClick}>
+                  <CgArrowRightO />
+                </button>
+              </span>
+            </h2>
+          ) : null}
           <div className="container">
             <div className="left"></div>
             <div className="right"></div>
             <div ref={carousel} className="schedules">
-              {!professional ? <div className="Schedules">
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button onClick={() => handleClick("20/03/2050", "12:00")}>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
+              {!professional ? (
+                <div className="Schedules">
+                  {
+                    schedules.map(schedule => (
+                    <div className="query">
+                      <p>
+                        <strong>Data:</strong> {schedule.date}
+                      </p>
+                      <p>
+                        <strong>Horário:</strong> {schedule.time}
+                      </p>
+                      <p>
+                        <strong>Duração:</strong> {schedule.duration}
+                      </p>
+                      <p>
+                        <strong>Preço:</strong> R$100.00
+                      </p>
+                      <Button
+                        onClick={() => handleClick(schedule.date, schedule.time, schedule.id)}
+                      >
+                        <AiFillSchedule />
+                        Agende sua consulta!
+                      </Button>
+                    </div>
+                    ))
+                  }
                 </div>
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button onClick={() => handleClick("20/03/2050", "12:00")}>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
-                </div>
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
-                </div>
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
-                </div>
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
-                </div>
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
-                </div>
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
-                </div>
-                <div className="query">
-                  <p>
-                    <strong>Data:</strong> 20/03/2050
-                  </p>
-                  <p>
-                    <strong>Horário:</strong> 12:00
-                  </p>
-                  <p>
-                    <strong>Duração:</strong> 01:00h
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$100.00
-                  </p>
-                  <Button>
-                    <AiFillSchedule />
-                    Agende sua consulta!
-                  </Button>
-                </div>
-              </div> : null}
+              ) : null}
             </div>
           </div>
         </div>

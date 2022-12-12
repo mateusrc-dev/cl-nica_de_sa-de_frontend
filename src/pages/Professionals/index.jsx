@@ -107,7 +107,6 @@ export function Professionals() {
           <ul>
             <li
               className={
-                specializationSelected === "all" ||
                 specializationSelected.length === 0
                   ? "active"
                   : "null"
@@ -185,7 +184,7 @@ export function Professionals() {
         </div>
         <div className="professionals">
           {professionals.map(Professional => (
-            <div className="professional">
+            <div className="professional" key={String(Professional.id)}>
               {!professional ? (
                 <button className="favorite" onClick={() => handleFavorite()}>
                   {heart ? <MdFavorite /> : <MdFavoriteBorder />}
@@ -204,7 +203,7 @@ export function Professionals() {
               <p>
                 {Professional.description}
               </p>
-              <Link to="/details/1">
+              <Link to={`/details/${Professional.id}`}>
                 {!professional ? (
                   <Button>
                     <AiFillSchedule />
