@@ -12,6 +12,7 @@ import { AiFillSchedule } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import { useInput } from "../../hooks/input";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
 export function Professionals() {
   const [heart, setHeart] = useState(false);
@@ -191,7 +192,7 @@ export function Professionals() {
                 </button>
               ) : null}
               <img
-                src="https://github.com/mateusrc-dev.png"
+                src={Professional.avatar ? `${api.defaults.baseURL}/files/${Professional.avatar}` : avatarPlaceholder}
                 alt="imagem do profissional"
               />
               <h3>
