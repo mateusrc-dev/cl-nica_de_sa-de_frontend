@@ -50,7 +50,7 @@ export function ProfileProfessional() {
       return
     }
     if (tags.length === 0) {
-      alert("Adicione alguma tag antes de atualizar seu perfil!")
+      alert("Adicione alguma tag antes de atualizar seu perfil, é muito importante inserir suas tags para você aparecer na pesquisa dos profissionais!")
       return
     }
     const professional = {

@@ -19,7 +19,7 @@ export function Professionals() {
 
   const [tags, setTags] = useState([]);
   const [tagsSelected, setTagsSelected] = useState([]);
-  const [specializationSelected, setSpecializationSelected] = useState([]);
+  const [specializationSelected, setSpecializationSelected] = useState("");
   const [professionals, setProfessionals] = useState([])
   const { search } = useInput();
 
@@ -41,7 +41,7 @@ export function Professionals() {
 
   function handleSpecializationSelected(specializationName) {
     if (specializationName === specializationSelected) {
-      setSpecializationSelected([]);
+      setSpecializationSelected();
       return;
     }
     setSpecializationSelected(specializationName);
@@ -54,6 +54,17 @@ export function Professionals() {
     }
     fetchTags();
   }, [specializationSelected]);
+
+  useEffect(() => {
+    async function fetchProfessionals() {
+      console.log(search)
+      console.log(specializationSelected)
+      console.log(tagsSelected)
+      const response = await api.get(`/professionals?name=${search}&specialization=${specializationSelected}&tags=${String(tagsSelected)}`)
+      console.log(response.data)
+    }
+    fetchProfessionals()
+  }, [search, tagsSelected, specializationSelected])
 
   function handleFavorite() {
     if (heart === false) {
