@@ -11,7 +11,7 @@ import { Button } from "../../components/button";
 import { AiFillSchedule } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuthProfessional } from "../../hooks/authProfessional";
-import { useInput } from '../../hooks/input'
+import { useInput } from "../../hooks/input";
 
 export function Professionals() {
   const [heart, setHeart] = useState(false);
@@ -20,9 +20,9 @@ export function Professionals() {
   const [tags, setTags] = useState([]);
   const [tagsSelected, setTagsSelected] = useState([]);
   const [specializationSelected, setSpecializationSelected] = useState("");
-  const [professionals, setProfessionals] = useState([])
+  const [professionals, setProfessionals] = useState([]);
   const { search } = useInput();
-
+  console.log(professionals);
 
   function handleTagSelected(tagName) {
     if (tagName === "all") {
@@ -41,7 +41,7 @@ export function Professionals() {
 
   function handleSpecializationSelected(specializationName) {
     if (specializationName === specializationSelected) {
-      setSpecializationSelected();
+      setSpecializationSelected("");
       return;
     }
     setSpecializationSelected(specializationName);
@@ -49,7 +49,9 @@ export function Professionals() {
 
   useEffect(() => {
     async function fetchTags() {
-      const response = await api.get(`/tags/?specialization=${specializationSelected}`);
+      const response = await api.get(
+        `/tags/?specialization=${specializationSelected}`
+      );
       setTags(response.data);
     }
     fetchTags();
@@ -57,14 +59,15 @@ export function Professionals() {
 
   useEffect(() => {
     async function fetchProfessionals() {
-      console.log(search)
-      console.log(specializationSelected)
-      console.log(tagsSelected)
-      const response = await api.get(`/professionals?name=${search}&specialization=${specializationSelected}&tags=${String(tagsSelected)}`)
-      console.log(response.data)
+      const response = await api.get(
+        `/professionals?name=${search}&specialization=${specializationSelected}&tags=${String(
+          tagsSelected
+        )}`
+      );
+      setProfessionals(response.data);
     }
-    fetchProfessionals()
-  }, [search, tagsSelected, specializationSelected])
+    fetchProfessionals();
+  }, [search, tagsSelected, specializationSelected]);
 
   function handleFavorite() {
     if (heart === false) {
@@ -180,134 +183,39 @@ export function Professionals() {
           </ul>
         </div>
         <div className="professionals">
-          <div className="professional">
-            {!professional ? (
-              <button className="favorite" onClick={() => handleFavorite()}>
-                {heart ? <MdFavorite /> : <MdFavoriteBorder />}
-              </button>
-            ) : null}
-            <img
-              src="https://github.com/mateusrc-dev.png"
-              alt="imagem do profissional"
-            />
-            <h3>
-              <span>Dr. Mateus Carvalho | Psiquiatra </span>
-              <span>
-                <BsStarFill /> 5.5
-              </span>
-            </h3>
-            <p>
-              Meu nome é Mateus, eu sou um psicólogo incrível, trato você super
-              bem, você vai se sentir no céu ao sair de uma consulta comigo,
-              como se nenhum problema existisse.
-            </p>
-            <Link to="/details/1">
+          {professionals.map(Professional => (
+            <div className="professional">
               {!professional ? (
-                <Button>
-                  <AiFillSchedule />
-                  Agende um horário!
-                </Button>
-              ) : (
-                <Button>Veja os detalhes do profissional!</Button>
-              )}
-            </Link>
-          </div>
-          <div className="professional">
-            <button className="favorite" onClick={() => handleFavorite()}>
-              {heart ? <MdFavorite /> : <MdFavoriteBorder />}
-            </button>
-            <img
-              src="https://github.com/mateusrc-dev.png"
-              alt="imagem do profissional"
-            />
-            <h3>
-              <span>Dr. Mateus Carvalho | Psicólogo </span>
-              <span>
-                <BsStarFill /> 5.5
-              </span>
-            </h3>
-            <p>
-              Meu nome é Mateus, eu sou um psicólogo incrível, trato você super
-              bem, você vai se sentir no céu ao sair de uma consulta comigo,
-              como se nenhum problema existisse.
-            </p>
-            <Button>
-              <AiFillSchedule />
-              Agende um horário!
-            </Button>
-          </div>
-          <div className="professional">
-            <button className="favorite">
-              <MdFavorite />
-            </button>
-            <img
-              src="https://github.com/mateusrc-dev.png"
-              alt="imagem do profissional"
-            />
-            <h3>
-              <span>Dr. Mateus Carvalho | Nutricionista </span>
-              <span>
-                <BsStarFill /> 5.5
-              </span>
-            </h3>
-            <p>
-              Meu nome é Mateus, eu sou um psicólogo incrível, trato você super
-              bem, você vai se sentir no céu ao sair de uma consulta comigo,
-              como se nenhum problema existisse.
-            </p>
-            <Button>
-              <AiFillSchedule />
-              Agende um horário!
-            </Button>
-          </div>
-          <div className="professional">
-            <button className="favorite">
-              <MdFavorite />
-            </button>
-            <img
-              src="https://github.com/mateusrc-dev.png"
-              alt="imagem do profissional"
-            />
-            <h3>
-              <span>Dr. Mateus Carvalho | Dentista </span>
-              <span>
-                <BsStarFill /> 5.5
-              </span>
-            </h3>
-            <p>
-              Meu nome é Mateus, eu sou um psicólogo incrível, trato você super
-              bem, você vai se sentir no céu ao sair de uma consulta comigo,
-              como se nenhum problema existisse.
-            </p>
-            <Button>
-              <AiFillSchedule />
-              Agende um horário!
-            </Button>
-          </div>
-          <div className="professional">
-            <button className="favorite">
-              <MdFavorite />
-            </button>
-            <img
-              src="https://github.com/mateusrc-dev.png"
-              alt="imagem do profissional"
-            />
-            <h3>
-              <span>Dr. Mateus Carvalho | Fisioterapeuta </span>
-              <span>
-                <BsStarFill /> 5.5
-              </span>
-            </h3>
-            <p>
-              Meu nome é Mateus, eu sou um psicólogo incrível, trato você super
-              bem, você vai se sentir no céu ao sair de uma consulta comigo,
-              como se nenhum problema existisse.
-            </p>
-            <Button>
-              <AiFillSchedule />
-              Agende um horário!
-            </Button>
-          </div>
+                <button className="favorite" onClick={() => handleFavorite()}>
+                  {heart ? <MdFavorite /> : <MdFavoriteBorder />}
+                </button>
+              ) : null}
+              <img
+                src="https://github.com/mateusrc-dev.png"
+                alt="imagem do profissional"
+              />
+              <h3>
+                <span>{Professional.name} | {Professional.specialization[0].toUpperCase() + Professional.specialization.substring(1)} </span>
+                <span>
+                  <BsStarFill /> 5.5
+                </span>
+              </h3>
+              <p>
+                {Professional.description}
+              </p>
+              <Link to="/details/1">
+                {!professional ? (
+                  <Button>
+                    <AiFillSchedule />
+                    Agende um horário!
+                  </Button>
+                ) : (
+                  <Button>Veja os detalhes do profissional!</Button>
+                )}
+              </Link>
+            </div>
+            ))
+          }
         </div>
       </Main>
       <Footer />
