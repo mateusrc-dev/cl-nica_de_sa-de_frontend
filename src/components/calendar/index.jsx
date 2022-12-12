@@ -12,6 +12,7 @@ import { api } from "../../services/api";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { Schedule } from "../../components/Schedule";
+import moment from "moment"
 
 const monthNames = [
   "Janeiro",
@@ -166,7 +167,7 @@ export function Calendar() {
   };
 
   async function handleCreateSchedule() {
-    if (modalDate < dateString) {
+    if (moment(modalDate).isBefore(dateString)) {
       alert("Não é possível criar um horário em um dia anterior a data atual!");
       return;
     } else {
@@ -239,7 +240,7 @@ export function Calendar() {
   }
 
   function handleClickThree() {
-    if (modalDate < dateString) {
+    if (moment(modalDate).isBefore(dateString)) {
       alert("Não é possível desmarcar uma consulta numa data anterior a data atual!");
       return;
     } 
@@ -375,7 +376,7 @@ export function Calendar() {
           )}
           <div className="button">
             {!clickThree ? (
-              <Button disabled={scheduleOccupied[0]["justification"] || modalDate < dateString} onClick={handleClickThree}>
+              <Button disabled={scheduleOccupied[0]["justification"] || moment(modalDate).isBefore(dateString)} onClick={handleClickThree}>
                 <span>Desmarcar consulta!</span>
               </Button>
             ) : null}
@@ -384,7 +385,7 @@ export function Calendar() {
                 <span>Confirmar!</span>
               </Button>
             ) : null}
-            {modalDate < dateString ? <div className="modalConfirm"><span>A consulta aconteceu?</span> <div className="buttonsModal"><Button onClick={() => confirmPositive(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Sim</Button><Button onClick={() => confirmNegative(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Não</Button></div></div>: null}
+            {moment(modalDate).isBefore(dateString) ? <div className="modalConfirm"><span>A consulta aconteceu?</span> <div className="buttonsModal"><Button onClick={() => confirmPositive(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Sim</Button><Button onClick={() => confirmNegative(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Não</Button></div></div>: null}
           </div>
         </div>
       </div>

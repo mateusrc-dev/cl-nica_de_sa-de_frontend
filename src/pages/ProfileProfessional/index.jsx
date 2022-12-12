@@ -18,6 +18,7 @@ import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
 export function ProfileProfessional() {
   const { professional, updateProfileProfessional } = useAuthProfessional();
+  const professional_id = professional.id
   const [name, setName] = useState(professional.name);
   const [email, setEmail] = useState(professional.email);
   const [description, setDescription] = useState(professional.description);
@@ -44,11 +45,16 @@ export function ProfileProfessional() {
   }
 
   async function handleUpdateProfessional() {
-    if (tags) {
+    if (newTag) {
       alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio!")
       return
     }
+    if (tags.length === 0) {
+      alert("Adicione alguma tag antes de atualizar seu perfil!")
+      return
+    }
     const professional = {
+      id: professional_id,
       name,
       email,
       description,
@@ -73,7 +79,7 @@ export function ProfileProfessional() {
 
   useEffect(() => {
     async function handleTags() {
-      const response = await api.get("/tags");
+      const response = await api.get(`/tags/${professional.id}`);
       let name;
       let tags = [];
       for (var i = 0; i < response.data.length; i++) {
