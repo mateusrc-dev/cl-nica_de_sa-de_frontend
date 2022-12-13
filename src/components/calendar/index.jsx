@@ -115,6 +115,10 @@ export function Calendar() {
   const Month = String(today.getMonth() + 1).padStart(2, "0");
   const dateString = `${Day}/${Month}/${Year}`;
 
+  const Hours = today.getHours()
+  const Minutes = today.getMinutes()
+  const hoursString = `${Hours}${Minutes}`
+
   var year = newDate.getFullYear();
   var month = newDate.getMonth();
   var nameMonth = monthNames[month];
@@ -167,8 +171,8 @@ export function Calendar() {
   };
 
   async function handleCreateSchedule() {
-    if (moment(modalDate).isBefore(dateString)) {
-      alert("Não é possível criar um horário em um dia anterior a data atual!");
+    if ((moment(modalDate).isBefore(dateString)) || ((String(modalTime).replace(":", "") < hoursString) && (moment(modalDate).isSame(dateString)))) {
+      alert("Não é possível criar um horário em um dia anterior a data atual ou em um horário que já passou na data atual!");
       return;
     } else {
       const availability = "disponível";
@@ -376,7 +380,7 @@ export function Calendar() {
           )}
           <div className="button">
             {!clickThree ? (
-              <Button disabled={scheduleOccupied[0]["justification"] || moment(modalDate).isBefore(dateString)} onClick={handleClickThree}>
+              <Button disabled={scheduleOccupied[0]["justification"] || (moment(modalDate).isBefore(dateString)) || ((String(modalTime).replace(":", "") < hoursString) && (moment(modalDate).isSame(dateString)))} onClick={handleClickThree}>
                 <span>Desmarcar consulta!</span>
               </Button>
             ) : null}
@@ -385,7 +389,7 @@ export function Calendar() {
                 <span>Confirmar!</span>
               </Button>
             ) : null}
-            {moment(modalDate).isBefore(dateString) ? <div className="modalConfirm"><span>A consulta aconteceu?</span> <div className="buttonsModal"><Button onClick={() => confirmPositive(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Sim</Button><Button onClick={() => confirmNegative(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Não</Button></div></div>: null}
+            {(moment(modalDate).isBefore(dateString)) || ((String(modalTime).replace(":", "") < hoursString) && (moment(modalDate).isSame(dateString))) ? <div className="modalConfirm"><span>A consulta aconteceu?</span> <div className="buttonsModal"><Button onClick={() => confirmPositive(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Sim</Button><Button onClick={() => confirmNegative(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Não</Button></div></div>: null}
           </div>
         </div>
       </div>
@@ -467,7 +471,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:00"} dateToday={dateString} />
+                    <Schedule date={number} time={"12:00"} dateToday={dateString} timeToday={hoursString}/>
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -505,7 +509,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:00"} dateToday={dateString} /> (Clique para ver
+                    <Schedule date={number} time={"13:00"} dateToday={dateString} timeToday={hoursString}/> (Clique para ver
                     mais detalhes)
                   </button>
                 ) : null}
@@ -543,7 +547,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "14:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"14:00"} dateToday={dateString} />
+                    <Schedule date={number} time={"14:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -581,7 +585,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:00"} dateToday={dateString} />
+                    <Schedule date={number} time={"15:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -616,7 +620,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:00"} dateToday={dateString} />
+                    <Schedule date={number} time={"16:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -651,7 +655,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "17:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"17:00"} dateToday={dateString} />
+                    <Schedule date={number} time={"17:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -686,7 +690,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"18:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -721,7 +725,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"19:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -756,7 +760,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "20:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"20:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"20:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -831,7 +835,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"12:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -867,7 +871,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:30"} dateToday={dateString} />
+                    <Schedule date={number} time={"13:30"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -903,7 +907,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"15:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -939,7 +943,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"16:30"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -975,7 +979,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"18:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1011,7 +1015,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"19:30"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1086,7 +1090,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"12:00"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1122,7 +1126,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"12:30"} dateToday={dateString} timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1158,7 +1162,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"13:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1194,7 +1198,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"13:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1230,7 +1234,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "14:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"14:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"14:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1266,7 +1270,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "14:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"14:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"14:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1302,7 +1306,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"15:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1338,7 +1342,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"15:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1374,7 +1378,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"16:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1410,7 +1414,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"16:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1446,7 +1450,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "17:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"17:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"17:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1482,7 +1486,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "17:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"17:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"17:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1518,7 +1522,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"18:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1554,7 +1558,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"18:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1590,7 +1594,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"19:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1626,7 +1630,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"19:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1662,7 +1666,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "20:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"20:00"} dateToday={dateString}/>
+                    <Schedule date={number} time={"20:00"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1698,7 +1702,7 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "20:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"20:30"} dateToday={dateString}/>
+                    <Schedule date={number} time={"20:30"} dateToday={dateString}  timeToday={hoursString} />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
