@@ -31,7 +31,7 @@ export function YourQueries() {
   useEffect(() => {
     async function fetchQueries() {
       const response = await api.get(
-        `/schedulesProfessionals/${professional.id}`
+        `/schedules`
       );
       console.log(response.data.schedules);
       setYourQueries(response.data.schedules);
