@@ -42,6 +42,7 @@ export function Details() {
   const [modalTime, setModalTime] = useState();
   const [testimony, setTestimony] = useState([]);
   const [testimonyAll, setTestimonyAll] = useState([]);
+  const [testimonyUpdate, setTestimonyUpdate] = useState("")
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
@@ -49,7 +50,6 @@ export function Details() {
   const [data, setData] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [idShedule, setIdSchedule] = useState(null)
-  console.log(testimony)
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
@@ -170,9 +170,13 @@ export function Details() {
   };
 
   async function handleStars(number) {
-    console.log(number)
-    console.log(params.id)
     await api.put(`assessments/${user.id}?note=${number}`);
+  }
+
+  async function handleUpdateTestimony() {
+    await api.put(`/assessments?testimony=${testimonyUpdate}&id_user=${user.id}`)
+    alert("Depoimento atualizado com sucesso!")
+    setTestimonyUpdate("")
   }
 
   const carousel = useRef(null);
@@ -466,8 +470,9 @@ export function Details() {
               <h4>Editar seu depoimento sobre o profissional:</h4>
               {testimony.map(test => (
               <textarea
-              
+                onChange={e => setTestimonyUpdate(e.target.value)}
                 placeholder={test.testimony}
+                value={testimonyUpdate}
                 cols="80"
                 rows="10"
               ></textarea>))}
