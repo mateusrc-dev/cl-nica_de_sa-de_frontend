@@ -29,6 +29,8 @@ import { useAuthUser } from "../../hooks/authUser";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import { GoAlert } from "react-icons/go";
 import { MdLogin } from "react-icons/md";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+import moment from "moment"
 
 export function Details() {
   const [click, setClick] = useState(false);
@@ -45,6 +47,20 @@ export function Details() {
   const [data, setData] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [idShedule, setIdSchedule] = useState(null)
+
+  const today = new Date();
+  const Day = String(today.getDate()).padStart(2, "0");
+  const Year = today.getFullYear();
+  const Month = String(today.getMonth() + 1).padStart(2, "0");
+  const dateString = `${Day}/${Month}/${Year}`;
+
+  const Hours = today.getHours()
+  const Minutes = today.getMinutes()
+  const hoursString = `${Hours}${Minutes}`
+
+  //const teste = "12:20"
+
+  //console.log(teste.replace(":", ""))
 
   useEffect(() => {
     async function fetchProfessional() {
@@ -64,7 +80,14 @@ export function Details() {
     fetchSchedules();
   }, [schedules]);
 
+
+  
   async function scheduleConfirm() {
+    if((Number(String(modalTime).replace(":", "")) - (Number(hoursString)) < 100) && (moment(modalDate).isSame(dateString))) {
+      alert("Não é possível agendar porque falta menos de 1hr para a consulta!")
+      return
+    }
+    
     const Schedule = {
       availability: "ocupado",
       status: "por realizar",
@@ -442,13 +465,14 @@ export function Details() {
             </ButtonText>
           </Link>
           <Section>
+          {data && (
             <div className="main">
               <img
-                src="https://github.com/mateusrc-dev.png"
+                src={data.avatar ? `${api.defaults.baseURL}/files/${data.avatar}` : avatarPlaceholder}
                 alt="foto do profissional"
               />
               <div className="Description">
-                {data && (
+                
                   <div className="description">
                     <h1>
                       Dr. {data.name}
@@ -468,9 +492,9 @@ export function Details() {
                       ))}
                     </div>
                   </div>
-                )}
               </div>
             </div>
+          )}
           </Section>
           {!professional ? (
             <h2>
@@ -493,7 +517,7 @@ export function Details() {
                 <div className="Schedules">
                   {
                     schedules.map(schedule => (
-                    <div className="query">
+                    <div className={(moment(schedule.date).isBefore(dateString)) || (((schedule.time).replace(":", "") < hoursString) && (moment(schedule.date).isSame(dateString))) ? "none " : "query"}>
                       <p>
                         <strong>Data:</strong> {schedule.date}
                       </p>

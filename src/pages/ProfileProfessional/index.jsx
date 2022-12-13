@@ -137,6 +137,12 @@ export function ProfileProfessional() {
               onChange={(e) => setSpecialization(e.target.value)}
             >
               <option
+                selected={specialization === ""}
+                value="nenhum"
+              >
+                Nenhum
+              </option>
+              <option
                 selected={specialization === "psicólogo"}
                 value="psicólogo"
               >

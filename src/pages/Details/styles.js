@@ -234,6 +234,9 @@ export const Main = styled.div`
     color: ${({ theme }) => theme.COLORS.WHITE};
     background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
   }
+  .none {
+    display: none;
+  }
   .columnTwo {
     grid-area: columnTwo;
     padding-left: 30px;
