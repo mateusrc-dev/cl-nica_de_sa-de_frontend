@@ -93,7 +93,7 @@ export const Main = styled.main`
     }
     .buttons {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 10px;
       width: 200px;
     }

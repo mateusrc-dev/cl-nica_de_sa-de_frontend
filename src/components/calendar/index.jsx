@@ -256,31 +256,25 @@ export function Calendar() {
 
   async function handleConfirmCancel(id) {
     const status = "desmarcado por professional!";
-    await api.put(`/schedules/${id}/?status=${status}&justification=${justification}`);
+    await api.put(`/schedulesCancel/${id}/?status=${status}&justification=${justification}`);
     alert("Consulta desmarcada!");
     setClickThree(false);
     window.location.reload();
   }
 
   async function confirmPositive(id) {
-    const confirm = {
-      availability: "ocupado",
-	    status: "consulta realizada",
-	    id: id,
-    };
-    await api.put("/schedules", confirm);
-    alert("Status da consulta atualizada com sucesso")
+    const availability = "ocupado";
+    const status = "consulta realizada";
+    await api.put(`/schedules/${status}?availability=${availability}&id=${id}`);
+    alert("Status da consulta atualizada com sucesso");
     window.location.reload();
   }
 
   async function confirmNegative(id) {
-    const confirm = {
-      availability: "ocupado",
-	    status: "consulta não realizada",
-	    id: id,
-    };
-    await api.put("/schedules", confirm);
-    alert("Status da consulta atualizada com sucesso")
+    const availability = "ocupado";
+    const status = "consulta não realizada";
+    await api.put(`/schedules/${status}?availability=${availability}&id=${id}`);
+    alert("Status da consulta atualizada com sucesso");
     window.location.reload();
   }
 
