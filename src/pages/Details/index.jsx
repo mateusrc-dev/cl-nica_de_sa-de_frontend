@@ -30,6 +30,7 @@ import { useAuthProfessional } from "../../hooks/authProfessional";
 import { GoAlert } from "react-icons/go";
 import { MdLogin } from "react-icons/md";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+import { BsTrash } from "react-icons/bs"
 import moment from "moment"
 
 export function Details() {
@@ -39,7 +40,8 @@ export function Details() {
   const [clickThree, setClickThree] = useState(false);
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
-  const [testimony, setTestimony] = useState(false);
+  const [testimony, setTestimony] = useState([]);
+  const [testimonyAll, setTestimonyAll] = useState([]);
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
@@ -47,6 +49,7 @@ export function Details() {
   const [data, setData] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [idShedule, setIdSchedule] = useState(null)
+  console.log(testimony)
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
@@ -57,10 +60,6 @@ export function Details() {
   const Hours = today.getHours()
   const Minutes = today.getMinutes()
   const hoursString = `${Hours}${Minutes}`
-
-  //const teste = "12:20"
-
-  //console.log(teste.replace(":", ""))
 
   useEffect(() => {
     async function fetchProfessional() {
@@ -80,8 +79,27 @@ export function Details() {
     fetchSchedules();
   }, [schedules]);
 
+  useEffect(() => {
+    async function fetchAssessments() {
+      const response = await api.get(
+        `assessments?id_professional=${params.id}`
+      );
+      setTestimonyAll(response.data.testimony);
+    }
+    fetchAssessments();
+  }, [testimonyAll]);
 
-  
+  useEffect(() => {
+    async function fetchAssessmentsUser() {
+      const response = await api.get(
+        `assessments/${params.id}`
+      );
+      setTestimony(response.data.testimony);
+      setStars(response.data.testimony[0].note)
+    }
+    fetchAssessmentsUser();
+  }, [testimony]);
+
   async function scheduleConfirm() {
     if((Number(String(modalTime).replace(":", "")) - (Number(hoursString)) < 100) && (moment(modalDate).isSame(dateString))) {
       alert("Não é possível agendar porque falta menos de 1hr para a consulta!")
@@ -151,8 +169,10 @@ export function Details() {
     }
   };
 
-  function handleStars(number) {
-    setStars(number);
+  async function handleStars(number) {
+    console.log(number)
+    console.log(params.id)
+    await api.put(`assessments/${user.id}?note=${number}`);
   }
 
   const carousel = useRef(null);
@@ -444,14 +464,20 @@ export function Details() {
                 </span>
               ) : null}
               <h4>Editar seu depoimento sobre o profissional:</h4>
+              {testimony.map(test => (
               <textarea
-                placeholder="Mateus é o melhor psicólogo, não tem pra ninguém, ele cura todas as doenças da alma, deixa a pessoa em um estado perfeito de saúde mental, recomendado, ele literalmente resolve sua vida!"
+              
+                placeholder={test.testimony}
                 cols="80"
                 rows="10"
-              ></textarea>
-              <Button>
+              ></textarea>))}
+              <Button onClick={() => handleUpdateTestimony()}>
                 Atualizar!
                 <GiConfirmed />
+              </Button>
+              <Button onClick={() => handleDeleteTestimony()}>
+                Excluir!
+                <BsTrash />
               </Button>
             </div>
           </div>
@@ -563,23 +589,20 @@ export function Details() {
                 <div className="bottom"></div>
                 <div ref={carouselTwo} className="Depositions">
                   <div className="Deposition">
-                    {testimony ? (
-                      <div className={user ? "testimony" : "none"}>
+                    {testimony.length !== 0 ? (
+                    testimony.map(test => (
+                      <div className={user.id === test.id ? "testimony" : "none"}>
                         <img
-                          src="https://github.com/mateusrc-dev.png"
-                          alt="foto do paciente"
+                          src={test.avatar ? `${api.defaults.baseURL}/files/${test.avatar}` : avatarPlaceholder} alt="avatar do usuário"
                         />
                         <div>
                           <span>
                             <BsStarFill />
-                            5.0
+                            {test.note}.0
                           </span>
                           <span>Seu depoimento</span>
                           <p>
-                            Mateus é o melhor psicólogo, não tem pra ninguém,
-                            ele cura todas as doenças da alma, deixa a pessoa em
-                            um estado perfeito de saúde mental, recomendado, ele
-                            literalmente resolve sua vida!
+                            {test.testimony}
                           </p>
                           <a
                             className="edit"
@@ -589,7 +612,7 @@ export function Details() {
                             <BiEditAlt />
                           </a>
                         </div>
-                      </div>
+                      </div>))
                     ) : (
                       <span className={user ? "createTestimony" : "none"}>
                         <FaRegHandPointRight />
@@ -600,70 +623,24 @@ export function Details() {
                         </Button>
                       </span>
                     )}
-                    <div className="testimony">
-                      <img src="https://github.com/mateusrc-dev.png" alt="" />
+                    {
+                    testimonyAll &&
+                    testimonyAll.map(testimony => (
+                    <div className={user.id !== testimony.id ? "testimony" : "none"}>
+                      <img src={testimony.avatar ? `${api.defaults.baseURL}/files/${testimony.avatar}` : avatarPlaceholder} alt="avatar do usuário" />
                       <div>
                         <span>
                           <BsStarFill />
-                          5.0
+                          {testimony.note}.0
                         </span>
-                        <span>Paciente Fernando</span>
+                        <span>{testimony.name}</span>
                         <p>
-                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
-                          cura todas as doenças da alma, deixa a pessoa em um
-                          estado perfeito de saúde mental, recomendado, ele
-                          literalmente resolve sua vida!
+                          {testimony.testimony}
                         </p>
                       </div>
                     </div>
-                    <div className="testimony">
-                      <img src="https://github.com/mateusrc-dev.png" alt="" />
-                      <div>
-                        <span>
-                          <BsStarFill />
-                          5.0
-                        </span>
-                        <span>Paciente Fernando</span>
-                        <p>
-                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
-                          cura todas as doenças da alma, deixa a pessoa em um
-                          estado perfeito de saúde mental, recomendado, ele
-                          literalmente resolve sua vida!
-                        </p>
-                      </div>
-                    </div>
-                    <div className="testimony">
-                      <img src="https://github.com/mateusrc-dev.png" alt="" />
-                      <div>
-                        <span>
-                          <BsStarFill />
-                          5.0
-                        </span>
-                        <span>Paciente Fernando</span>
-                        <p>
-                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
-                          cura todas as doenças da alma, deixa a pessoa em um
-                          estado perfeito de saúde mental, recomendado, ele
-                          literalmente resolve sua vida!
-                        </p>
-                      </div>
-                    </div>
-                    <div className="testimony">
-                      <img src="https://github.com/mateusrc-dev.png" alt="" />
-                      <div>
-                        <span>
-                          <BsStarFill />
-                          5.0
-                        </span>
-                        <span>Paciente Fernando</span>
-                        <p>
-                          Mateus é o melhor psicólogo, não tem pra ninguém, ele
-                          cura todas as doenças da alma, deixa a pessoa em um
-                          estado perfeito de saúde mental, recomendado, ele
-                          literalmente resolve sua vida!
-                        </p>
-                      </div>
-                    </div>
+                    ))
+                    }
                   </div>
                 </div>
               </div>

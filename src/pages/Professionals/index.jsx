@@ -23,7 +23,6 @@ export function Professionals() {
   const [specializationSelected, setSpecializationSelected] = useState("");
   const [professionals, setProfessionals] = useState([]);
   const { search } = useInput();
-  console.log(professionals);
 
   function handleTagSelected(tagName) {
     if (tagName === "all") {

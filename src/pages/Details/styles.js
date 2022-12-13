@@ -351,6 +351,9 @@ export const Main = styled.div`
           border-radius: 5px;
         }
       }
+      .none {
+        display: none;
+      }
       .createTestimony {
         background: ${({ theme }) => theme.COLORS.WHITE};
         border: 1px solid ${({ theme }) => theme.COLORS.WHITE};

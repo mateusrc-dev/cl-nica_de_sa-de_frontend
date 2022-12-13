@@ -7,7 +7,6 @@ function AuthUserProvider({ children }) {
 
   async function signIn({ email, password }) {
     try {
-      console.log(email, password);
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
       localStorage.setItem("@fullnessclinic:user", JSON.stringify(user));

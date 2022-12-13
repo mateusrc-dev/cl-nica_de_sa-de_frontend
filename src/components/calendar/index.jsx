@@ -152,7 +152,6 @@ export function Calendar() {
 
   const weekDays = getWeeks();
   const numberDays = getNumber();
-  console.log(numberDays);
 
   function handleClick(dt, tm) {
     if (click === false) {
