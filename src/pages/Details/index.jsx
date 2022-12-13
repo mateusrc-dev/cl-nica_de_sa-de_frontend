@@ -193,23 +193,14 @@ export function Details() {
     }
     alert("Depoimento deletado!");
     setStars(1)
-    setClickTwo(false)
-    setClick(false)
     setClickThree(false)
   }
 
   async function createTestimony() {
-    /*const testimony = {
-      testimony: createTestimony,
-      note: starsTwo,
-      id_professional: params.id
-    }*/
     await api.post(`/assessments?testimony=${testimonyCreate}&note=${starsTwo}&id_professional=${params.id}`);
     alert("Depoimento criado com sucesso!");
     setStarsTwo(1)
     setClickTwo(false)
-    setClick(false)
-    setClickThree(false)
     setCreateTestimony("")
   }
 
