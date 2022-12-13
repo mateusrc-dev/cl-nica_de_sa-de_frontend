@@ -30,36 +30,38 @@ import { useAuthProfessional } from "../../hooks/authProfessional";
 import { GoAlert } from "react-icons/go";
 import { MdLogin } from "react-icons/md";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
-import { BsTrash } from "react-icons/bs"
-import moment from "moment"
+import { BsTrash } from "react-icons/bs";
+import moment from "moment";
 
 export function Details() {
   const [click, setClick] = useState(false);
   const [stars, setStars] = useState(1);
+  const [starsTwo, setStarsTwo] = useState(1)
   const [clickTwo, setClickTwo] = useState(false);
   const [clickThree, setClickThree] = useState(false);
   const [modalDate, setModalDate] = useState();
   const [modalTime, setModalTime] = useState();
   const [testimony, setTestimony] = useState([]);
   const [testimonyAll, setTestimonyAll] = useState([]);
-  const [testimonyUpdate, setTestimonyUpdate] = useState("")
+  const [testimonyUpdate, setTestimonyUpdate] = useState("");
+  const [testimonyCreate, setCreateTestimony] = useState("")
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
   const params = useParams();
   const [data, setData] = useState(null);
   const [schedules, setSchedules] = useState([]);
-  const [idShedule, setIdSchedule] = useState(null)
+  const [idShedule, setIdSchedule] = useState(null);
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
   const Year = today.getFullYear();
   const Month = String(today.getMonth() + 1).padStart(2, "0");
-  const dateString = `${Day}/${Month}/${Year}`;
+  const dateString = `${Year}-${Month}-${Day}`;
 
-  const Hours = today.getHours()
-  const Minutes = today.getMinutes()
-  const hoursString = `${Hours}${Minutes}`
+  const Hours = today.getHours();
+  const Minutes = today.getMinutes();
+  const hoursString = `${Hours}${Minutes}`;
 
   useEffect(() => {
     async function fetchProfessional() {
@@ -91,29 +93,32 @@ export function Details() {
 
   useEffect(() => {
     async function fetchAssessmentsUser() {
-      const response = await api.get(
-        `assessments/${params.id}`
-      );
+      const response = await api.get(`assessments/${params.id}`);
       setTestimony(response.data.testimony);
-      setStars(response.data.testimony[0].note)
+      setStars(response.data.testimony[0].note);
     }
     fetchAssessmentsUser();
   }, [testimony]);
 
   async function scheduleConfirm() {
-    if((Number(String(modalTime).replace(":", "")) - (Number(hoursString)) < 100) && (moment(modalDate).isSame(dateString))) {
-      alert("Não é possível agendar porque falta menos de 1hr para a consulta!")
-      return
+    if (
+      Number(String(modalTime).replace(":", "")) - Number(hoursString) < 100 &&
+      moment(modalDate).isSame(dateString)
+    ) {
+      alert(
+        "Não é possível agendar porque falta menos de 1hr para a consulta!"
+      );
+      return;
     }
-    
+
     const Schedule = {
       availability: "ocupado",
       status: "por realizar",
-      id: idShedule
-    }
+      id: idShedule,
+    };
     await api.put("/schedules", Schedule);
-    alert("Consulta agendada com sucesso!")
-    setClick(false)
+    alert("Consulta agendada com sucesso!");
+    setClick(false);
   }
 
   function handleFavorite() {
@@ -171,12 +176,41 @@ export function Details() {
 
   async function handleStars(number) {
     await api.put(`assessments/${user.id}?note=${number}`);
+    setStarsTwo(number)
   }
 
   async function handleUpdateTestimony() {
-    await api.put(`/assessments?testimony=${testimonyUpdate}&id_user=${user.id}`)
-    alert("Depoimento atualizado com sucesso!")
-    setTestimonyUpdate("")
+    await api.put(
+      `/assessments?testimony=${testimonyUpdate}&id_user=${user.id}`
+    );
+    alert("Depoimento atualizado com sucesso!");
+    setTestimonyUpdate("");
+  }
+
+  async function handleDeleteTestimony() {
+    if (confirm("Tem certeza que deseja deletar seu depoimento?")) {
+      await api.delete(`/assessments?id_user=${user.id}`);
+    }
+    alert("Depoimento deletado!");
+    setStars(1)
+    setClickTwo(false)
+    setClick(false)
+    setClickThree(false)
+  }
+
+  async function createTestimony() {
+    /*const testimony = {
+      testimony: createTestimony,
+      note: starsTwo,
+      id_professional: params.id
+    }*/
+    await api.post(`/assessments?testimony=${testimonyCreate}&note=${starsTwo}&id_professional=${params.id}`);
+    alert("Depoimento criado com sucesso!");
+    setStarsTwo(1)
+    setClickTwo(false)
+    setClick(false)
+    setClickThree(false)
+    setCreateTestimony("")
   }
 
   const carousel = useRef(null);
@@ -253,7 +287,7 @@ export function Details() {
             </button>
             <div>
               <h4>Dê sua nota para esse profissional:</h4>
-              {stars === 1 ? (
+              {starsTwo === 1 ? (
                 <span className="stars">
                   <button onClick={() => handleStars(1)}>
                     <BsStarFill />
@@ -272,7 +306,7 @@ export function Details() {
                   </button>
                 </span>
               ) : null}
-              {stars === 2 ? (
+              {starsTwo === 2 ? (
                 <span className="stars">
                   <button onClick={() => handleStars(1)}>
                     <BsStarFill />
@@ -291,7 +325,7 @@ export function Details() {
                   </button>
                 </span>
               ) : null}
-              {stars === 3 ? (
+              {starsTwo === 3 ? (
                 <span className="stars">
                   <button onClick={() => handleStars(1)}>
                     <BsStarFill />
@@ -310,7 +344,7 @@ export function Details() {
                   </button>
                 </span>
               ) : null}
-              {stars === 4 ? (
+              {starsTwo === 4 ? (
                 <span className="stars">
                   <button onClick={() => handleStars(1)}>
                     <BsStarFill />
@@ -329,7 +363,7 @@ export function Details() {
                   </button>
                 </span>
               ) : null}
-              {stars === 5 ? (
+              {starsTwo === 5 ? (
                 <span className="stars">
                   <button onClick={() => handleStars(1)}>
                     <BsStarFill />
@@ -353,8 +387,10 @@ export function Details() {
                 placeholder="Capriche no seu depoimento ;)"
                 cols="80"
                 rows="10"
+                value={testimonyCreate}
+                onChange={e => setCreateTestimony(e.target.value)}
               ></textarea>
-              <Button>
+              <Button onClick={() => createTestimony()}>
                 Finalizar!
                 <GiConfirmed />
               </Button>
@@ -468,14 +504,15 @@ export function Details() {
                 </span>
               ) : null}
               <h4>Editar seu depoimento sobre o profissional:</h4>
-              {testimony.map(test => (
-              <textarea
-                onChange={e => setTestimonyUpdate(e.target.value)}
-                placeholder={test.testimony}
-                value={testimonyUpdate}
-                cols="80"
-                rows="10"
-              ></textarea>))}
+              {testimony.map((test) => (
+                <textarea
+                  onChange={(e) => setTestimonyUpdate(e.target.value)}
+                  placeholder={test.testimony}
+                  value={testimonyUpdate}
+                  cols="80"
+                  rows="10"
+                ></textarea>
+              ))}
               <Button onClick={() => handleUpdateTestimony()}>
                 Atualizar!
                 <GiConfirmed />
@@ -496,14 +533,17 @@ export function Details() {
             </ButtonText>
           </Link>
           <Section>
-          {data && (
-            <div className="main">
-              <img
-                src={data.avatar ? `${api.defaults.baseURL}/files/${data.avatar}` : avatarPlaceholder}
-                alt="foto do profissional"
-              />
-              <div className="Description">
-                
+            {data && (
+              <div className="main">
+                <img
+                  src={
+                    data.avatar
+                      ? `${api.defaults.baseURL}/files/${data.avatar}`
+                      : avatarPlaceholder
+                  }
+                  alt="foto do profissional"
+                />
+                <div className="Description">
                   <div className="description">
                     <h1>
                       Dr. {data.name}
@@ -523,9 +563,9 @@ export function Details() {
                       ))}
                     </div>
                   </div>
+                </div>
               </div>
-            </div>
-          )}
+            )}
           </Section>
           {!professional ? (
             <h2>
@@ -546,9 +586,16 @@ export function Details() {
             <div ref={carousel} className="schedules">
               {!professional ? (
                 <div className="Schedules">
-                  {
-                    schedules.map(schedule => (
-                    <div className={(moment(schedule.date).isBefore(dateString)) || (((schedule.time).replace(":", "") < hoursString) && (moment(schedule.date).isSame(dateString))) ? "none " : "query"}>
+                  {schedules.map((schedule) => (
+                    <div
+                      className={
+                        moment(schedule.date).isBefore(dateString) ||
+                        (schedule.time.replace(":", "") < hoursString &&
+                          moment(schedule.date).isSame(dateString))
+                          ? "none "
+                          : "query"
+                      }
+                    >
                       <p>
                         <strong>Data:</strong> {schedule.date}
                       </p>
@@ -562,14 +609,15 @@ export function Details() {
                         <strong>Preço:</strong> R$100.00
                       </p>
                       <Button
-                        onClick={() => handleClick(schedule.date, schedule.time, schedule.id)}
+                        onClick={() =>
+                          handleClick(schedule.date, schedule.time, schedule.id)
+                        }
                       >
                         <AiFillSchedule />
                         Agende sua consulta!
                       </Button>
                     </div>
-                    ))
-                  }
+                  ))}
                 </div>
               ) : null}
             </div>
@@ -595,29 +643,35 @@ export function Details() {
                 <div ref={carouselTwo} className="Depositions">
                   <div className="Deposition">
                     {testimony.length !== 0 ? (
-                    testimony.map(test => (
-                      <div className={user.id === test.id ? "testimony" : "none"}>
-                        <img
-                          src={test.avatar ? `${api.defaults.baseURL}/files/${test.avatar}` : avatarPlaceholder} alt="avatar do usuário"
-                        />
-                        <div>
-                          <span>
-                            <BsStarFill />
-                            {test.note}.0
-                          </span>
-                          <span>Seu depoimento</span>
-                          <p>
-                            {test.testimony}
-                          </p>
-                          <a
-                            className="edit"
-                            title="Editar"
-                            onClick={() => handleClickThree()}
-                          >
-                            <BiEditAlt />
-                          </a>
+                      testimony.map((test) => (
+                        <div
+                          className={user.id === test.id ? "testimony" : "none"}
+                        >
+                          <img
+                            src={
+                              test.avatar
+                                ? `${api.defaults.baseURL}/files/${test.avatar}`
+                                : avatarPlaceholder
+                            }
+                            alt="avatar do usuário"
+                          />
+                          <div>
+                            <span>
+                              <BsStarFill />
+                              {test.note}.0
+                            </span>
+                            <span>Seu depoimento</span>
+                            <p>{test.testimony}</p>
+                            <a
+                              className="edit"
+                              title="Editar"
+                              onClick={() => handleClickThree()}
+                            >
+                              <BiEditAlt />
+                            </a>
+                          </div>
                         </div>
-                      </div>))
+                      ))
                     ) : (
                       <span className={user ? "createTestimony" : "none"}>
                         <FaRegHandPointRight />
@@ -628,24 +682,31 @@ export function Details() {
                         </Button>
                       </span>
                     )}
-                    {
-                    testimonyAll &&
-                    testimonyAll.map(testimony => (
-                    <div className={user.id !== testimony.id ? "testimony" : "none"}>
-                      <img src={testimony.avatar ? `${api.defaults.baseURL}/files/${testimony.avatar}` : avatarPlaceholder} alt="avatar do usuário" />
-                      <div>
-                        <span>
-                          <BsStarFill />
-                          {testimony.note}.0
-                        </span>
-                        <span>{testimony.name}</span>
-                        <p>
-                          {testimony.testimony}
-                        </p>
-                      </div>
-                    </div>
-                    ))
-                    }
+                    {testimonyAll &&
+                      testimonyAll.map((testimony) => (
+                        <div
+                          className={
+                            user.id !== testimony.id ? "testimony" : "none"
+                          }
+                        >
+                          <img
+                            src={
+                              testimony.avatar
+                                ? `${api.defaults.baseURL}/files/${testimony.avatar}`
+                                : avatarPlaceholder
+                            }
+                            alt="avatar do usuário"
+                          />
+                          <div>
+                            <span>
+                              <BsStarFill />
+                              {testimony.note}.0
+                            </span>
+                            <span>{testimony.name}</span>
+                            <p>{testimony.testimony}</p>
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>

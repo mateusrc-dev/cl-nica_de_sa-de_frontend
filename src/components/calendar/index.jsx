@@ -113,7 +113,7 @@ export function Calendar() {
   const Day = String(today.getDate()).padStart(2, "0");
   const Year = today.getFullYear();
   const Month = String(today.getMonth() + 1).padStart(2, "0");
-  const dateString = `${Day}/${Month}/${Year}`;
+  const dateString = `${Year}-${Month}-${Day}`;
 
   const Hours = today.getHours()
   const Minutes = today.getMinutes()
@@ -144,7 +144,7 @@ export function Calendar() {
       const day = String(next.getDate()).padStart(2, "0");
       const month = String(next.getMonth() + 1).padStart(2, "0");
       const year = next.getFullYear();
-      const numberWeek = `${day}/${month}/${year}`;
+      const numberWeek = `${year}-${month}-${day}`;
       numbersWeek.push(numberWeek);
     }
     return numbersWeek;
