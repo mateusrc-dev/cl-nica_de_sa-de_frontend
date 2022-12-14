@@ -16,7 +16,6 @@ import moment from "moment";
 export function YourQueries() {
   const { professional } = useAuthProfessional();
   const [yourQueries, setYourQueries] = useState([]);
-  const [click, setClick] = useState(false);
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
@@ -33,7 +32,6 @@ export function YourQueries() {
       const response = await api.get(
         `/schedules`
       );
-      console.log(response.data.schedules);
       setYourQueries(response.data.schedules);
     }
     fetchQueries();

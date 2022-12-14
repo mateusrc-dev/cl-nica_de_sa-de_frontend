@@ -5,7 +5,8 @@ import { Button } from "../../components/button";
 import { TiCancel } from "react-icons/ti";
 import { AiFillSchedule } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { api } from "../../services/api"
 import { CgClose } from "react-icons/cg";
 import { CgArrowLeftO } from "react-icons/cg";
 import { CgArrowRightO } from "react-icons/cg";
@@ -15,6 +16,8 @@ import { Link } from "react-router-dom";
 
 export function YourSchedules() {
   const [click, setClick] = useState(false);
+  const [schedules, setSchedules] = useState([])
+  console.log(schedules)
 
   function handleClick() {
     if (click === false) {
@@ -41,6 +44,16 @@ export function YourSchedules() {
     e.preventDefault();
     carousel.current.scrollLeft += carousel.current.offsetWidth;
   };
+
+  useEffect(() => {
+    async function fetchSchedules() {
+      const response = await api.get(
+        "schedulesUser/"
+      );
+      setSchedules(response.data.schedules);
+    }
+    fetchSchedules();
+  }, [schedules]);
 
   return (
     <Container>

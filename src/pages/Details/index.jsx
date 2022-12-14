@@ -36,7 +36,7 @@ import moment from "moment";
 export function Details() {
   const [click, setClick] = useState(false);
   const [stars, setStars] = useState(1);
-  const [starsTwo, setStarsTwo] = useState(1)
+  const [starsTwo, setStarsTwo] = useState(1);
   const [clickTwo, setClickTwo] = useState(false);
   const [clickThree, setClickThree] = useState(false);
   const [modalDate, setModalDate] = useState();
@@ -44,7 +44,7 @@ export function Details() {
   const [testimony, setTestimony] = useState([]);
   const [testimonyAll, setTestimonyAll] = useState([]);
   const [testimonyUpdate, setTestimonyUpdate] = useState("");
-  const [testimonyCreate, setCreateTestimony] = useState("")
+  const [testimonyCreate, setCreateTestimony] = useState("");
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
@@ -93,6 +93,9 @@ export function Details() {
 
   useEffect(() => {
     async function fetchAssessmentsUser() {
+      if (user === undefined) {
+        return;
+      }
       const response = await api.get(`assessments/${params.id}`);
       setTestimony(response.data.testimony);
       setStars(response.data.testimony[0].note);
@@ -176,7 +179,7 @@ export function Details() {
 
   async function handleStars(number) {
     await api.put(`assessments/${user.id}?note=${number}`);
-    setStarsTwo(number)
+    setStarsTwo(number);
   }
 
   async function handleUpdateTestimony() {
@@ -192,16 +195,18 @@ export function Details() {
       await api.delete(`/assessments?id_user=${user.id}`);
     }
     alert("Depoimento deletado!");
-    setStars(1)
-    setClickThree(false)
+    setStars(1);
+    setClickThree(false);
   }
 
   async function createTestimony() {
-    await api.post(`/assessments?testimony=${testimonyCreate}&note=${starsTwo}&id_professional=${params.id}`);
+    await api.post(
+      `/assessments?testimony=${testimonyCreate}&note=${starsTwo}&id_professional=${params.id}`
+    );
     alert("Depoimento criado com sucesso!");
-    setStarsTwo(1)
-    setClickTwo(false)
-    setCreateTestimony("")
+    setStarsTwo(1);
+    setClickTwo(false);
+    setCreateTestimony("");
   }
 
   const carousel = useRef(null);
@@ -379,7 +384,7 @@ export function Details() {
                 cols="80"
                 rows="10"
                 value={testimonyCreate}
-                onChange={e => setCreateTestimony(e.target.value)}
+                onChange={(e) => setCreateTestimony(e.target.value)}
               ></textarea>
               <Button onClick={() => createTestimony()}>
                 Finalizar!
@@ -581,8 +586,8 @@ export function Details() {
                     <div
                       className={
                         moment(schedule.date).isBefore(dateString) ||
-                        (schedule.time.replace(":", "") < hoursString &&
-                          moment(schedule.date).isSame(dateString))
+                        ((schedule.time.replace(":", "") < hoursString) &&
+                        (moment(schedule.date).isSame(dateString)))
                           ? "none "
                           : "query"
                       }
@@ -634,6 +639,7 @@ export function Details() {
                 <div ref={carouselTwo} className="Depositions">
                   <div className="Deposition">
                     {testimony.length !== 0 ? (
+                      testimony &&
                       testimony.map((test) => (
                         <div
                           className={user.id === test.id ? "testimony" : "none"}
@@ -674,30 +680,51 @@ export function Details() {
                       </span>
                     )}
                     {testimonyAll &&
-                      testimonyAll.map((testimony) => (
-                        <div
-                          className={
-                            user.id !== testimony.id ? "testimony" : "none"
-                          }
-                        >
-                          <img
-                            src={
-                              testimony.avatar
-                                ? `${api.defaults.baseURL}/files/${testimony.avatar}`
-                                : avatarPlaceholder
+                      testimonyAll.map((testimony) =>
+                        user ? (
+                          <div
+                            className={
+                              user.id !== testimony.id ? "testimony" : "none"
                             }
-                            alt="avatar do usuário"
-                          />
-                          <div>
-                            <span>
-                              <BsStarFill />
-                              {testimony.note}.0
-                            </span>
-                            <span>{testimony.name}</span>
-                            <p>{testimony.testimony}</p>
+                          >
+                            <img
+                              src={
+                                testimony.avatar
+                                  ? `${api.defaults.baseURL}/files/${testimony.avatar}`
+                                  : avatarPlaceholder
+                              }
+                              alt="avatar do usuário"
+                            />
+                            <div>
+                              <span>
+                                <BsStarFill />
+                                {testimony.note}.0
+                              </span>
+                              <span>{testimony.name}</span>
+                              <p>{testimony.testimony}</p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ) : (
+                          <div className={"testimony"}>
+                            <img
+                              src={
+                                testimony.avatar
+                                  ? `${api.defaults.baseURL}/files/${testimony.avatar}`
+                                  : avatarPlaceholder
+                              }
+                              alt="avatar do usuário"
+                            />
+                            <div>
+                              <span>
+                                <BsStarFill />
+                                {testimony.note}.0
+                              </span>
+                              <span>{testimony.name}</span>
+                              <p>{testimony.testimony}</p>
+                            </div>
+                          </div>
+                        )
+                      )}
                   </div>
                 </div>
               </div>
