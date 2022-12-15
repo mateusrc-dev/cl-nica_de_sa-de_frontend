@@ -29,9 +29,7 @@ export function YourQueries() {
 
   useEffect(() => {
     async function fetchQueries() {
-      const response = await api.get(
-        `/schedules`
-      );
+      const response = await api.get(`/schedules`);
       setYourQueries(response.data.schedules);
     }
     fetchQueries();
@@ -52,7 +50,6 @@ export function YourQueries() {
   }
 
   async function handleClick(id) {
-    console.log()
     if (confirm("Tem certeza que deseja cancelar?")) {
       const justification = prompt("Escreva uma justificativa!");
       const status = "desmarcado por professional!";
@@ -60,6 +57,8 @@ export function YourQueries() {
         `/schedulesCancel/${id}/?status=${status}&justification=${justification}`
       );
       alert("Consulta desmarcada!");
+    } else {
+      return
     }
   }
 
@@ -132,17 +131,23 @@ export function YourQueries() {
                     (querie.time.replace(":", "") < hoursString &&
                       moment(querie.date).isSame(dateString)) ? (
                       <span className="buttons">
-                        A consulta aconteceu?
-                        <span>
-                          <Button onClick={() => confirmPositive(querie.id)}>
-                            Sim!
-                          </Button>
-                        </span>
-                        <span>
-                          <Button onClick={() => confirmNegative(querie.id)}>
-                            Não!
-                          </Button>
-                        </span>
+                        {querie.justification ? null : (
+                          <span>A consulta aconteceu?</span>
+                        )}
+                        {querie.justification ? null : (
+                          <span>
+                            <Button onClick={() => confirmPositive(querie.id)}>
+                              Sim!
+                            </Button>
+                          </span>
+                        )}
+                        {querie.justification ? null : (
+                          <span>
+                            <Button onClick={() => confirmNegative(querie.id)}>
+                              Não!
+                            </Button>
+                          </span>
+                        )}
                       </span>
                     ) : (
                       <span>
