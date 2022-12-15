@@ -128,7 +128,7 @@ export function YourQueries() {
                       </span>
                     ) : null}
                     {moment(querie.date).isBefore(dateString) ||
-                    (querie.time.replace(":", "") < hoursString &&
+                    Number(String(querie.time.replace(":", "")) < Number(hoursString) &&
                       moment(querie.date).isSame(dateString)) ? (
                       <span className="buttons">
                         {querie.justification ? null : (

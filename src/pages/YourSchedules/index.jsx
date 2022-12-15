@@ -112,7 +112,7 @@ export function YourSchedules() {
                     </span> : null}
                     <span className="buttons">
                       {schedule.justification ? null : <Button disabled={ moment(schedule.date).isBefore(dateString) ||
-                        ((schedule.time.replace(":", "") < hoursString) &&
+                        (Number(String((schedule.time.replace(":", ""))) < Number(hoursString)) &&
                         (moment(schedule.date).isSame(dateString)))} onClick={() => handleConfirmCancel(schedule.id)}>
                         Cancelar consulta! <TiCancel />
                       </Button>}
