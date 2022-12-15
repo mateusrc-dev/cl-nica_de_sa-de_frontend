@@ -15,6 +15,8 @@ export function Schedule({ date, time, dateToday, timeToday }) {
 
   handleSchedules();
 
+  console.log(Number(timeToday))
+
   return (
     <Container>
       <span className="nameClient">{scheduleOccupied[0]["name"]}</span>

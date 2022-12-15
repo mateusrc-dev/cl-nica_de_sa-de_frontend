@@ -58,8 +58,8 @@ export function Details() {
   const Month = String(today.getMonth() + 1).padStart(2, "0");
   const dateString = `${Year}-${Month}-${Day}`;
 
-  const Hours = today.getHours();
-  const Minutes = today.getMinutes();
+  const Hours = String(today.getHours()).padStart(2, "0")
+  const Minutes = String(today.getMinutes()).padStart(2, "0")
   const hoursString = `${Hours}${Minutes}`;
 
   useEffect(() => {
@@ -121,14 +121,6 @@ export function Details() {
     await api.put("/schedules", Schedule);
     alert("Consulta agendada com sucesso!");
     setClick(false);
-  }
-
-  function handleFavorite() {
-    if (heart === false) {
-      setHeart(true);
-    } else if (heart === true) {
-      setHeart(false);
-    }
   }
 
   function handleClick(dt, tm, id) {
