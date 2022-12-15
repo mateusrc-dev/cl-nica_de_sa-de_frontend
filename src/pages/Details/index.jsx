@@ -97,9 +97,7 @@ export function Details() {
       }
       const response = await api.get(`assessments/${params.id}`);
       setTestimony(response.data.testimony);
-      if (!testimony) {
-        setStars(response.data.testimony[0].note);
-      }
+      setStars(response.data.testimony[0].note);
     }
     fetchAssessmentsUser();
   }, [testimony]);
@@ -183,6 +181,7 @@ export function Details() {
       `/assessments/${user.id}?note=${number}&id_professional=${params.id}`
     );
     setStarsTwo(number);
+    setStars(number)
   }
 
   async function handleUpdateTestimony() {

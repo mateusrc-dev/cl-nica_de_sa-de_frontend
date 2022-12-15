@@ -69,7 +69,7 @@ export function YourSchedules() {
           <div className="main">
             {schedules.map((schedule) => (
               <div className="Scheduling" key={String(schedule.id)}>
-                <svg class="svg" width="500px" height="250px">
+                <svg className="svg" width="500px" height="250px">
                   <polygon
                     points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
                     stroke="blue"

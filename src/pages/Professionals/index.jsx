@@ -13,6 +13,7 @@ import { useAuthUser } from "../../hooks/authUser";
 import { useInput } from "../../hooks/input";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { Favorite } from "../../components/favorite"
+import { Notes } from "../../components/notes"
 
 export function Professionals() {
   const [heart, setHeart] = useState(false);
@@ -68,14 +69,6 @@ export function Professionals() {
     }
     fetchProfessionals();
   }, [search, tagsSelected, specializationSelected]);
-
-  function handleFavorite() {
-    if (heart === false) {
-      setHeart(true);
-    } else if (heart === true) {
-      setHeart(false);
-    }
-  }
 
   return (
     <Container>
@@ -194,7 +187,7 @@ export function Professionals() {
               <h3>
                 <span>{Professional.name} | {Professional.specialization[0].toUpperCase() + Professional.specialization.substring(1)} </span>
                 <span>
-                  <BsStarFill /> 5.5
+                  <BsStarFill /> <Notes id_professional={Professional.id}/>
                 </span>
               </h3>
               <p>

@@ -58,7 +58,7 @@ export function Favorites() {
           {favorites &&
             favorites.map((favorite) => (
               <div className="Scheduling" key={String(favorite.id)}>
-                <svg class="svg" width="1100px" height="250px">
+                <svg className="svg" width="1100px" height="250px">
                   <polygon
                     points="0,250 50,0 1100,0 1050,250 0,250"
                     stroke="blue"
