@@ -170,7 +170,7 @@ export function Calendar() {
   };
 
   async function handleCreateSchedule() {
-    if ((moment(modalDate).isBefore(dateString)) || ((String(modalTime).replace(":", "") < hoursString) && (moment(modalDate).isSame(dateString)))) {
+    if ((moment(modalDate).isBefore(dateString)) || (Number(String(modalTime).replace(":", "") < Number(hoursString)) && (moment(modalDate).isSame(dateString)))) {
       alert("Não é possível criar um horário em um dia anterior a data atual ou em um horário que já passou na data atual!");
       return;
     } else {
@@ -373,7 +373,7 @@ export function Calendar() {
           )}
           <div className="button">
             {!clickThree ? (
-              <Button disabled={scheduleOccupied[0]["justification"] || (moment(modalDate).isBefore(dateString)) || ((String(modalTime).replace(":", "") < hoursString) && (moment(modalDate).isSame(dateString)))} onClick={handleClickThree}>
+              <Button disabled={scheduleOccupied[0]["justification"] || (moment(modalDate).isBefore(dateString)) || (Number(String(modalTime).replace(":", "") < Number(hoursString)) && (moment(modalDate).isSame(dateString)))} onClick={handleClickThree}>
                 <span>Desmarcar consulta!</span>
               </Button>
             ) : null}
