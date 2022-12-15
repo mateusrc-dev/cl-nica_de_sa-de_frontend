@@ -15,8 +15,6 @@ import moment from "moment"
 export function YourSchedules() {
   const [schedules, setSchedules] = useState([]);
 
-  console.log(schedules)
-
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
   const Year = today.getFullYear();
@@ -75,7 +73,7 @@ export function YourSchedules() {
                   <polygon
                     points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
                     stroke="blue"
-                    stroke-width="0.5"
+                    strokeWidth="0.5"
                     fill="white"
                   />
                 </svg>

@@ -8,8 +8,31 @@ import { GiNestedHearts } from "react-icons/gi";
 import { ButtonText } from "../../components/buttonText";
 import { TiArrowBack } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+import { api } from "../../services/api";
 
 export function Favorites() {
+  const [favorites, setFavorites] = useState();
+
+  useEffect(() => {
+    async function Favorite() {
+      const response = await api.get(`/favorites`);
+      setFavorites(response.data.favorites);
+    }
+    Favorite();
+  }, [favorites]);
+
+  async function deleteFavorite(professional_id) {
+    if (
+      confirm("Tem certeza que deseja excluir o profissional dos favoritos?")
+    ) {
+      await api.delete(`/favorites/${professional_id}`);
+    } else {
+      return;
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -32,158 +55,52 @@ export function Favorites() {
           excluí-los dos favoritos!
         </p>
         <div className="main">
-          <div className="Scheduling">
-            <svg class="svg" width="1100px" height="250px">
-              <polygon
-                points="0,250 50,0 1100,0 1050,250 0,250"
-                stroke="blue"
-                stroke-width="1"
-              />
-            </svg>
-            <div className="scheduling">
-              <img
-                src="https://github.com/mateusrc-dev.png"
-                alt="imagem do profissional"
-              />
-              <div className="details">
-                <span>
-                  <strong>Profissional:</strong> Dr. Mateus Carvalho
-                </span>
-                <span>
-                  <strong>Especialidade:</strong> Psicólogo
-                </span>
-                <span></span>
-                <span className="description">
-                  <strong>Descrição:</strong> Meu nome é Mateus, sou um
-                  profissional incrível e você não vai se arrepender de fazer
-                  uma consulta comigo, sou o melhor do fullness clinic, sem
-                  dúvida (espero que meus colegas de trabalho não leiam isso...)
-                </span>
-                <span>
-                  <Button>
-                    Visitar página do profissional! <FaWalking />
-                  </Button>
-                  <Button>
-                    Excluir dos favoritos! <GiBrokenHeart />
-                  </Button>
-                </span>
+          {favorites &&
+            favorites.map((favorite) => (
+              <div className="Scheduling" key={String(favorite.id)}>
+                <svg class="svg" width="1100px" height="250px">
+                  <polygon
+                    points="0,250 50,0 1100,0 1050,250 0,250"
+                    stroke="blue"
+                    strokeWidth="1"
+                  />
+                </svg>
+                <div className="scheduling">
+                  <img
+                    src={
+                      favorite.avatar
+                        ? `${api.defaults.baseURL}/files/${favorite.avatar}`
+                        : avatarPlaceholder
+                    }
+                    alt="imagem do profissional"
+                  />
+                  <div className="details">
+                    <span>
+                      <strong>Profissional:</strong> Dr. {favorite.name}
+                    </span>
+                    <span>
+                      <strong>Especialidade:</strong>{" "}
+                      {favorite.specialization[0].toUpperCase() +
+                        favorite.specialization.substring(1)}
+                    </span>
+                    <span></span>
+                    <span className="description">
+                      <strong>Descrição:</strong> {favorite.description}
+                    </span>
+                    <span>
+                      <Link to={`/details/${favorite.id}`}>
+                        <Button>
+                          Visitar página do profissional! <FaWalking />
+                        </Button>
+                      </Link>
+                      <Button onClick={() => deleteFavorite(favorite.id)}>
+                        Excluir dos favoritos! <GiBrokenHeart />
+                      </Button>
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="Scheduling">
-            <svg class="svg" width="1100px" height="250px">
-              <polygon
-                points="0,250 50,0 1100,0 1050,250 0,250"
-                stroke="blue"
-                stroke-width="1"
-              />
-            </svg>
-            <div className="scheduling">
-              <img
-                src="https://github.com/mateusrc-dev.png"
-                alt="imagem do profissional"
-              />
-              <div className="details">
-                <span>
-                  <strong>Profissional:</strong> Dr. Mateus Carvalho
-                </span>
-                <span>
-                  <strong>Especialidade:</strong> Psicólogo
-                </span>
-                <span></span>
-                <span className="description">
-                  <strong>Descrição:</strong> Meu nome é Mateus, sou um
-                  profissional incrível e você não vai se arrepender de fazer
-                  uma consulta comigo, sou o melhor do fullness clinic, sem
-                  dúvida (espero que meus colegas de trabalho não leiam isso...)
-                </span>
-                <span>
-                  <Button>
-                    Visitar página do profissional! <FaWalking />
-                  </Button>
-                  <Button>
-                    Excluir dos favoritos! <GiBrokenHeart />
-                  </Button>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="Scheduling">
-            <svg class="svg" width="1100px" height="250px">
-              <polygon
-                points="0,250 50,0 1100,0 1050,250 0,250"
-                stroke="blue"
-                stroke-width="1"
-              />
-            </svg>
-            <div className="scheduling">
-              <img
-                src="https://github.com/mateusrc-dev.png"
-                alt="imagem do profissional"
-              />
-              <div className="details">
-                <span>
-                  <strong>Profissional:</strong> Dr. Mateus Carvalho
-                </span>
-                <span>
-                  <strong>Especialidade:</strong> Psicólogo
-                </span>
-                <span></span>
-                <span className="description">
-                  <strong>Descrição:</strong> Meu nome é Mateus, sou um
-                  profissional incrível e você não vai se arrepender de fazer
-                  uma consulta comigo, sou o melhor do fullness clinic, sem
-                  dúvida (espero que meus colegas de trabalho não leiam isso...)
-                </span>
-                <span>
-                  <Button>
-                    Visitar página do profissional! <FaWalking />
-                  </Button>
-                  <Button>
-                    Excluir dos favoritos! <GiBrokenHeart />
-                  </Button>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="Scheduling">
-            <svg class="svg" width="1100px" height="250px">
-              <polygon
-                points="0,250 50,0 1100,0 1050,250 0,250"
-                stroke="blue"
-                stroke-width="1"
-              />
-            </svg>
-            <div className="scheduling">
-              <img
-                src="https://github.com/mateusrc-dev.png"
-                alt="imagem do profissional"
-              />
-              <div className="details">
-                <span>
-                  <strong>Profissional:</strong> Dr. Mateus Carvalho
-                </span>
-                <span>
-                  <strong>Especialidade:</strong> Psicólogo
-                </span>
-                <span></span>
-                <span className="description">
-                  <strong>Descrição:</strong> Meu nome é Mateus, sou um
-                  profissional incrível e você não vai se arrepender de fazer
-                  uma consulta comigo, sou o melhor do fullness clinic, sem
-                  dúvida (espero que meus colegas de trabalho não leiam isso...)
-                </span>
-                <span>
-                  <Button>
-                    Visitar página do profissional! <FaWalking />
-                  </Button>
-                  <Button>
-                    Excluir dos favoritos! <GiBrokenHeart />
-                  </Button>
-                </span>
-              </div>
-            </div>
-          </div>
+            ))}
         </div>
       </Main>
       <Footer />
