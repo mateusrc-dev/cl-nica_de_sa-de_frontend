@@ -45,7 +45,6 @@ export function Details() {
   const [testimonyAll, setTestimonyAll] = useState([]);
   const [testimonyUpdate, setTestimonyUpdate] = useState("");
   const [testimonyCreate, setCreateTestimony] = useState("");
-  const [testimonyId, setTestimonyId] = useState()
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
@@ -99,8 +98,9 @@ export function Details() {
       }
       const response = await api.get(`assessments/${params.id}`);
       setTestimony(response.data.testimony);
-      setStars(response.data.testimony[0].note);
-      setTestimonyId(response.data.testimony[0].id)
+      if (!testimony) {
+        setStars(response.data.testimony[0].note);
+      }
     }
     fetchAssessmentsUser();
   }, [testimony]);
@@ -179,9 +179,10 @@ export function Details() {
     }
   };
 
-
   async function handleStars(number) {
-    await api.put(`/assessments/${user.id}?note=${number}&id_professional=${params.id}`);
+    await api.put(
+      `/assessments/${user.id}?note=${number}&id_professional=${params.id}`
+    );
     setStarsTwo(number);
   }
 
@@ -195,9 +196,11 @@ export function Details() {
 
   async function handleDeleteTestimony() {
     if (confirm("Tem certeza que deseja deletar seu depoimento?")) {
-      await api.delete(`/assessments?id_user=${user.id}&id_professional=${params.id}`);
+      await api.delete(
+        `/assessments?id_user=${user.id}&id_professional=${params.id}`
+      );
     } else {
-      return
+      return;
     }
     alert("Depoimento deletado!");
     setStars(1);
@@ -507,6 +510,7 @@ export function Details() {
               <h4>Editar seu depoimento sobre o profissional:</h4>
               {testimony.map((test) => (
                 <textarea
+                  key={String(test.id)}
                   onChange={(e) => setTestimonyUpdate(e.target.value)}
                   placeholder={test.testimony}
                   value={testimonyUpdate}
@@ -592,8 +596,8 @@ export function Details() {
                       key={String(schedule.id)}
                       className={
                         moment(schedule.date).isBefore(dateString) ||
-                        ((schedule.time.replace(":", "") < hoursString) &&
-                        (moment(schedule.date).isSame(dateString)))
+                        (schedule.time.replace(":", "") < hoursString &&
+                          moment(schedule.date).isSame(dateString))
                           ? "none "
                           : "query"
                       }
@@ -648,6 +652,7 @@ export function Details() {
                       testimony &&
                       testimony.map((test) => (
                         <div
+                          key={String(test.id)}
                           className={user.id === test.id ? "testimony" : "none"}
                         >
                           <img
