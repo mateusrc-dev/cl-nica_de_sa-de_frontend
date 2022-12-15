@@ -45,6 +45,7 @@ export function Details() {
   const [testimonyAll, setTestimonyAll] = useState([]);
   const [testimonyUpdate, setTestimonyUpdate] = useState("");
   const [testimonyCreate, setCreateTestimony] = useState("");
+  const [testimonyId, setTestimonyId] = useState()
   const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
@@ -99,6 +100,7 @@ export function Details() {
       const response = await api.get(`assessments/${params.id}`);
       setTestimony(response.data.testimony);
       setStars(response.data.testimony[0].note);
+      setTestimonyId(response.data.testimony[0].id)
     }
     fetchAssessmentsUser();
   }, [testimony]);
@@ -177,14 +179,15 @@ export function Details() {
     }
   };
 
+
   async function handleStars(number) {
-    await api.put(`assessments/${user.id}?note=${number}`);
+    await api.put(`/assessments/${user.id}?note=${number}&id_professional=${params.id}`);
     setStarsTwo(number);
   }
 
   async function handleUpdateTestimony() {
     await api.put(
-      `/assessments?testimony=${testimonyUpdate}&id_user=${user.id}`
+      `/assessments?testimony=${testimonyUpdate}&id_user=${user.id}&id_professional=${params.id}`
     );
     alert("Depoimento atualizado com sucesso!");
     setTestimonyUpdate("");
@@ -192,7 +195,9 @@ export function Details() {
 
   async function handleDeleteTestimony() {
     if (confirm("Tem certeza que deseja deletar seu depoimento?")) {
-      await api.delete(`/assessments?id_user=${user.id}`);
+      await api.delete(`/assessments?id_user=${user.id}&id_professional=${params.id}`);
+    } else {
+      return
     }
     alert("Depoimento deletado!");
     setStars(1);
