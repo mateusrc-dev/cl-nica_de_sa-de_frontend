@@ -6,8 +6,6 @@ import { Button } from "../../components/button";
 import { AiFillSchedule } from "react-icons/ai";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
-import { MdFavorite } from "react-icons/md";
-import { MdFavoriteBorder } from "react-icons/md";
 import { useRef } from "react";
 import { CgArrowLeftO } from "react-icons/cg";
 import { CgArrowRightO } from "react-icons/cg";
@@ -32,6 +30,7 @@ import { MdLogin } from "react-icons/md";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { BsTrash } from "react-icons/bs";
 import moment from "moment";
+import { Favorite } from "../../components/favorite";
 
 export function Details() {
   const [click, setClick] = useState(false);
@@ -52,7 +51,6 @@ export function Details() {
   const [data, setData] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [idShedule, setIdSchedule] = useState(null);
-  console.log(schedules)
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
@@ -554,12 +552,12 @@ export function Details() {
                     <h1>
                       Dr. {data.name}
                       {!professional ? (
-                        <button
-                          className="favorite"
-                          onClick={() => handleFavorite()}
-                        >
-                          {heart ? <MdFavorite /> : <MdFavoriteBorder />}
-                        </button>
+                        !user ? null : (
+                          <Favorite
+                            professional_id={data.id}
+                            className="favorites"
+                          />
+                        )
                       ) : null}
                     </h1>
                     <p>{data.description}</p>
@@ -597,8 +595,11 @@ export function Details() {
                       key={String(schedule.id)}
                       className={
                         moment(schedule.date).isBefore(dateString) ||
-                        Number(String(schedule.time.replace(":", "")) < Number(hoursString) &&
-                          moment(schedule.date).isSame(dateString))
+                        Number(
+                          String(schedule.time.replace(":", "")) <
+                            Number(hoursString) &&
+                            moment(schedule.date).isSame(dateString)
+                        )
                           ? "none "
                           : "query"
                       }
@@ -718,7 +719,7 @@ export function Details() {
                             </div>
                           </div>
                         ) : (
-                          <div className={"testimony"}>
+                          <div key={String(testimony.id)} className={"testimony"}>
                             <img
                               src={
                                 testimony.avatar

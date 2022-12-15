@@ -5,19 +5,19 @@ import { GiHealthNormal } from "react-icons/gi";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { BsStarFill } from "react-icons/bs";
-import { MdFavorite } from "react-icons/md";
-import { MdFavoriteBorder } from "react-icons/md";
 import { Button } from "../../components/button";
 import { AiFillSchedule } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuthProfessional } from "../../hooks/authProfessional";
+import { useAuthUser } from "../../hooks/authUser";
 import { useInput } from "../../hooks/input";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+import { Favorite } from "../../components/favorite"
 
 export function Professionals() {
   const [heart, setHeart] = useState(false);
   const { professional } = useAuthProfessional();
-
+  const { user } = useAuthUser();
   const [tags, setTags] = useState([]);
   const [tagsSelected, setTagsSelected] = useState([]);
   const [specializationSelected, setSpecializationSelected] = useState("");
@@ -185,9 +185,7 @@ export function Professionals() {
           {professionals.map(Professional => (
             <div className="professional" key={String(Professional.id)}>
               {!professional ? (
-                <button className="favorite" onClick={() => handleFavorite()}>
-                  {heart ? <MdFavorite /> : <MdFavoriteBorder />}
-                </button>
+                !user ? null : <Favorite professional_id={Professional.id}/>
               ) : null}
               <img
                 src={Professional.avatar ? `${api.defaults.baseURL}/files/${Professional.avatar}` : avatarPlaceholder}
