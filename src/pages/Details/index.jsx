@@ -52,6 +52,7 @@ export function Details() {
   const [data, setData] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [idShedule, setIdSchedule] = useState(null);
+  console.log(schedules)
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
@@ -596,7 +597,7 @@ export function Details() {
                       key={String(schedule.id)}
                       className={
                         moment(schedule.date).isBefore(dateString) ||
-                        (schedule.time.replace(":", "") < hoursString &&
+                        Number(String(schedule.time.replace(":", "")) < Number(hoursString) &&
                           moment(schedule.date).isSame(dateString))
                           ? "none "
                           : "query"

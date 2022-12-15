@@ -65,7 +65,7 @@ export function Calendar() {
 
   const date = new Date();
   var newDate = new Date();
-  const [Number, setNumber] = useState(0);
+  const [number, setNumber] = useState(0);
 
   function handleDisplayTimeLeft() {
     if (schedules.length !== 0) {
@@ -107,7 +107,7 @@ export function Calendar() {
     setNumber((prevState) => prevState - 7);
   }
 
-  newDate.setDate(date.getDate() + Number);
+  newDate.setDate(date.getDate() + number);
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
@@ -382,7 +382,7 @@ export function Calendar() {
                 <span>Confirmar!</span>
               </Button>
             ) : null}
-            {(moment(modalDate).isBefore(dateString)) || ((String(modalTime).replace(":", "") < hoursString) && (moment(modalDate).isSame(dateString))) ? <div className="modalConfirm"><span>A consulta aconteceu?</span> <div className="buttonsModal"><Button onClick={() => confirmPositive(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Sim</Button><Button onClick={() => confirmNegative(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Não</Button></div></div>: null}
+            {(moment(modalDate).isBefore(dateString)) || (Number(String(modalTime).replace(":", "") < Number(hoursString)) && (moment(modalDate).isSame(dateString))) ? <div className="modalConfirm"><span>A consulta aconteceu?</span> <div className="buttonsModal"><Button onClick={() => confirmPositive(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Sim</Button><Button onClick={() => confirmNegative(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Não</Button></div></div>: null}
           </div>
         </div>
       </div>
