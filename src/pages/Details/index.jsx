@@ -589,6 +589,7 @@ export function Details() {
                 <div className="Schedules">
                   {schedules.map((schedule) => (
                     <div
+                      key={String(schedule.id)}
                       className={
                         moment(schedule.date).isBefore(dateString) ||
                         ((schedule.time.replace(":", "") < hoursString) &&
@@ -688,6 +689,7 @@ export function Details() {
                       testimonyAll.map((testimony) =>
                         user ? (
                           <div
+                            key={String(testimony.id)}
                             className={
                               user.id !== testimony.id ? "testimony" : "none"
                             }

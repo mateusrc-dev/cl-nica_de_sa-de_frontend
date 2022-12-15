@@ -85,7 +85,7 @@ export function YourQueries() {
           </p>
           <div className="main">
             {yourQueries.map((querie) => (
-              <div className="Scheduling">
+              <div className="Scheduling" key={String(querie.id)}>
                 <svg class="svg" width="500px" height="250px">
                   <polygon
                     points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
