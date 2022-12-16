@@ -191,7 +191,7 @@ export const Container = styled.div`
     margin: auto;
     border-collapse: collapse;
     width: 100%;
-    max-width: 850px;
+    max-width: 1200px;
   }
   .table tbody td {
     padding: 5px;
@@ -230,6 +230,7 @@ export const Container = styled.div`
     }
     .state {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+      color: blue;
     }
     button {
       background: ${({ theme }) => theme.COLORS.BACKGROUND_400};

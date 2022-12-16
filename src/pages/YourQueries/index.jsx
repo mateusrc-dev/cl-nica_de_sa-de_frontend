@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Button } from "../../components/button";
@@ -58,15 +58,15 @@ export function YourQueries() {
       );
       alert("Consulta desmarcada!");
     } else {
-      return
+      return;
     }
   }
 
   return (
     <Container>
       <Header />
-      <Main>
-        <section>
+      <main>
+        <section className="section">
           <div className="textButton">
             <Link to={-1}>
               <ButtonText>
@@ -86,9 +86,9 @@ export function YourQueries() {
           <div className="main">
             {yourQueries.map((querie) => (
               <div className="Scheduling" key={String(querie.id)}>
-                <svg className="svg" width="500px" height="250px">
+                <svg className="svg" width="500px" height="500px">
                   <polygon
-                    points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
+                    points="0,50 50,0 500,0 500,300 450,350 0,350 0,50"
                     stroke="blue"
                     strokeWidth="0.5"
                     fill="white"
@@ -123,13 +123,16 @@ export function YourQueries() {
                       <strong>Status:</strong> {querie.status}
                     </span>
                     {querie.justification ? (
-                      <span className="last">
+                      <span className="last justification">
                         <strong>Justificativa:</strong> {querie.justification}
                       </span>
                     ) : null}
                     {moment(querie.date).isBefore(dateString) ||
-                    Number(String(querie.time.replace(":", "")) < Number(hoursString) &&
-                      moment(querie.date).isSame(dateString)) ? (
+                    Number(
+                      String(querie.time.replace(":", "")) <
+                        Number(hoursString) &&
+                        moment(querie.date).isSame(dateString)
+                    ) ? (
                       <span className="buttons">
                         {querie.justification ? null : (
                           <span>A consulta aconteceu?</span>
@@ -164,7 +167,7 @@ export function YourQueries() {
             ))}
           </div>
         </section>
-      </Main>
+        </main>
       <Footer />
     </Container>
   );

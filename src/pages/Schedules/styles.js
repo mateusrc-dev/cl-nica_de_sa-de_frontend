@@ -14,7 +14,6 @@ export const Main = styled.main`
   justify-content: space-around;
   padding: 0 50px;
   gap: 10px;
-  width: 100%;
   height: 100%;
   grid-area: content;
   overflow-y: auto;
