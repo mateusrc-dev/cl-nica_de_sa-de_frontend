@@ -70,10 +70,24 @@ export const Container = styled.div`
       border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
       border-radius: 10px;
     }
+    .modalContentOne {
+      position: relative;
+      width: 100%;
+      margin: 50px;
+      background: ${({ theme }) => theme.COLORS.WHITE};
+      border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
+      border-radius: 10px;
+      padding: 100px;
+      p {
+        margin-bottom: 50px;
+        font-size: 20px;
+      }
+    }
+
     .modalContent .container {
       width: 100%;
       height: 100%;
-      padding: 100px 200px;
+      padding: 50px 100px;
       font-size: 24px;
       display: flex;
       flex-direction: row;
@@ -100,6 +114,17 @@ export const Container = styled.div`
       border: none;
     }
     .modalContent .close svg {
+      color: ${({ theme }) => theme.COLORS.BLUE_100};
+      font-size: 35px;
+    }
+    .modalContentOne .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+    }
+    .modalContentOne .close svg {
       color: ${({ theme }) => theme.COLORS.BLUE_100};
       font-size: 35px;
     }
@@ -191,7 +216,6 @@ export const Container = styled.div`
     margin: auto;
     border-collapse: collapse;
     width: 100%;
-    max-width: 1200px;
   }
   .table tbody td {
     padding: 5px;

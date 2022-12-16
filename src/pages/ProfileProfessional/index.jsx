@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Input } from "../../components/input";
@@ -98,7 +98,7 @@ export function ProfileProfessional() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <div className="avatar">
           <Link to={-1}>
             <ButtonText>
@@ -207,7 +207,7 @@ export function ProfileProfessional() {
             </Button>
           </span>
         </form>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

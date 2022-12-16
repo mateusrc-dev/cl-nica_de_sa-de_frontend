@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Calendar } from "../../components/calendar";
@@ -12,7 +12,7 @@ export function Schedules() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <div className="columnOne">
           <Link to={-1}>
             <ButtonText>
@@ -38,7 +38,7 @@ export function Schedules() {
           </ul>
         </div>
         <Calendar />
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

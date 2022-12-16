@@ -12,7 +12,7 @@ import { api } from "../../services/api";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { Schedule } from "../../components/Schedule";
-import moment from "moment"
+import moment from "moment";
 
 const monthNames = [
   "Janeiro",
@@ -47,7 +47,7 @@ export function Calendar() {
   const [modalTime, setModalTime] = useState();
   const [displayTime, setDisplayTime] = useState("01:00");
   const [schedules, setSchedules] = useState([]);
-  const [justification, setJustification] = useState("")
+  const [justification, setJustification] = useState("");
   const [scheduleOccupied, setScheduleOccupied] = useState([
     {
       availability: "ocupado",
@@ -117,7 +117,7 @@ export function Calendar() {
 
   const Hours = String(today.getHours()).padStart(2, "0");
   const Minutes = String(today.getMinutes()).padStart(2, "0");
-  const hoursString = `${Hours}${Minutes}`
+  const hoursString = `${Hours}${Minutes}`;
 
   var year = newDate.getFullYear();
   var month = newDate.getMonth();
@@ -170,8 +170,14 @@ export function Calendar() {
   };
 
   async function handleCreateSchedule() {
-    if ((moment(modalDate).isBefore(dateString)) || (Number(String(modalTime).replace(":", "") < Number(hoursString)) && (moment(modalDate).isSame(dateString)))) {
-      alert("Não é possível criar um horário em um dia anterior a data atual ou em um horário que já passou na data atual!");
+    if (
+      moment(modalDate).isBefore(dateString) ||
+      (Number(String(modalTime).replace(":", "") < Number(hoursString)) &&
+        moment(modalDate).isSame(dateString))
+    ) {
+      alert(
+        "Não é possível criar um horário em um dia anterior a data atual ou em um horário que já passou na data atual!"
+      );
       return;
     } else {
       const availability = "disponível";
@@ -207,7 +213,7 @@ export function Calendar() {
   }, []);
 
   async function handleClickTwoClose() {
-      setClickThree(false)
+    setClickThree(false);
     if (clickTwo === false) {
       setClickTwo(true);
     } else {
@@ -244,9 +250,11 @@ export function Calendar() {
 
   function handleClickThree() {
     if (moment(modalDate).isBefore(dateString)) {
-      alert("Não é possível desmarcar uma consulta numa data anterior a data atual!");
+      alert(
+        "Não é possível desmarcar uma consulta numa data anterior a data atual!"
+      );
       return;
-    } 
+    }
     if (clickThree === false) {
       setClickThree(true);
     } else {
@@ -256,7 +264,9 @@ export function Calendar() {
 
   async function handleConfirmCancel(id) {
     const status = "desmarcado por professional!";
-    await api.put(`/schedulesCancel/${id}/?status=${status}&justification=${justification}`);
+    await api.put(
+      `/schedulesCancel/${id}/?status=${status}&justification=${justification}`
+    );
     alert("Consulta desmarcada!");
     setClickThree(false);
     window.location.reload();
@@ -285,18 +295,18 @@ export function Calendar() {
         className={click ? "modal" : "none"}
         onClick={handleOutsideClick}
       >
-        <div className="modalContent">
+        <div className="modalContentOne">
           <button className="close" onClick={() => handleClick()}>
             <CgClose />
           </button>
           <p>
             <FaRegHandPointRight /> Tem certeza que deseja criar um horário na
             data {modalDate} às {modalTime}hrs?
-            <Button onClick={handleCreateSchedule}>
-              Confirmar!
-              <GiConfirmed />
-            </Button>
           </p>
+          <Button onClick={handleCreateSchedule}>
+            Confirmar!
+            <GiConfirmed />
+          </Button>
         </div>
       </div>
       <div
@@ -368,21 +378,58 @@ export function Calendar() {
           ) : (
             <p>
               <h2>Escreva uma justificativa:</h2>
-              <textarea onChange={e => setJustification(e.target.value)} cols="50" rows="10" placeholder="Explique os motivos para desmarcar a consulta!"></textarea>
+              <textarea
+                onChange={(e) => setJustification(e.target.value)}
+                cols="50"
+                rows="10"
+                placeholder="Explique os motivos para desmarcar a consulta!"
+              ></textarea>
             </p>
           )}
           <div className="button">
             {!clickThree ? (
-              <Button disabled={scheduleOccupied[0]["justification"] || (moment(modalDate).isBefore(dateString)) || (Number(String(modalTime).replace(":", "") < Number(hoursString)) && (moment(modalDate).isSame(dateString)))} onClick={handleClickThree}>
+              <Button
+                disabled={
+                  scheduleOccupied[0]["justification"] ||
+                  moment(modalDate).isBefore(dateString) ||
+                  (Number(
+                    String(modalTime).replace(":", "") < Number(hoursString)
+                  ) &&
+                    moment(modalDate).isSame(dateString))
+                }
+                onClick={handleClickThree}
+              >
                 <span>Desmarcar consulta!</span>
               </Button>
             ) : null}
             {clickThree ? (
-              <Button onClick={() => handleConfirmCancel(scheduleOccupied[0]["id"])}>
+              <Button
+                onClick={() => handleConfirmCancel(scheduleOccupied[0]["id"])}
+              >
                 <span>Confirmar!</span>
               </Button>
             ) : null}
-            {(moment(modalDate).isBefore(dateString)) || (Number(String(modalTime).replace(":", "") < Number(hoursString)) && (moment(modalDate).isSame(dateString))) ? <div className="modalConfirm"><span>A consulta aconteceu?</span> <div className="buttonsModal"><Button onClick={() => confirmPositive(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Sim</Button><Button onClick={() => confirmNegative(scheduleOccupied[0]["id"])} disabled={scheduleOccupied[0]["justification"]}>Não</Button></div></div>: null}
+            {moment(modalDate).isBefore(dateString) ||
+            (Number(String(modalTime).replace(":", "") < Number(hoursString)) &&
+              moment(modalDate).isSame(dateString)) ? (
+              <div className="modalConfirm">
+                <span>A consulta aconteceu?</span>{" "}
+                <div className="buttonsModal">
+                  <Button
+                    onClick={() => confirmPositive(scheduleOccupied[0]["id"])}
+                    disabled={scheduleOccupied[0]["justification"]}
+                  >
+                    Sim
+                  </Button>
+                  <Button
+                    onClick={() => confirmNegative(scheduleOccupied[0]["id"])}
+                    disabled={scheduleOccupied[0]["justification"]}
+                  >
+                    Não
+                  </Button>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -426,7 +473,7 @@ export function Calendar() {
             </td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
@@ -444,7 +491,7 @@ export function Calendar() {
 
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
@@ -466,7 +513,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:00"} dateToday={dateString} timeToday={hoursString}/>
+                    <Schedule
+                      date={number}
+                      time={"12:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -483,7 +535,7 @@ export function Calendar() {
             <td>13:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
@@ -505,8 +557,13 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:00"} dateToday={dateString} timeToday={hoursString}/> (Clique para ver
-                    mais detalhes)
+                    <Schedule
+                      date={number}
+                      time={"13:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />{" "}
+                    (Clique para ver mais detalhes)
                   </button>
                 ) : null}
                 {!schedulesTwo.includes(number + "13:00disponível") &&
@@ -522,7 +579,7 @@ export function Calendar() {
             <td>14:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
@@ -544,7 +601,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "14:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"14:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"14:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -561,7 +623,7 @@ export function Calendar() {
             <td>15:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
@@ -583,7 +645,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"15:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -600,18 +667,21 @@ export function Calendar() {
             <td>16:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "16:00disponível") ? (
-                  <button className="state" onClick={() => {
-                    handleDeleteSchedule(number, "16:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "16:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "16:00ocupado") ? (
                   <button
@@ -619,7 +689,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"16:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -636,18 +711,21 @@ export function Calendar() {
             <td>17:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "17:00disponível") ? (
-                  <button className="state" onClick={() => {
-                    handleDeleteSchedule(number, "17:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "17:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "17:00ocupado") ? (
                   <button
@@ -655,7 +733,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "17:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"17:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"17:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -672,18 +755,21 @@ export function Calendar() {
             <td>18:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "18:00disponível") ? (
-                  <button className="state" onClick={() => {
-                    handleDeleteSchedule(number, "18:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "18:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "18:00ocupado") ? (
                   <button
@@ -691,7 +777,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"18:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -708,18 +799,21 @@ export function Calendar() {
             <td>19:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "19:00disponível") ? (
-                  <button className="state" onClick={() => {
-                    handleDeleteSchedule(number, "19:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "19:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "19:00ocupado") ? (
                   <button
@@ -727,7 +821,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"19:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -744,18 +843,21 @@ export function Calendar() {
             <td>20:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "20:00disponível") ? (
-                  <button className="state" onClick={() => {
-                    handleDeleteSchedule(number, "20:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "20:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "20:00ocupado") ? (
                   <button
@@ -763,7 +865,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "20:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"20:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"20:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -783,7 +890,7 @@ export function Calendar() {
           <tr>
             <th></th>
             {weekDays.map((key) => (
-              <th  key={String(key)} className="list_item">
+              <th key={String(key)} className="list_item">
                 <span>{key}</span>
               </th>
             ))}
@@ -803,7 +910,7 @@ export function Calendar() {
             </td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
@@ -820,19 +927,21 @@ export function Calendar() {
             <td>12:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "12:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "12:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "12:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "12:00ocupado") ? (
                   <button
@@ -840,7 +949,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"12:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -857,19 +971,21 @@ export function Calendar() {
             <td>13:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "13:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "13:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "13:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "13:30ocupado") ? (
                   <button
@@ -877,7 +993,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:30"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"13:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -894,19 +1015,21 @@ export function Calendar() {
             <td>15:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "15:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "15:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "15:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "15:00ocupado") ? (
                   <button
@@ -914,7 +1037,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"15:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -931,19 +1059,21 @@ export function Calendar() {
             <td>16:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "16:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "16:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "16:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "16:30ocupado") ? (
                   <button
@@ -951,7 +1081,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:30"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"16:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -968,19 +1103,21 @@ export function Calendar() {
             <td>18:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "18:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "18:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "18:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "18:00ocupado") ? (
                   <button
@@ -988,7 +1125,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"18:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1005,19 +1147,21 @@ export function Calendar() {
             <td>19:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "19:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "19:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "19:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "19:30ocupado") ? (
                   <button
@@ -1025,7 +1169,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:30"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"19:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1065,7 +1214,7 @@ export function Calendar() {
             </td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
@@ -1082,19 +1231,21 @@ export function Calendar() {
             <td>12:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "12:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "12:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "12:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "12:00ocupado") ? (
                   <button
@@ -1102,7 +1253,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:00"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"12:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1119,19 +1275,21 @@ export function Calendar() {
             <td>12:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "12:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "12:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "12:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "12:30ocupado") ? (
                   <button
@@ -1139,7 +1297,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "12:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"12:30"} dateToday={dateString} timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"12:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1156,19 +1319,21 @@ export function Calendar() {
             <td>13:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "13:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "13:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "13:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "13:00ocupado") ? (
                   <button
@@ -1176,7 +1341,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"13:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1193,19 +1363,21 @@ export function Calendar() {
             <td>13:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "13:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "13:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "13:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "13:30ocupado") ? (
                   <button
@@ -1213,7 +1385,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "13:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"13:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"13:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1230,19 +1407,21 @@ export function Calendar() {
             <td>14:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "14:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "14:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "14:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "14:00ocupado") ? (
                   <button
@@ -1250,7 +1429,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "14:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"14:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"14:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1267,19 +1451,21 @@ export function Calendar() {
             <td>14:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "14:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "14:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "14:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "14:30ocupado") ? (
                   <button
@@ -1287,7 +1473,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "14:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"14:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"14:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1304,19 +1495,21 @@ export function Calendar() {
             <td>15:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "15:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "15:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "15:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "15:00ocupado") ? (
                   <button
@@ -1324,7 +1517,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"15:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1341,19 +1539,21 @@ export function Calendar() {
             <td>15:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "15:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "15:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "15:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "15:30ocupado") ? (
                   <button
@@ -1361,7 +1561,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "15:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"15:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"15:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1378,19 +1583,21 @@ export function Calendar() {
             <td>16:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "16:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "16:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "16:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "16:00ocupado") ? (
                   <button
@@ -1398,7 +1605,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"16:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1415,19 +1627,21 @@ export function Calendar() {
             <td>16:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "16:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "16:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "16:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "16:30ocupado") ? (
                   <button
@@ -1435,7 +1649,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "16:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"16:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"16:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1452,19 +1671,21 @@ export function Calendar() {
             <td>17:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "17:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "17:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "17:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "17:00ocupado") ? (
                   <button
@@ -1472,7 +1693,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "17:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"17:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"17:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1489,19 +1715,21 @@ export function Calendar() {
             <td>17:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "17:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "17:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "17:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "17:30ocupado") ? (
                   <button
@@ -1509,7 +1737,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "17:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"17:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"17:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1526,19 +1759,21 @@ export function Calendar() {
             <td>18:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "18:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "18:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "18:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "18:00ocupado") ? (
                   <button
@@ -1546,7 +1781,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"18:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1563,19 +1803,21 @@ export function Calendar() {
             <td>18:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "18:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "18:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "18:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "18:30ocupado") ? (
                   <button
@@ -1583,7 +1825,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "18:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"18:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"18:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1600,19 +1847,21 @@ export function Calendar() {
             <td>19:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "19:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "19:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "19:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "19:00ocupado") ? (
                   <button
@@ -1620,7 +1869,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"19:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1637,19 +1891,21 @@ export function Calendar() {
             <td>19:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "19:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "19:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "19:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "19:30ocupado") ? (
                   <button
@@ -1657,7 +1913,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "19:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"19:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"19:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1674,19 +1935,21 @@ export function Calendar() {
             <td>20:00</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "20:00disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "20:00");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "20:00");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "20:00ocupado") ? (
                   <button
@@ -1694,7 +1957,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "20:00")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"20:00"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"20:00"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
@@ -1711,19 +1979,21 @@ export function Calendar() {
             <td>20:30</td>
             {numberDays.map((number) => (
               <td
-              key={String(number)}
+                key={String(number)}
                 className={
                   dateString === number ? "list_item_active" : "list_item"
                 }
               >
                 {" "}
                 {schedulesTwo.includes(number + "20:30disponível") ? (
-                  <button className="state"
-                  onClick={() => {
-                    handleDeleteSchedule(number, "20:30");
-                  }}
-                >
-                  Horário Criado Disponível (Clique para excluir)</button>
+                  <button
+                    className="state"
+                    onClick={() => {
+                      handleDeleteSchedule(number, "20:30");
+                    }}
+                  >
+                    Horário Criado Disponível (Clique para excluir)
+                  </button>
                 ) : null}
                 {schedulesTwo.includes(number + "20:30ocupado") ? (
                   <button
@@ -1731,7 +2001,12 @@ export function Calendar() {
                     onClick={() => handleClickTwo(number, "20:30")}
                   >
                     Horário Ocupado por{" "}
-                    <Schedule date={number} time={"20:30"} dateToday={dateString}  timeToday={hoursString} />
+                    <Schedule
+                      date={number}
+                      time={"20:30"}
+                      dateToday={dateString}
+                      timeToday={hoursString}
+                    />
                     (Clique para ver mais detalhes)
                   </button>
                 ) : null}
