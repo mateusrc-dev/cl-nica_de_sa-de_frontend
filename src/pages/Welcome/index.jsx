@@ -2,10 +2,8 @@ import { useAuthUser } from "../../hooks/authUser";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import { Container, Main } from "./styles";
 import { useNavigate } from "react-router-dom";
-import { CiCloudSun } from "react-icons/ci";
-import { BsFillMoonStarsFill } from "react-icons/bs";
 import { GiHealthNormal } from "react-icons/gi";
-import {useEffect} from "react"
+import { useEffect } from "react";
 
 export function Welcome() {
   const { user } = useAuthUser();
@@ -34,27 +32,13 @@ export function Welcome() {
       }, 8000);
     }
     handleTime();
-  }, [])
+  }, []);
 
   return (
     <Container>
       <Main>
         <div className="welcome">
-          {Time === "Bom dia" ? (
-            <h1>
-              {Time} <CiCloudSun />
-            </h1>
-          ) : null}
-          {Time === "Boa tarde" ? (
-            <h1>
-              {Time} <CiCloudSun />
-            </h1>
-          ) : null}
-          {Time === "Boa noite" ? (
-            <h1>
-              {Time} <BsFillMoonStarsFill />
-            </h1>
-          ) : null}
+          <h1>{Time}</h1>
         </div>
         <h2 className="nameUser">
           Seja bem vindo(a) a
