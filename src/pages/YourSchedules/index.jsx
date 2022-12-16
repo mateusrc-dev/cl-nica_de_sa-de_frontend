@@ -21,8 +21,8 @@ export function YourSchedules() {
   const Month = String(today.getMonth() + 1).padStart(2, "0");
   const dateString = `${Year}-${Month}-${Day}`;
 
-  const Hours = today.getHours();
-  const Minutes = today.getMinutes();
+  const Hours = String(today.getHours()).padStart(2, "0");
+  const Minutes = String(today.getMinutes()).padStart(2, "0");
   const hoursString = `${Hours}${Minutes}`;
 
   useEffect(() => {

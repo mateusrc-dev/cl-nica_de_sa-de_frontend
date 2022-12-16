@@ -23,8 +23,8 @@ export function YourQueries() {
   const Month = String(today.getMonth() + 1).padStart(2, "0");
   const dateString = `${Year}-${Month}-${Day}`;
 
-  const Hours = today.getHours();
-  const Minutes = today.getMinutes();
+  const Hours = String(today.getHours()).padStart(2, "0");
+  const Minutes = String(today.getMinutes()).padStart(2, "0");
   const hoursString = `${Hours}${Minutes}`;
 
   useEffect(() => {
@@ -86,11 +86,11 @@ export function YourQueries() {
           <div className="main">
             {yourQueries.map((querie) => (
               <div className="Scheduling" key={String(querie.id)}>
-                <svg class="svg" width="500px" height="250px">
+                <svg className="svg" width="500px" height="250px">
                   <polygon
                     points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
                     stroke="blue"
-                    stroke-width="0.5"
+                    strokeWidth="0.5"
                     fill="white"
                   />
                 </svg>
