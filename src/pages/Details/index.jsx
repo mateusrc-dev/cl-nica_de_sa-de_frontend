@@ -44,7 +44,6 @@ export function Details() {
   const [testimonyAll, setTestimonyAll] = useState([]);
   const [testimonyUpdate, setTestimonyUpdate] = useState("");
   const [testimonyCreate, setCreateTestimony] = useState("");
-  const [heart, setHeart] = useState(false);
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
   const params = useParams();

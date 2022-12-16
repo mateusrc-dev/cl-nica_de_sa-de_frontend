@@ -70,7 +70,7 @@ export const Container = styled.div`
       border: 1px solid ${({ theme }) => theme.COLORS.BLUE_100};
       border-radius: 10px;
     }
-    .modalContent p {
+    .modalContent .container {
       width: 100%;
       height: 100%;
       padding: 100px 200px;
@@ -81,14 +81,14 @@ export const Container = styled.div`
       gap: 50px;
       text-align: justify;
     }
-    .modalContent p .allDetails {
+    .modalContent .container .allDetails {
       display: flex;
       flex-direction: row;
       align-items: flex-start;
       gap: 100px;
       text-align: justify;
     }
-    .modalContent p svg {
+    .modalContent .container svg {
       position: static;
       font-size: 90px;
     }

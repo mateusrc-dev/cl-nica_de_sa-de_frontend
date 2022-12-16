@@ -18,7 +18,7 @@ import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 
 export function ProfileProfessional() {
   const { professional, updateProfileProfessional } = useAuthProfessional();
-  const professional_id = professional.id
+  const professional_id = professional.id;
   const [name, setName] = useState(professional.name);
   const [email, setEmail] = useState(professional.email);
   const [description, setDescription] = useState(professional.description);
@@ -37,8 +37,8 @@ export function ProfileProfessional() {
 
   function handleAddTag() {
     if (newTag.length === 0) {
-      alert ("Digite algo para adicionar uma nova tag!")
-      return
+      alert("Digite algo para adicionar uma nova tag!");
+      return;
     }
     setTags((prevState) => [...prevState, newTag]);
     setNewTag("");
@@ -46,12 +46,16 @@ export function ProfileProfessional() {
 
   async function handleUpdateProfessional() {
     if (newTag) {
-      alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio!")
-      return
+      alert(
+        "Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio!"
+      );
+      return;
     }
     if (tags.length === 0) {
-      alert("Adicione alguma tag antes de atualizar seu perfil, é muito importante inserir suas tags para você aparecer na pesquisa dos profissionais!")
-      return
+      alert(
+        "Adicione alguma tag antes de atualizar seu perfil, é muito importante inserir suas tags para você aparecer na pesquisa dos profissionais!"
+      );
+      return;
     }
     const professional = {
       id: professional_id,
@@ -135,40 +139,14 @@ export function ProfileProfessional() {
               name="select"
               id="specialization"
               onChange={(e) => setSpecialization(e.target.value)}
+              defaultValue={specialization}
             >
-              <option
-                selected={specialization === ""}
-                value="nenhum"
-              >
-                Nenhum
-              </option>
-              <option
-                selected={specialization === "psicólogo"}
-                value="psicólogo"
-              >
-                Psicólogo
-              </option>
-              <option
-                selected={specialization === "psiquiatra"}
-                value="psiquiatra"
-              >
-                Psiquiatra
-              </option>
-              <option
-                selected={specialization === "nutricionista"}
-                value="nutricionista"
-              >
-                Nutricionista
-              </option>
-              <option
-                selected={specialization === "fisioterapeuta"}
-                value="fisioterapeuta"
-              >
-                Fisioterapeuta
-              </option>
-              <option selected={specialization === "dentista"} value="dentista">
-                Dentista
-              </option>
+              <option value="nenhum">Nenhum</option>
+              <option value="psicólogo">Psicólogo</option>
+              <option value="psiquiatra">Psiquiatra</option>
+              <option value="nutricionista">Nutricionista</option>
+              <option value="fisioterapeuta">Fisioterapeuta</option>
+              <option value="dentista">Dentista</option>
             </select>
           </label>
           <label htmlFor="old_password">

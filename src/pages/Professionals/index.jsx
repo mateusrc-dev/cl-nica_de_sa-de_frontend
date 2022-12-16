@@ -4,7 +4,6 @@ import { api } from "../../services/api";
 import { GiHealthNormal } from "react-icons/gi";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
-import { BsStarFill } from "react-icons/bs";
 import { Button } from "../../components/button";
 import { AiFillSchedule } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -16,7 +15,6 @@ import { Favorite } from "../../components/favorite"
 import { Notes } from "../../components/notes"
 
 export function Professionals() {
-  const [heart, setHeart] = useState(false);
   const { professional } = useAuthProfessional();
   const { user } = useAuthUser();
   const [tags, setTags] = useState([]);
@@ -186,9 +184,7 @@ export function Professionals() {
               />
               <h3>
                 <span>{Professional.name} | {Professional.specialization[0].toUpperCase() + Professional.specialization.substring(1)} </span>
-                <span>
-                  <BsStarFill /> <Notes id_professional={Professional.id}/>
-                </span>
+                <Notes id_professional={Professional.id}/>
               </h3>
               <p>
                 {Professional.description}

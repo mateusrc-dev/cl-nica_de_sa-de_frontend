@@ -1,6 +1,7 @@
 import { Container } from "./styles";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
+import { BsStarFill } from "react-icons/bs";
 
 export function Notes({ id_professional }) {
   const [assessments, setAssessments] = useState([]);
@@ -26,7 +27,7 @@ export function Notes({ id_professional }) {
 
   return (
     <Container>
-      <span>{!result ? null : (result).toFixed(1)}</span>
+      {!result ? null : <span> <BsStarFill /> {(result).toFixed(1)}</span>}
     </Container>
   );
 }

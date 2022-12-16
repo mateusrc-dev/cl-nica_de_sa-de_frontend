@@ -309,7 +309,7 @@ export function Calendar() {
             <CgClose />
           </button>
           {!clickThree ? (
-            <p>
+            <div className="container">
               <div className="allDetails">
                 <div className="scheduleDetails">
                   <h2>Detalhes sobre o horário:</h2>
@@ -364,7 +364,7 @@ export function Calendar() {
                   </div>
                 </div>
               </div>
-            </p>
+            </div>
           ) : (
             <p>
               <h2>Escreva uma justificativa:</h2>
@@ -404,7 +404,7 @@ export function Calendar() {
       <table className={displayTime === "01:00" ? "table" : "none"}>
         <thead>
           <tr>
-            <tr></tr>
+            <th></th>
             {weekDays.map((key) => (
               <th key={String(key)} className="list_item">
                 <span>{key}</span>
@@ -781,7 +781,7 @@ export function Calendar() {
       <table className={displayTime === "01:30" ? "table" : "none"}>
         <thead>
           <tr>
-            <tr></tr>
+            <th></th>
             {weekDays.map((key) => (
               <th  key={String(key)} className="list_item">
                 <span>{key}</span>
@@ -1043,7 +1043,7 @@ export function Calendar() {
       <table className={displayTime === "00:30" ? "table" : "none"}>
         <thead>
           <tr>
-            <tr></tr>
+            <th></th>
             {weekDays.map((key) => (
               <th key={String(key)} className="list_item">
                 <span>{key}</span>

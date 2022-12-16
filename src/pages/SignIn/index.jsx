@@ -49,10 +49,8 @@ export function SignIn() {
     <Container>
       <Header>
         <Link to="/">
-          <a>
             retornar para a Home
             <TfiBackLeft />
-          </a>
         </Link>
       </Header>
       <Main>
@@ -118,24 +116,22 @@ export function SignIn() {
                     <FiLogIn />
                   </Button>
                   <Link to="/signUp">
-                    <a>
                       Crie a sua conta!
                       <MdCreate />
-                    </a>
                   </Link>
                 </div>
                 <div className={click === 2 ? "loginClient" : "none"}>
                   <h1>Faça seu login (Profissional)</h1>
-                  <label htmlFor="email">
+                  <label htmlFor="emailProfessional">
                     <strong>Email:</strong>
-                    <Input id={"email"} placeholder={"Digite o seu email!"} onChange={(e) => setEmailProfessional(e.target.value)}>
+                    <Input id={"emailProfessional"} placeholder={"Digite o seu email!"} onChange={(e) => setEmailProfessional(e.target.value)}>
                       <HiOutlineMail />
                     </Input>
                   </label>
-                  <label htmlFor="password" className="password">
+                  <label htmlFor="passwordProfessional" className="password">
                     <strong>Senha:</strong>
                     <Input
-                      id={"password"}
+                      id={"passwordProfessional"}
                       type={"password"}
                       placeholder="Digite a sua senha!"
                       onChange={(e) => setPasswordProfessional(e.target.value)}

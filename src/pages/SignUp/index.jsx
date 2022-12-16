@@ -45,10 +45,8 @@ export function SignUp() {
     <Container>
       <Header>
         <Link to="/">
-          <a>
             retornar para a Home
             <TfiBackLeft />
-          </a>
         </Link>
       </Header>
       <Main>
@@ -101,10 +99,8 @@ export function SignUp() {
                 <AiOutlineUserAdd />
               </Button>
               <Link to="/signIn">
-                <a>
                   <BsArrowReturnLeft />
                   Voltar para o login
-                </a>
               </Link>
             </div>
           </div>
