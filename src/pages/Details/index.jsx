@@ -57,8 +57,8 @@ export function Details() {
   const Month = String(today.getMonth() + 1).padStart(2, "0");
   const dateString = `${Year}-${Month}-${Day}`;
 
-  const Hours = String(today.getHours()).padStart(2, "0")
-  const Minutes = String(today.getMinutes()).padStart(2, "0")
+  const Hours = String(today.getHours()).padStart(2, "0");
+  const Minutes = String(today.getMinutes()).padStart(2, "0");
   const hoursString = `${Hours}${Minutes}`;
 
   useEffect(() => {
@@ -96,7 +96,9 @@ export function Details() {
       }
       const response = await api.get(`assessments/${params.id}`);
       setTestimony(response.data.testimony);
-      setStars(response.data.testimony[0].note);
+      if (!response.data.testimony) {
+        setStars(response.data.testimony[0].note);
+      }
     }
     fetchAssessmentsUser();
   }, [testimony]);
@@ -172,7 +174,7 @@ export function Details() {
       `/assessments/${user.id}?note=${number}&id_professional=${params.id}`
     );
     setStarsTwo(number);
-    setStars(number)
+    setStars(number);
   }
 
   async function handleUpdateTestimony() {
@@ -709,7 +711,10 @@ export function Details() {
                             </div>
                           </div>
                         ) : (
-                          <div key={String(testimony.id)} className={"testimony"}>
+                          <div
+                            key={String(testimony.id)}
+                            className={"testimony"}
+                          >
                             <img
                               src={
                                 testimony.avatar

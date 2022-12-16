@@ -194,10 +194,10 @@ export function Header() {
           <div className="user">
             {user || professional ? null : (
               <Link to="/signIn">
-                <a className="login">
+                <span className="login">
                   <FiLogIn />
                   Fazer login
-                </a>
+                </span>
               </Link>
             )}
             {user ? (

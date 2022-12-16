@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { CiCloudSun } from "react-icons/ci";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { GiHealthNormal } from "react-icons/gi";
+import {useEffect} from "react"
 
 export function Welcome() {
-  const hours = new Date();
   const { user } = useAuthUser();
   const { professional } = useAuthProfessional();
   const navigate = useNavigate();
 
   function handleHours() {
+    const hours = new Date();
     let Hours;
     if (hours.getHours() >= 0 && hours.getHours() <= 12) {
       Hours = "Bom dia";
@@ -24,33 +25,34 @@ export function Welcome() {
     return Hours;
   }
 
-  const Hours = handleHours();
+  const Time = handleHours();
 
-  function handleTime() {
-    setTimeout(function () {
-      navigate("/");
-    }, 8000);
-  }
-
-  handleTime();
+  useEffect(() => {
+    function handleTime() {
+      setTimeout(() => {
+        navigate("/");
+      }, 8000);
+    }
+    handleTime();
+  }, [])
 
   return (
     <Container>
       <Main>
         <div className="welcome">
-          {Hours === "Bom dia" ? (
+          {Time === "Bom dia" ? (
             <h1>
-              {Hours} <CiCloudSun />
+              {Time} <CiCloudSun />
             </h1>
           ) : null}
-          {Hours === "Boa tarde" ? (
+          {Time === "Boa tarde" ? (
             <h1>
-              {Hours} <CiCloudSun />
+              {Time} <CiCloudSun />
             </h1>
           ) : null}
-          {Hours === "Boa noite" ? (
+          {Time === "Boa noite" ? (
             <h1>
-              {Hours} <BsFillMoonStarsFill />
+              {Time} <BsFillMoonStarsFill />
             </h1>
           ) : null}
         </div>

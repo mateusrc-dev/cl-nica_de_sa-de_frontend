@@ -8,7 +8,6 @@ function AuthProfessionalProvider({ children }) {
   async function signInProfessional({ emailProfessional, passwordProfessional }) {
     try {
       const response = await api.post("/sessionsprofessionals", { email: emailProfessional, password: passwordProfessional });
-      console.log(response)
       const { professional, token } = response.data;
       localStorage.setItem("@fullnessclinic:professional", JSON.stringify(professional));
       localStorage.setItem("@fullnessclinic:token", token);

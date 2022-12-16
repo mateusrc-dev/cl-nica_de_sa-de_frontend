@@ -25,19 +25,11 @@ export const Main = styled.main`
   }
   @keyframes colors {
     0% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 50% 100%;
-    }
-
-    75% {
-      background-position: 100% 50%;
+      background-position: 0% 70%;
     }
 
     100% {
-      background-position: 50% 0%;
+      background-position: 70% 0%;
     }
   }
   .logo {
