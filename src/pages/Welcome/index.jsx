@@ -4,6 +4,8 @@ import { Container, Main } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { GiHealthNormal } from "react-icons/gi";
 import { useEffect } from "react";
+import { BsFillCloudSunFill } from "react-icons/bs";
+import { GiNightSleep } from "react-icons/gi";
 
 export function Welcome() {
   const { user } = useAuthUser();
@@ -38,7 +40,14 @@ export function Welcome() {
     <Container>
       <Main>
         <div className="welcome">
-          <h1>{Time}</h1>
+          <h1>
+            {Time}{" "}
+            {Time === "Bom dia" || Time === "Boa tarde" ? (
+              <BsFillCloudSunFill />
+            ) : (
+              <GiNightSleep />
+            )}
+          </h1>
         </div>
         <h2 className="nameUser">
           Seja bem vindo(a) a
