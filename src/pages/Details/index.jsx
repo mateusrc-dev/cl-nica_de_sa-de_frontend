@@ -30,6 +30,7 @@ import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { BsTrash } from "react-icons/bs";
 import moment from "moment";
 import { Favorite } from "../../components/favorite";
+import { ShowLoading } from "../../components/loading";
 
 export function Details() {
   const [click, setClick] = useState(false);
@@ -49,6 +50,7 @@ export function Details() {
   const [data, setData] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [idShedule, setIdSchedule] = useState(null);
+  const [loadingState, setLoadingState] = useState(false);
 
   const today = new Date();
   const Day = String(today.getDate()).padStart(2, "0");
@@ -62,8 +64,10 @@ export function Details() {
 
   useEffect(() => {
     async function fetchProfessional() {
+      setLoadingState(true)
       const response = await api.get(`/professionals/${params.id}`);
       setData(response.data);
+      setLoadingState(false)
     }
     fetchProfessional();
   }, []);
@@ -739,6 +743,7 @@ export function Details() {
             </div>
           </div>
         </div>
+        {loadingState ? <ShowLoading/> : null}
       </main>
       <Footer />
     </Container>

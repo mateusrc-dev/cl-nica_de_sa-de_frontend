@@ -57,7 +57,7 @@ export function ProfileProfessional() {
       );
       return;
     }
-    const professional = {
+    const updated = {
       id: professional_id,
       name,
       email,
@@ -67,6 +67,7 @@ export function ProfileProfessional() {
       password: passwordNew,
       old_password: passwordOld,
     };
+    const userUpdated = Object.assign(professional, updated)
     await updateProfileProfessional({ professional, avatarFile });
   }
 
