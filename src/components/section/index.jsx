@@ -4,7 +4,7 @@ export function Section({ children }) {
   return (
     <Container>
       <div className="row"></div>
-      <main>{children}</main>
+      {children}
       <div className="row"></div>
     </Container>
   );

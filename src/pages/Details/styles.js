@@ -144,6 +144,7 @@ export const Container = styled.div`
     gap: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
+    width: 100%;
     img {
       width: 250px;
       height: 250px;
@@ -159,17 +160,12 @@ export const Container = styled.div`
       display: flex;
       overflow-y: auto;
       flex-direction: column;
+      width: 100%;
       gap: 20px;
-      .favorite {
-        background: none;
-        border: none;
-        font-size: 25px;
-        margin-right: 10px;
-        color: ${({ theme }) => theme.COLORS.BLUE_100};
-        transition: all 0.5s;
-      }
-      .favorite:hover {
-        transform: scale(1.2);
+      h1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
     }
     .description::-webkit-scrollbar {

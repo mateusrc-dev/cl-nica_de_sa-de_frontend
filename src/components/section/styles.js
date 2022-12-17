@@ -9,7 +9,4 @@ export const Container = styled.section`
     border-radius: 50px;
     background: ${({ theme }) => theme.COLORS.BLUE_100};
   }
-  main {
-    margin: 20px 0;
-  }
 `;

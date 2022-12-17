@@ -167,14 +167,11 @@ export const Container = styled.div`
     }
   }
   .sectionTwo {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-areas: "slider textTwo";
+    display: flex;
     gap: 20px;
     align-items: center;
   }
   .textTwo {
-    grid-area: textTwo;
     h2 {
       font-style: italic;
       font-size: 30px;
@@ -186,7 +183,6 @@ export const Container = styled.div`
     }
   }
   .slider {
-    grid-area: slider;
     margin: auto;
   }
   .image {
@@ -194,6 +190,7 @@ export const Container = styled.div`
   }
   .img {
     width: 300px;
+    height: 300px;
     border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
     border-radius: 10px;
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
