@@ -19,7 +19,7 @@ Para utilizar o projeto como desenvolvedor siga os seguintes passos:
 3. Para utilizar o usuário de administrador da aplicação é importante usar o insomnia para criar um usuário para o administrador, pois não existe uma rota na aplicação pra criar esse usuário de administrador, existe apenas as rotas para criar contas para o cliente na aplicação - a rota para ser utilizada no insomnia para criar a conta do administrador é "localhost:3333/professionals" e os dados precisam ser inseridos em formato JSON (segue exemplo abaixo): 
 
 <p align="center">
-  <img width="400" src="src/assets/insomnia.jpg" >
+  <img width="700" src="src/assets/insomnia.jpg" >
 </p>
 
 {
