@@ -8,6 +8,6 @@ export const Container = styled.div`
     transition: transform 0.5s;
   }
   svg:hover {
-    transform: scale(1.1)
+    transform: scale(1.0)
   }
 `;
