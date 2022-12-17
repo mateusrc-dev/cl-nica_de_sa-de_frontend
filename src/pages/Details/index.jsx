@@ -95,7 +95,7 @@ export function Details() {
       }
       const response = await api.get(`assessments/${params.id}`);
       setTestimony(response.data.testimony);
-      if (!response.data.testimony) {
+      if (response.data.testimony) {
         setStars(response.data.testimony[0].note);
       }
     }
