@@ -13,6 +13,7 @@ import { useInput } from "../../hooks/input";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { Favorite } from "../../components/favorite"
 import { Notes } from "../../components/notes"
+import { ShowLoadingTwo } from "../../components/loadingTwo";
 
 export function Professionals() {
   const { professional } = useAuthProfessional();
@@ -22,6 +23,7 @@ export function Professionals() {
   const [specializationSelected, setSpecializationSelected] = useState("");
   const [professionals, setProfessionals] = useState([]);
   const { search } = useInput();
+  const [loadingState, setLoadingState] = useState(false);
 
   function handleTagSelected(tagName) {
     if (tagName === "all") {
@@ -48,22 +50,26 @@ export function Professionals() {
 
   useEffect(() => {
     async function fetchTags() {
+      setLoadingState(true)
       const response = await api.get(
         `/tags/?specialization=${specializationSelected}`
       );
       setTags(response.data);
+      setLoadingState(false)
     }
     fetchTags();
   }, [specializationSelected]);
 
   useEffect(() => {
     async function fetchProfessionals() {
+      setLoadingState(true)
       const response = await api.get(
         `/professionals?name=${search}&specialization=${specializationSelected}&tags=${String(
           tagsSelected
         )}`
       );
       setProfessionals(response.data);
+      setLoadingState(false)
     }
     fetchProfessionals();
   }, [search, tagsSelected, specializationSelected]);
@@ -203,6 +209,7 @@ export function Professionals() {
             ))
           }
         </div>
+        {loadingState ? <ShowLoadingTwo/> : null}
       </main>
       <Footer />
     </Container>

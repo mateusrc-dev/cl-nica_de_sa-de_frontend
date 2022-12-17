@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { useAuthProfessional } from "../../hooks/authProfessional";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+import { ShowLoading } from "../../components/loading";
 
 export function Home() {
   const { professional } = useAuthProfessional();
@@ -21,53 +22,64 @@ export function Home() {
   const [professionalThree, setProfessionalThree] = useState([]);
   const [professionalFour, setProfessionalFour] = useState([]);
   const [professionalFive, setProfessionalFive] = useState([]);
+  const [loadingState, setLoadingState] = useState(false)
 
   useEffect(() => {
     async function fetchProfessional() {
+      setLoadingState(true)
       const response = await api.get(
         `/professionalsSpecialization?specialization=${"psicólogo"}`
       );
       setProfessionalOne(response.data.professional);
+      setLoadingState(false)
     }
     fetchProfessional();
   }, []);
 
   useEffect(() => {
     async function fetchProfessional() {
+      setLoadingState(true)
       const response = await api.get(
         `/professionalsSpecialization?specialization=${"psiquiatra"}`
       );
       setProfessionalTwo(response.data.professional);
+      setLoadingState(false)
     }
     fetchProfessional();
   }, []);
 
   useEffect(() => {
     async function fetchProfessional() {
+      setLoadingState(true)
       const response = await api.get(
         `/professionalsSpecialization?specialization=${"nutricionista"}`
       );
       setProfessionalThree(response.data.professional);
+      setLoadingState(false)
     }
     fetchProfessional();
   }, []);
 
   useEffect(() => {
     async function fetchProfessional() {
+      setLoadingState(true)
       const response = await api.get(
         `/professionalsSpecialization?specialization=${"fisioterapeuta"}`
       );
       setProfessionalFour(response.data.professional);
+      setLoadingState(false)
     }
     fetchProfessional();
   }, []);
 
   useEffect(() => {
     async function fetchProfessional() {
+      setLoadingState(true)
       const response = await api.get(
         `/professionalsSpecialization?specialization=${"dentista"}`
       );
       setProfessionalFive(response.data.professional);
+      setLoadingState(false)
     }
     fetchProfessional();
   }, []);
@@ -313,6 +325,7 @@ export function Home() {
           </div>
           <div className="rowTwo"></div>
         </div>
+        {loadingState ? <ShowLoading/> : null}
       </main>
       <Footer />
     </Container>

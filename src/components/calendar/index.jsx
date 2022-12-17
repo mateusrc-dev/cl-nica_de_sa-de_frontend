@@ -13,6 +13,7 @@ import { useAuthProfessional } from "../../hooks/authProfessional";
 import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { Schedule } from "../../components/Schedule";
 import moment from "moment";
+import { ShowLoading } from "../../components/loading";
 
 const monthNames = [
   "Janeiro",
@@ -48,6 +49,7 @@ export function Calendar() {
   const [displayTime, setDisplayTime] = useState("01:00");
   const [schedules, setSchedules] = useState([]);
   const [justification, setJustification] = useState("");
+  const [loadingState, setLoadingState] = useState(false)
   const [scheduleOccupied, setScheduleOccupied] = useState([
     {
       availability: "ocupado",
@@ -194,6 +196,7 @@ export function Calendar() {
 
   useEffect(() => {
     async function handleSchedules() {
+      setLoadingState(true)
       const response = await api.get(
         `/schedulesProfessionals/${professional.id}`
       );
@@ -208,6 +211,7 @@ export function Calendar() {
         setDisplayTime(obj4);
       }
       setSchedulesTwo(Schedules);
+      setLoadingState(false)
     }
     handleSchedules();
   }, []);
@@ -222,10 +226,12 @@ export function Calendar() {
   }
 
   async function handleClickTwo(date, time) {
+    setLoadingState(true)
     const response = await api.get(
       `/schedulesProfessionals/?date=${date}&time=${time}`
     );
     setScheduleOccupied(response.data.schedules);
+    setLoadingState(false)
     if (clickTwo === false) {
       setClickTwo(true);
       setModalDate(date);
@@ -2021,6 +2027,7 @@ export function Calendar() {
           </tr>
         </tbody>
       </table>
+      {loadingState ? <ShowLoading /> : null}
     </Container>
   );
 }
