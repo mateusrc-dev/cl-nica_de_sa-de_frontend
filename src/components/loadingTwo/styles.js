@@ -20,10 +20,10 @@ export const Container = styled.div`
 
   @keyframes opacity {
     0% {
-      opacity: 1;
+      opacity: 0;
     }
     100% {
-      opacity: 0;
+      opacity: 1;
     }
   }
 `;
