@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Button } from "../../components/button";
@@ -36,7 +36,7 @@ export function Favorites() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <div className="textButton">
           <Link to={-1}>
             <ButtonText>
@@ -102,7 +102,7 @@ export function Favorites() {
               </div>
             ))}
         </div>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

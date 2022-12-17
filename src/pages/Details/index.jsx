@@ -1,5 +1,4 @@
-//nessa página vai ficar os detalhes do profissional (horários livres, detalhes sobre ele, depoimentos sobre ele, etc.)
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import { Button } from "../../components/button";
@@ -236,7 +235,7 @@ export function Details() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <div
           id="modal"
           className={click ? "modal" : "none"}
@@ -740,7 +739,7 @@ export function Details() {
             </div>
           </div>
         </div>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

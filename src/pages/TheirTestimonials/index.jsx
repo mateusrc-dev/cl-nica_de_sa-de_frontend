@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Button } from "../../components/button";
@@ -17,7 +17,6 @@ import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 export function TheirTestimonials() {
   const [assessments, setAssessments] = useState([]);
   const [testimony, setTestimony] = useState("");
-  console.log(assessments)
 
   async function handleStars(number, id) {
     console.log(number)
@@ -52,7 +51,7 @@ export function TheirTestimonials() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <div className="textButton">
           <Link to={-1}>
             <ButtonText>
@@ -72,12 +71,12 @@ export function TheirTestimonials() {
         <div className="main">
           {assessments &&
             assessments.map((assessment) => (
-              <div className="Scheduling">
-                <svg class="svg" width="1100px" height="250px">
+              <div className="Scheduling" key={String(assessment.id)}>
+                <svg className="svg" width="1100px" height="250px">
                   <polygon
                     points="0,250 50,0 1100,0 1050,250 0,250"
                     stroke="blue"
-                    stroke-width="1"
+                    strokeWidth="1"
                   />
                 </svg>
                 <div className="scheduling">
@@ -272,7 +271,7 @@ export function TheirTestimonials() {
               </div>
             ))}
         </div>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

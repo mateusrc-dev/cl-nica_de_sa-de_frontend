@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import { GiHealthNormal } from "react-icons/gi";
@@ -71,7 +71,7 @@ export function Professionals() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <header>
           <h1>
             <GiHealthNormal /> fullness clinic
@@ -203,7 +203,7 @@ export function Professionals() {
             ))
           }
         </div>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

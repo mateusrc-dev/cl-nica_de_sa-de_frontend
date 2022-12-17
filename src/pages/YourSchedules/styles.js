@@ -6,9 +6,27 @@ export const Container = styled.div`
   display: grid;
   grid-template-rows: 100px auto 70px;
   grid-template-areas: "header" "content" "footer";
-`;
+  main::-webkit-scrollbar {
+    width: 15px;
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+    border-left: 1px solid ${({ theme }) => theme.COLORS.BLUE_200};
+  }
+  main::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+    border-radius: 0px;
+    width: 0px;
+    background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
+    border: 3px solid transparent;
+  }
+  main::-webkit-scrollbar-thumb:hover {
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+    border-radius: 0px;
+    width: 0px;
+    background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
+    border: 1px solid transparent;
+  }
 
-export const Main = styled.main`
+  main {
   width: 100%;
   height: 100%;
   grid-area: content;
@@ -144,7 +162,7 @@ export const Main = styled.main`
     justify-content: center;
     gap: 20px;
     width: 500px;
-    height: 250px;
+    height: 350px;
     background: transparent;
     img {
       width: 200px;
@@ -156,8 +174,31 @@ export const Main = styled.main`
   .details {
     display: flex;
     flex-direction: column;
+    width: 200px;
     .last {
       margin-bottom: 10px;
+    }
+    .justification {
+      overflow-y: scroll;
+      height: 70px;
+    }
+    .justification::-webkit-scrollbar {
+      width: 10px;
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+    }
+    .justification::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+      border-radius: 0px;
+      width: 0px;
+      background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
+      border: 0px solid rgba(0, 0, 0, 0);
+    }
+    .justification::-webkit-scrollbar-thumb:hover {
+      background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+      border-radius: 0px;
+      width: 0px;
+      background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
+      border: 0px solid rgba(0, 0, 0, 0);
     }
     .buttons {
       display: flex;
@@ -166,4 +207,6 @@ export const Main = styled.main`
       width: 200px;
     }
   }
+}
 `;
+

@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { GiHealthNormal } from "react-icons/gi";
@@ -16,7 +16,7 @@ export function Home() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <header>
           <h1>
             <GiHealthNormal /> fullness clinic
@@ -178,7 +178,7 @@ export function Home() {
           </div>
           <div className="rowTwo"></div>
         </div>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

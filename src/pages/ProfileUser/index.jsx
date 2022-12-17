@@ -1,5 +1,4 @@
-//nessa página vai ficar os detalhes do profissional (horários livres, detalhes sobre ele, depoimentos sobre ele, etc.)
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Input } from "../../components/input";
@@ -46,7 +45,7 @@ export function ProfileUser() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <div className="avatar">
           <Link to={-1}>
             <ButtonText>
@@ -65,10 +64,10 @@ export function ProfileUser() {
           </label>
         </div>
         <form className="main">
-          <label htmlFor="email">
+          <label htmlFor="name">
             <strong>Seu nome</strong>
             <Input
-              id={"email"}
+              id={"name"}
               placeholder={name}
               onChange={(e) => setName(e.target.value)}
             ></Input>
@@ -116,7 +115,7 @@ export function ProfileUser() {
             </Button>
           </span>
         </form>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

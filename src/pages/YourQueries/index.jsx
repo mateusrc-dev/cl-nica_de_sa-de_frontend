@@ -111,7 +111,7 @@ export function YourQueries() {
                       <strong>Queixa do paciente:</strong> {querie.queixas}
                     </span>
                     <span>
-                      <strong>Data da consulta:</strong> {querie.date}
+                      <strong>Data da consulta (ano-mês-dia):</strong> {querie.date}
                     </span>
                     <span>
                       <strong>Horário da consulta:</strong> {querie.time}hrs

@@ -6,9 +6,27 @@ export const Container = styled.div`
   display: grid;
   grid-template-rows: 100px auto 70px;
   grid-template-areas: "header" "content" "footer";
-`;
 
-export const Main = styled.main`
+  main::-webkit-scrollbar {
+    width: 15px;
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+    border-left: 1px solid ${({ theme }) => theme.COLORS.BLUE_200};
+  }
+  main::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
+    border-radius: 0px;
+    width: 0px;
+    background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
+    border: 3px solid transparent;
+  }
+  main::-webkit-scrollbar-thumb:hover {
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+    border-radius: 0px;
+    width: 0px;
+    background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
+    border: 1px solid transparent;
+  }
+  main {
   width: 100%;
   height: 100%;
   grid-area: content;
@@ -227,4 +245,5 @@ export const Main = styled.main`
     height: 60px;
     border-radius: 10px;
   }
+}
 `;

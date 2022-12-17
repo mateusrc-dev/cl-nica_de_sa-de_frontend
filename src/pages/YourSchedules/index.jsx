@@ -1,4 +1,4 @@
-import { Container, Main } from "./styles";
+import { Container } from "./styles";
 import { Header } from "../../components/header";
 import { Footer } from "../../components/footer";
 import { Button } from "../../components/button";
@@ -47,7 +47,7 @@ export function YourSchedules() {
   return (
     <Container>
       <Header />
-      <Main>
+      <main>
         <section>
           <div className="textButton">
             <Link to={-1}>
@@ -69,9 +69,9 @@ export function YourSchedules() {
           <div className="main">
             {schedules.map((schedule) => (
               <div className="Scheduling" key={String(schedule.id)}>
-                <svg className="svg" width="500px" height="250px">
+                <svg className="svg" width="500px" height="350px">
                   <polygon
-                    points="0,50 50,0 500,0 500,200 450,250 0,250 0,50"
+                    points="0,50 50,0 500,0 500,300 450,350 0,350 0,50"
                     stroke="blue"
                     strokeWidth="0.5"
                     fill="white"
@@ -94,7 +94,7 @@ export function YourSchedules() {
                       <strong>Especialidade:</strong> {schedule.specialization[0].toUpperCase() + schedule.specialization.substring(1)}
                     </span>
                     <span>
-                      <strong>Data da consulta:</strong> {schedule.date}
+                      <strong>Data da consulta (ano-mês-dia):</strong> {schedule.date}
                     </span>
                     <span>
                       <strong>Horário da consulta:</strong> {schedule.time}
@@ -105,7 +105,7 @@ export function YourSchedules() {
                     <span className={schedule.justification ? null : "last"}>
                       <strong>Status da consulta:</strong> {schedule.status}
                     </span>
-                    {schedule.justification ? <span className="last">
+                    {schedule.justification ? <span className="last justification">
                       <strong>Justificativa:</strong> {schedule.justification}
                     </span> : null}
                     <span className="buttons">
@@ -121,7 +121,7 @@ export function YourSchedules() {
             ))}
           </div>
         </section>
-      </Main>
+      </main>
       <Footer />
     </Container>
   );

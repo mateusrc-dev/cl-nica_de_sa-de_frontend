@@ -8,22 +8,23 @@ export const Container = styled.div`
   grid-template-areas: "header" "content" "footer";
 
   main::-webkit-scrollbar {
-    width: 10px;
+    width: 15px;
     background: ${({ theme }) => theme.COLORS.BACKGROUND_1100};
+    border-left: 1px solid ${({ theme }) => theme.COLORS.BLUE_200};
   }
   main::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_400};
     border-radius: 0px;
     width: 0px;
     background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
-    border: 0px solid rgba(0, 0, 0, 0);
+    border: 3px solid transparent;
   }
   main::-webkit-scrollbar-thumb:hover {
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
     border-radius: 0px;
     width: 0px;
     background-clip: padding-box; /*para as bordas ficarem transparentes e com isso dar a impressão que tem uma margem nos lados da borda*/
-    border: 0px solid rgba(0, 0, 0, 0);
+    border: 1px solid transparent;
   }
   main {
     display: flex;
