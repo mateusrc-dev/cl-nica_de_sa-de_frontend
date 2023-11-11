@@ -4,6 +4,8 @@ Parte front-end da aplicação clínica_de_saúde... Faz parte de uma atividade 
   <img width="800" src="src/assets/imageapp.jpg" >
 </p>
 
+Esse aplicativo é bem denso e tentei aplicar várias aprendizados do curso Explorer da Rocketseat, é um projeto pessoal no qual usei minha criatividade para criar as funcionalidades da aplicação, as interfaces, etc. Essa aplicação é uma clínica de saúde, tem a página Home que apresentar informações de uma clínica fictícia, o usuário pode visualizar os profissionais e filtrar eles por área de formação (ex. psicologia, nutrição, etc.) ou por público alvo dos profissionais (ex. depressão, ansiedade, etc.)
+
 
 Nesse aplicativo usamos as seguintes técnicas:
 
