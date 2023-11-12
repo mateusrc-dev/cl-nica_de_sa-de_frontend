@@ -39,7 +39,7 @@ Nesse aplicativo usamos as seguintes técnicas:
 - Uso de ícones (react-icons)
 - Uso de bibliotecas como moment, express, etc.
 
-Para utilizar o projeto como desenvolvedor siga os seguintes passos:
+### Para utilizar o projeto como desenvolvedor siga os seguintes passos:
 
 1. Você precisa ativar o servidor tanto no arquivo front-end como no back-end com o comando "npm run dev"
 
