@@ -1,4 +1,6 @@
-# Parte front-end da aplicação clínica de saúde clinicfulness... Faz parte de uma atividade do curso Explorer da Rocketseat (um projeto pessoal) - Parte visual do aplicativo fullness clinic (FRONT-END)
+# Parte front-end da aplicação clínica de saúde fullness clinic 
+
+### Faz parte de uma atividade do curso Explorer da Rocketseat (um projeto pessoal)
 
 <p align="center">
   <img width="800" src="src/assets/imageapp.jpg" >
